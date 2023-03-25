@@ -3,32 +3,34 @@
 ## Functionality
 
 ### Databases:
-* 1) Items
-    Item Name
-    Item Description
-    Category
-    Trade requests / Active conversations
-    Department / Location
-    Price
-    Image(s)
-    Date and time of posting and most recent edit
-    Availability
-* 2) User Accounts
-    Name
-    Email (to log in)
-    Phone number
-    Profile Picture
-    Password (hashed)
-    Department
-    Date and time of account activation 
-    Date and time of latest login 
-* 3) Administrator Accounts
-    Name
-    Email (to log in)
-    Permissions
-    Password (hashed)
-    Date and time of account activation 
-    Date and time of latest login 
+#### 1) Items
+* Item Name
+* Item Description
+* Category
+* Trade requests / Active conversations
+* Department / Location
+* Price
+* Image(s)
+* Date and time of posting and most recent edit
+* Availability
+
+#### 2) User Accounts
+* Name
+* Email (to log in)
+* Phone number
+* Profile Picture
+* Password (hashed)
+* Department
+* Date and time of account activation 
+* Date and time of latest login 
+
+#### 3) Administrator Accounts
+* Name
+* Email (to log in)
+* Permissions
+* Password (hashed)
+* Date and time of account activation 
+* Date and time of latest login 
 
 ### Site Pages:
 * Account Activation
