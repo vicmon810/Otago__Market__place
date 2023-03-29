@@ -1,0 +1,62 @@
+@startuml login_seq 
+title simple login sequence diagram
+
+skinparam {
+	Style strictuml
+	RoundCorner 5
+	BoxPadding 35
+	ParticipantPadding 15
+    Padding 2
+
+	Sequence {
+		' make activations yellow too
+		LifeLineBackgroundColor #FDFDCD
+
+		' make stereotypes more presentable
+		Stereotype {
+			Font {
+				Size 11
+				Style plain
+			}
+		}
+	}
+
+    Database {
+		' make database border consistent with the rest of the diagram
+		BorderColor #A80036
+	}
+}
+
+actor  user as user 
+
+participant "main Menu" as main 
+participant "Category Page" as page <<From>>
+database Database as db
+
+' user click Category button 
+user -> main : click Category button 
+activate  main
+
+' jumping to Category page 
+main -> page : <<construct>>
+activate page
+
+' query data 
+page -> db : query items data 
+activate db
+
+' db return data 
+db -> db: query all data 
+db -> page : sent back to frontend
+deactivate db
+'display in main 
+page -> main : display returning data 
+deactivate page
+main -> user : readable list of data
+
+
+
+
+
+
+@enduml

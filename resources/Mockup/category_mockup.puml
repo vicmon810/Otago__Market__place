@@ -1,0 +1,25 @@
+@startsalt  login_mockup
+
+ title Otago Market Place
+ header www.otagomarketplace.co.nz
+ footer Otago
+{
+   {*[Search] | [Map] | [Catgory]}
+
+
+{S
+{* clock tower  |<b>business school | Science depart }
+    Table 
+    coffee machin 
+    desk 
+    chair 
+    printer 
+    laptop
+    headphone 
+    bench 
+}
+}
+
+
+
+@endsalt

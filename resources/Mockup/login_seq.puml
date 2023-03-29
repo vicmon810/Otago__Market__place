@@ -1,0 +1,67 @@
+@startuml login_seq 
+title simple login sequence diagram
+
+skinparam {
+	Style strictuml
+	RoundCorner 5
+	BoxPadding 35
+	ParticipantPadding 15
+    Padding 2
+
+	Sequence {
+		' make activations yellow too
+		LifeLineBackgroundColor #FDFDCD
+
+		' make stereotypes more presentable
+		Stereotype {
+			Font {
+				Size 11
+				Style plain
+			}
+		}
+	}
+
+    Database {
+		' make database border consistent with the rest of the diagram
+		BorderColor #A80036
+	}
+}
+
+actor  user as user 
+
+participant "main Menu" as main 
+participant "Login page" as login <<From>>
+participant "Catogry page" as catogry <<From>>
+database Database as db
+
+'user clicks login button 
+user -> main++: "Click 'login' button"
+create login 
+main -> login : <<construct>>
+
+' user type user name and password 
+user -> login : enter username
+activate login
+login -> db : pass: username and password 
+activate db
+'Database check username and password 
+db -> db : search user name in db 
+' if username found compare input password with stored password
+
+alt username not found 
+    db -> main : error message
+else username matched 
+    db -> db : search user name in db
+    alt password matched 
+        db -> catogry
+        activate catogry
+    else 
+        db -> main : error message
+        end
+    end
+
+
+
+
+
+@enduml

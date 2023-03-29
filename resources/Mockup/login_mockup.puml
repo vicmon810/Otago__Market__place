@@ -1,0 +1,20 @@
+@startsalt  login_mockup
+
+ title Otago Market Place
+ header www.otagomarketplace.co.nz
+ footer Otago
+{
+   {*[Search] | [Map] | [Catgory]}
+
+
+{ 
+    Login
+    User ID<&person>   | "vicmon100 " 
+    Password<&key>  | "*********"
+    [Cancel<&circle-x>]   | [log in<&account-login>]
+}
+}
+
+
+
+@endsalt
