@@ -1,0 +1,43 @@
+[
+    {
+        "User_Id": "STA001",
+        "User_Name": "admin",
+        "password": "admin",
+        "Email": "admin@123.com",
+        "Department": "",
+        "Contact_Number": "",
+        "Profile_Picture": "",
+        "admin": "true"
+    },
+    {
+  "User_Id": "USR002",
+  "User_Name": "johndoe",
+  "password": "pass123",
+  "Email": "johndoe@email.com",
+  "Department": "Sales",
+  "Contact_Number": "555-1234",
+  "Profile_Picture": "",
+  "admin": "false"
+},
+{
+  "User_Id": "USR004",
+  "User_Name": "sarahjones",
+  "password": "mypassword",
+  "Email": "sarahjones@example.com",
+  "Department": "Support",
+  "Contact_Number": "555-9876",
+  "Profile_Picture": "",
+  "admin": "false"
+},
+{
+  "User_Id": "USR005",
+  "User_Name": "charrely",
+  "password": "mypassword",
+  "Email": "charrely@example.com",
+  "Department": "Operations",
+  "Contact_Number": "555-4321",
+  "Profile_Picture": "",
+  "admin": "false"
+}
+
+]
