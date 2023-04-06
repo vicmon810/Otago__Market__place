@@ -1,32 +1,24 @@
 const express = require("express");
-const itemModel = require("../model/items");
+const {
+  getAllItems,
+  getSingleItem,
+  createItem,
+} = require("../controllers/itemController");
 const routes = express.Router();
 
 //GET All items
-routes.get("/", (req, res) => {
-  res.json({ mssg: "Get all messages" });
-});
+routes.get("/items", getAllItems);
 //GET a Single items
-routes.get("/:id", (req, res) => {
-  res.json({ mssg: "single" });
-});
+routes.get("/item/:id", getSingleItem);
 // POST a new item
-routes.post("/", async (req, res) => {
-  const { Product } = req.body;
-  try {
-    const item = await itemModel.create({ product });
-    res.status(200).json(item);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
+routes.post("/items", createItem);
 
 //DELETE a item
-routes.delete("/:id", (req, res) => {
+routes.delete("/item/:id", (req, res) => {
   res.json({ mssg: "DELETE new item" });
 });
 // UPDATE a item
-routes.patch("/:id", (req, res) => {
+routes.patch("/item/:id", (req, res) => {
   res.json({ mssg: "UPDATE new item" });
 });
 

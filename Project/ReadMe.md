@@ -1,3 +1,6 @@
+# [MongoDB Compass workspace invite link](https://app.getpostman.com/join-team?invite_code=5882b6f4539ec983bf05e63be1068370&target_code=9fb1a29094ad612e31841336f4f6f1bb) 
+
+
 # To start the server :
 ```
 cd Project/server
@@ -10,6 +13,7 @@ cd Project/client
 npm install
 npm start
 ```
+<br>
 
 ** if npm fails to install, please use ```npm outdated || npm update``` instead
 
