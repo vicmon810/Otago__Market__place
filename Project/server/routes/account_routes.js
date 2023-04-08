@@ -1,14 +1,14 @@
 const express = require("express");
+const { getUser, getAdmin } = require("../controllers/accountController");
+
 const routes = express.Router();
 
 //GET All accounts
 //routes.get("account/", getAllItems);
 //GET a Single account profile page
-routes.get("account/:id", (req, res) => {
-  res.josn({ mssg: "account" });
-});
+routes.get("/account/:id", getUser);
 //GET a ADMIN Page
-routes.get("account/admin", (req, res) => {
+routes.get("/account/admin", (req, res) => {
   res.json({ mssg: "ADMIN" });
 });
 // POST a new account
