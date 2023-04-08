@@ -1,33 +1,25 @@
 const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema;
-
-const itemSchema = new Schema(
+const itemSchema = new mongoose.Schema(
   {
-    Product: {
-      Product_id: String, // Unique identifier for the product
-      Product_name: String, // Name of the product
-      Quantity: Number, // Number of units available
-      Locations: [String], // List of locations where the product is available
-      Product_Description: String, // Description of the product
-      product_Category: String, // Category of the product
-      Create_Date: Date, // Date and time when the product was created
-      Owner_Account: String, // Account name of the product owner
-      Owner_Contact: {
-        // Contact information of the product owner
-        Email: String,
-        Phone: String,
-      },
-      Image: String, // URL of the product image
-      Product_Features: {
-        // Features of the product
-        Connectivity: String,
-        Layout: String,
-        Backlit: Boolean,
-      },
+    Product_id: { type: String, require: true },
+    Product_name: { type: String, require: true },
+    Quantity: { type: Number, require: true },
+    Locations: { type: [String], require: true },
+    Product_description: { type: String, require: true },
+    product_category: { type: String, require: true },
+    Create_time: { type: Date, require: true },
+    Owner_account: { type: String, require: true },
+    Owner_contact: {
+      Email: { type: String, require: true },
+      Phone: { type: String, require: true },
     },
+    Image: { type: String, require: true },
+    Product_Features: { type: [String], require: true },
+    Tags: { type: [String], require: false },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("item", itemSchema);
+const item = mongoose.model("item", itemSchema);
+module.exports = item;

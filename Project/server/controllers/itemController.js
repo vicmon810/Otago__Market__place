@@ -1,11 +1,20 @@
-const itemModel = require("../model/items");
+const itemModel = require("../model/item");
+const express = require("express");
+const dbo = require("../db/conn");
 
+// This help convert the id from string to ObjectId for the _id.
+const ObjectId = require("mongodb").ObjectId;
 //GET all items
+
 const getAllItems = async (req, res) => {
-  console.log("TEST");
-  // const count = await Item.estimatedDocumentCount({}, { maxTimeMS: 30000 });
-  const items = await itemModel.find({});
-  res.status(200).json({ items });
+  let db_connect = dbo.getDb("test");
+  const items = await db_connect
+    .collection("items")
+    .find({})
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.status(200).json(result);
+    });
 };
 
 // GET single item
@@ -24,20 +33,9 @@ const getAllItems = async (req, res) => {
 // };
 
 const getSingleItem = async (req, res) => {
-  const id = req.params.id;
-  try {
-    const item = await itemModel
-      .findById(id)
-      .maxTimeMS(60000) // Increase the timeout value to 60 seconds
-      .exec();
-    if (!item) {
-      return res.status(404).json({ error: "Not Found" });
-    }
-    res.status(200).json(item);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Server Error" });
-  }
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId(req.params.id) };
+  console.log(db_connect);
 };
 
 //create a new item
