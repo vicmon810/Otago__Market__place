@@ -1,3 +1,6 @@
+# 9/Apr/2023
+solved that issue because the way I use to establish connection with db is incorrect, now it's been fixed. And item and user account database and backend query functions done. still it has some minor bug need to be fixed eg : update either item or user account the information is not fully passed into database. <br> PS:Now will working on frontend query data from backend.<br>PS: everyone have a great break.   
+
 # 3/Apr/2023
 
 ***MongooseError: Operation `items.findOne()` buffering timed out after 10000ms:***<br>
