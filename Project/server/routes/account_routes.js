@@ -1,5 +1,11 @@
 const express = require("express");
-const { getUser, getAdmin } = require("../controllers/accountController");
+const {
+  getUser,
+  getAdmin,
+  createAccount,
+  updateUser,
+  deleteUser,
+} = require("../controllers/accountController");
 
 const routes = express.Router();
 
@@ -8,17 +14,10 @@ routes.get("/account/:id", getUser);
 //GET a ADMIN Page
 routes.get("/admin", getAdmin);
 // POST a new account
-routes.post("/account", (req, res) => {
-  res.json({ mssg: "post accoutn" });
-});
-
+routes.post("/account", createAccount);
 //DELETE an account
-routes.delete("account/:id", (req, res) => {
-  res.json({ mssg: "DELETE new item" });
-});
+routes.delete("/account/:id", deleteUser);
 // UPDATE an account
-routes.patch("account/:id", (req, res) => {
-  res.json({ mssg: "UPDATE new item" });
-});
+routes.patch("/account/:id", updateUser);
 
 module.exports = routes;
