@@ -30,10 +30,27 @@ const getSingleItem = async (req, res) => {
 //create a new item
 const createItem = async (req, res) => {
   let db_connect = dbo.getDb();
-  let item = {};
+  let item = {
+    Product_id: req.params.Product_id,
+    Product_name: req.body.Product_name,
+    Quantity: req.body.Quantity,
+    Location: req.body.Location,
+    Product_description: req.body.Product_description,
+    Product_category: req.body.Product_category,
+    Create_time: req.body.Create_time,
+    Owner_account: req.body.Owner_account,
+    Owner_contact: {
+      Email: req.body.Email,
+      Phone: req.body.Phone,
+    },
+    Image: req.body.Image,
+    Product_Features: req.body.Product_Features,
+    Tags: req.body.Tags,
+  };
+  console.log(item);
   db_connect.collection("items").insertOne(item, function (err, result) {
     if (err) throw err;
-    res.status(200).json(result);
+    res.json(result);
   });
 };
 
@@ -42,8 +59,25 @@ const updateItem = async (req, res) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
   let newItem = {
-    $set: {},
+    $set: {
+      Product_id: req.params.Product_id,
+      Product_name: req.body.Product_name,
+      Quantity: req.body.Quantity,
+      Location: req.body.Location,
+      Product_description: req.body.Product_description,
+      Product_category: req.body.Product_category,
+      Create_time: req.body.Create_time,
+      Owner_account: req.body.Owner_account,
+      Owner_contact: {
+        Email: req.body.Email,
+        Phone: req.body.Phone,
+      },
+      Image: req.body.Image,
+      Product_Features: req.body.Product_Features,
+      Tags: req.body.Tags,
+    },
   };
+  console.log(newItem);
   db_connect
     .collection("items")
     .updateOne(myquery, newItem, function (err, result) {
