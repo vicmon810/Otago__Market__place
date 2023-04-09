@@ -3,6 +3,8 @@ const {
   getAllItems,
   getSingleItem,
   createItem,
+  deleteItem,
+  updateItem,
 } = require("../controllers/itemController");
 const routes = express.Router();
 
@@ -14,12 +16,8 @@ routes.get("/item/:id", getSingleItem);
 routes.post("/items", createItem);
 
 //DELETE a item
-routes.delete("/item/:id", (req, res) => {
-  res.json({ mssg: "DELETE new item" });
-});
+routes.delete("/item/:id", deleteItem);
 // UPDATE a item
-routes.patch("/item/:id", (req, res) => {
-  res.json({ mssg: "UPDATE new item" });
-});
+routes.patch("/item/:id", updateItem);
 
 module.exports = routes;
