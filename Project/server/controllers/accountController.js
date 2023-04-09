@@ -18,7 +18,7 @@ const getUser = async (req, res) => {
 //get admin info
 const getAdmin = async (req, res) => {
   let db_connect = dbo.getDb("test");
-  await db_connect
+  db_connect
     .collection("admin")
     .find({})
     .toArray(function (err, result) {

@@ -6,9 +6,7 @@ const routes = express.Router();
 //GET a Single account profile page
 routes.get("/account/:id", getUser);
 //GET a ADMIN Page
-routes.get("/account/admin", (req, res) => {
-  res.json({ mssg: "ADMIN" });
-});
+routes.get("/admin", getAdmin);
 // POST a new account
 routes.post("/account", (req, res) => {
   res.json({ mssg: "post accoutn" });
