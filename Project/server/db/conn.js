@@ -1,5 +1,7 @@
 const { MongoClient } = require("mongodb");
-const Db = process.env.ATLAS_URI;
+const dbUser = process.env.ATLAS_USER;
+const dbPassword = process.env.ATLAS_PASSWORD;
+const Db = "mongodb+srv://" + dbUser + ":" + dbPassword + "@cluster0.hayoush.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(Db, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
