@@ -26,6 +26,7 @@ function LoginForm() {
     <div className="login-form-container">
       <h1 className="login-form-title">Login</h1>
       <form className="login-form" onSubmit={handleSubmit}>
+        <form action="Project/client/src/components/create.js"></form>
         <label htmlFor="username" className="login-form-label">
           Username:
         </label>
