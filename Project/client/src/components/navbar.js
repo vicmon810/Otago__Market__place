@@ -29,14 +29,15 @@ export default function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/create">
-                Create Record
-              </NavLink>
-              <NavLink className="nav-link" to="/login">
-                Log in
-              </NavLink>
-            </li>
+            <NavLink className="nav-link" to="/create">
+              Create item
+            </NavLink>
+            <NavLink className="nav-link" to="/login">
+              Log in
+            </NavLink>
+            <NavLink className="nav-link" to="/register">
+              Sign in
+            </NavLink>
           </ul>
         </div>
       </nav>

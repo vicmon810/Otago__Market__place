@@ -47,12 +47,11 @@ const getSingleItem = async (req, res) => {
 const createItem = async (req, res) => {
   try {
     let db_connect = dbo.getDb();
-    console.log(req.params.Product_id);
     let item = {
-      Product_id: req.params.Product_id,
+      Product_id: req.body.Product_id,
       Product_name: req.body.Product_name,
       Quantity: req.body.Quantity,
-      Location: req.body.Location,
+      Location: req.body.Locations,
       Product_description: req.body.Product_description,
       Product_category: req.body.Product_category,
       Create_time: req.body.Create_time,

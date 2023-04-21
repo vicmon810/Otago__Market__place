@@ -56,7 +56,7 @@ export default function Create() {
     navigate("/");
   }
 
-  // This following section will display the form that takes the input from the user.
+  // This following section will display the form that takes the input from the item.
   return (
     <div>
       <h3>Create New Record</h3>
