@@ -1,9 +1,7 @@
 const itemModel = require("../model/item");
 const express = require("express");
 const dbo = require("../db/conn");
-const {
-  ObjectID
-} = require("mongodb");
+const { ObjectID } = require("mongodb");
 
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
@@ -15,14 +13,14 @@ const getAllItems = async (req, res) => {
     const items = await db_connect
       .collection("items")
       .find({})
-      .toArray(function(err, result) {
+      .toArray(function (err, result) {
         if (err) throw err;
         res.status(200).json(result);
       });
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: "Internal server error"
+      message: "Internal server error",
     });
   }
 };
@@ -31,16 +29,16 @@ const getSingleItem = async (req, res) => {
   try {
     let db_connect = dbo.getDb();
     let myquery = {
-      _id: ObjectId(req.params.id)
+      _id: ObjectId(req.params.id),
     };
-    db_connect.collection("items").findOne(myquery, function(err, result) {
+    db_connect.collection("items").findOne(myquery, function (err, result) {
       if (err) throw err;
       res.status(200).json(result);
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: "Internal server error"
+      message: "Internal server error",
     });
   }
 };
@@ -49,6 +47,7 @@ const getSingleItem = async (req, res) => {
 const createItem = async (req, res) => {
   try {
     let db_connect = dbo.getDb();
+    console.log(req.params.Product_id);
     let item = {
       Product_id: req.params.Product_id,
       Product_name: req.body.Product_name,
@@ -67,14 +66,14 @@ const createItem = async (req, res) => {
       Tags: req.body.Tags,
     };
     console.log(item);
-    db_connect.collection("items").insertOne(item, function(err, result) {
+    db_connect.collection("items").insertOne(item, function (err, result) {
       if (err) throw err;
       res.json(result);
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: "Internal server error"
+      message: "Internal server error",
     });
   }
 };
@@ -84,7 +83,7 @@ const updateItem = async (req, res) => {
   try {
     let db_connect = dbo.getDb();
     let myquery = {
-      _id: ObjectId(req.params.id)
+      _id: ObjectId(req.params.id),
     };
     let newItem = {
       $set: {
@@ -108,14 +107,14 @@ const updateItem = async (req, res) => {
     console.log(newItem);
     db_connect
       .collection("items")
-      .updateOne(myquery, newItem, function(err, result) {
+      .updateOne(myquery, newItem, function (err, result) {
         if (err) throw err;
         res.status(200).json(result);
       });
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: "Internal server error"
+      message: "Internal server error",
     });
   }
 };
@@ -125,17 +124,19 @@ const deleteItem = async (req, res) => {
   try {
     let db_connection = dbo.getDb();
     let myquery = {
-      _id: ObjectID(req.params.id)
+      _id: ObjectID(req.params.id),
     };
-    db_connection.collection("items").deleteOne(myquery, function(err, result) {
-      if (err) throw err;
-      console.log("1 item deleted successfully");
-      res.status(204).json(result);
-    });
+    db_connection
+      .collection("items")
+      .deleteOne(myquery, function (err, result) {
+        if (err) throw err;
+        console.log("1 item deleted successfully");
+        res.status(204).json(result);
+      });
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: "Internal server error"
+      message: "Internal server error",
     });
   }
 };
