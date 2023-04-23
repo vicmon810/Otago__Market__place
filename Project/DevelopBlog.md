@@ -1,3 +1,16 @@
+# 21/Apr/2023
+Basically back-end is finished, can start to tidy up and can rename those routers. 
+front-end router : 
+                * User login - not yet finished
+                * User register - basic functionality for demonstration 
+                * item display - basic functionality for demonstration
+                * item creation - basic functionality for demonstration
+                * item deletion - basic functionality for demonstration
+                * item edit - not yet finished
+                * notifications - not yet started
+                * offers function - not yet started 
+  
+
 # 9/Apr/2023
 solved that issue because the way I use to establish connection with db is incorrect, now it's been fixed. And item and user account database and backend query functions done. still it has some minor bug need to be fixed eg : update either item or user account the information is not fully passed into database. <br> PS:Now will working on frontend query data from backend.<br>PS: everyone have a great break.   
 

@@ -3,19 +3,44 @@ import { Link } from "react-router-dom";
 
 const Record = (props) => (
   <tr>
-    <td>{props.record.name}</td>
-    <td>{props.record.position}</td>
-    <td>{props.record.level}</td>
-    <td>
-      <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
-      <button className="btn btn-link"
+    <tr>Product ID</tr>
+    <tr>{props.record.Product_id}</tr>
+    <tr>Product Name</tr>
+    <tr>{props.record.Product_name}</tr>
+    <tr>Quantity</tr>
+    <tr>{props.record.Quantity}</tr>
+    <tr>Locations</tr>
+    <tr>{props.record.Locations}</tr>
+    <tr>Product Description</tr>
+    <tr>{props.record.Product_Description}</tr>
+    <tr>Product Category</tr>
+    <tr>{props.record.product_Category}</tr>
+    <tr>Create Date</tr>
+    <tr>{props.record.Create_Date}</tr>
+    <tr>Owner Account</tr>
+    <tr>{props.record.Owner_Account}</tr>
+    <tr>Email</tr>
+    <tr>{props.record.Owner_Contact?.Email}</tr>
+    <tr>Phone Number</tr>
+    <tr>{props.record.Owner_Contact?.Phone}</tr>
+    <tr>Image</tr>
+    <tr>{props.record.Image}</tr>
+    <tr>Product Features</tr>
+    <tr>{props.record.Product_Features}</tr>
+    <tr>
+      <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
+        Edit
+      </Link>{" "}
+      |
+      <button
+        className="btn btn-link"
         onClick={() => {
           props.deleteRecord(props.record._id);
         }}
       >
         Delete
       </button>
-    </td>
+    </tr>
   </tr>
 );
 
@@ -25,7 +50,9 @@ export default function RecordList() {
   // This method fetches the records from the database.
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`http://localhost:5000/record/`);
+      const response = await fetch(
+        `http://localhost:8000/api/item_routes/items`
+      );
 
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`;
@@ -39,13 +66,13 @@ export default function RecordList() {
 
     getRecords();
 
-    return; 
+    return;
   }, [records.length]);
 
   // This method will delete a record
   async function deleteRecord(id) {
-    await fetch(`http://localhost:5000/${id}`, {
-      method: "DELETE"
+    await fetch(`http://localhost:8000/api/item_routes/item/${id}`, {
+      method: "DELETE",
     });
 
     const newRecords = records.filter((el) => el._id !== id);
@@ -70,14 +97,6 @@ export default function RecordList() {
     <div>
       <h3>Record List</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Level</th>
-            <th>Action</th>
-          </tr>
-        </thead>
         <tbody>{recordList()}</tbody>
       </table>
     </div>
