@@ -4,15 +4,15 @@ import { useNavigate } from "react-router";
 export default function Create() {
   const [form, setForm] = useState({
     Product_id: "",
-    Product_name: "",
+    Title: "",
     Quantity: "",
-    Locations: "",
-    Product_description: "",
-    Product_category: "",
-    Create_time: "",
+    Location: "",
+    Description: "",
+    Category: "",
+    Timestamp: "",
     Owner_account: "",
     Image: "",
-    Product_Features: "",
+    //Product_Features: "",
   });
   const navigate = useNavigate();
 
@@ -26,6 +26,8 @@ export default function Create() {
   // This function will handle the submission.
   async function onSubmit(e) {
     e.preventDefault();
+
+    updateForm({ Timestamp: Math.floor((new Date()).getTime() / 1000) }); //UTC/Unix timestamp
 
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newItem = { ...form };
@@ -45,42 +47,54 @@ export default function Create() {
       Product_id: "",
       Product_name: "",
       Quantity: "",
-      Locations: "",
-      Product_description: "",
-      Product_category: "",
-      Create_time: "",
+      Location: "",
+      Description: "",
+      Category: "",
+      Timestamp: "",
       Owner_account: "",
       Image: "",
-      Product_Features: "",
+      //Product_Features: "",
     });
     navigate("/");
   }
 
+  function validateImageSize(_, input) {
+    const ImageSize = document.getElementById("Image").files[0].size / 1024 / 1024; // in MB
+    if (ImageSize > 20) {
+      alert('File size exceeds 20 MB');
+      // $(file).val(''); //for clearing with Jquery
+    } else {
+      updateForm({ Image: input }); // soft restriction, must restrict on server-side as well
+    }
+  }
+  
   // This following section will display the form that takes the input from the item.
   return (
     <div>
-      <h3>Create New Record</h3>
+      <h3>Add listing</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label htmlFor="name">Product Id</label>
+          <label htmlFor="Title">Title</label>
           <input
             type="text"
             className="form-control"
-            id="Product_id"
-            value={form.Product_id}
-            onChange={(e) => updateForm({ Product_id: e.target.value })}
+            id="Title"
+            value={form.Title}
+            onChange={(e) => updateForm({ Title: e.target.value })}
           />
         </div>
-
         <div className="form-group">
-          <label htmlFor="Product_name">Product Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="Product_name"
-            value={form.Product_name}
-            onChange={(e) => updateForm({ Product_name: e.target.value })}
-          />
+          <label htmlFor="Category">Category</label>
+          <div></div>
+          <select id = "Category" onChange={(e) => updateForm({ Category: e.target.value })} >  
+            <option> --Choose Category-- </option>  
+            <option> Appliances </option>  
+            <option> Clothing </option>  
+            <option> Electronics </option>  
+            <option> Furniture </option>  
+            <option> Stationary </option>  
+            <option> Other </option>  
+          </select> 
         </div>
         <div className="form-group">
           <label htmlFor="Quantity">Quantity</label>
@@ -89,61 +103,44 @@ export default function Create() {
             className="form-control"
             id="Quantity"
             value={form.Quantity}
+            placeholder = "1"
             onChange={(e) => updateForm({ Quantity: e.target.value })}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="Locations">Locations</label>
+          <label htmlFor="Location">Location</label>
           <input
             type="text"
             className="form-control"
-            id="Locations"
-            value={form.Locations}
-            onChange={(e) => updateForm({ Locations: e.target.value })}
+            id="Location"
+            value={form.Location}
+            onChange={(e) => updateForm({ Location: e.target.value })}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="Product_Description">Product_Description</label>
+          <label htmlFor="Description">Description</label>
           <input
             type="text"
             className="form-control"
-            id="Product_Description"
-            value={form.Product_description}
-            onChange={(e) =>
-              updateForm({ Product_description: e.target.value })
+            id="Description"
+            value={form.Description}
+            onChange={(e) => updateForm({ Description: e.target.value })
             }
           />
         </div>
+        
         <div className="form-group">
-          <label htmlFor="Create_Date">Create Date</label>
-          <input
-            type="text"
-            className="form-control"
-            id="Create_Date"
-            value={form.Create_time}
-            onChange={(e) => updateForm({ Create_time: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="Image">Image</label>
+          <label htmlFor="Image">Image(s)</label>
           <input
             type="file"
+            accept="image/*"
             className="form-control"
-            id="position"
+            id="Image"
             value={form.Image}
-            onChange={(e) => updateForm({ Image: e.target.value })}
+            onChange={(e) => validateImageSize(e.target.files)}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="Product_features">Product Features</label>
-          <input
-            type="text"
-            className="form-control"
-            id="Product_Features"
-            value={form.Product_Features}
-            onChange={(e) => updateForm({ Product_Features: e.target.value })}
-          />
-        </div>
+         
         {
           /* <div className="form-group">
           <div className="form-check form-check-inline">
@@ -192,12 +189,50 @@ export default function Create() {
           <div className="form-group">
             <input
               type="submit"
-              value="Create Item"
+              value="Add listing"
               className="btn btn-primary"
             />
           </div>
         }
       </form>
     </div>
+
+    /* product ID should be generated automatically (by formula)
+    <div className="form-group">
+          <label htmlFor="name">Product Id</label>
+          <input
+            type="text"
+            className="form-control"
+            id="Product_id"
+            value={form.Product_id}
+            onChange={(e) => updateForm({ Product_id: e.target.value })}
+          />
+    </div>*/
+
+    /* timestamp should be recorded automatically
+    <div className="form-group">
+      <label htmlFor="Timestamp">Timestamp Date</label>
+      <input
+        type="text"
+        className="form-control"
+        id="Timestamp"
+        value={form.Timestamp}
+        onChange={(e) => updateForm({ Timestamp: e.target.value })}
+      />
+    </div>
+    */
+
+    /* this is the same as Description
+    <div className="form-group">
+          <label htmlFor="Product_features">Product Features</label>
+          <input
+            type="text"
+            className="form-control"
+            id="Product_Features"
+            value={form.Product_Features}
+            onChange={(e) => updateForm({ Product_Features: e.target.value })}
+          />
+    </div>
+    */
   );
 }
