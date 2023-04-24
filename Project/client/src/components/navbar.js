@@ -30,13 +30,13 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <NavLink className="nav-link" to="/create">
-              Create item
+              Add listing
             </NavLink>
             <NavLink className="nav-link" to="/login">
               Log in
             </NavLink>
             <NavLink className="nav-link" to="/register">
-              Sign in
+              Register
             </NavLink>
           </ul>
         </div>
