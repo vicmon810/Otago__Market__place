@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./Login.css";
+import "/Users/apple/Info310/OtagoMarketplace/Project/client/src/components/Login.css";
 
 function LoginForm() {
   const [username, setUsername] = useState("");

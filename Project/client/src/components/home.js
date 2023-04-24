@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import navbar from "./navbar";
+import navbar from "./navbar/navbar";
 import "./Login.css";
-import Navbar from "./navbar";
+import Navbar from "./navbar/navbar";
 
 function LoginForm() {
   const [username, setUsername] = useState("");

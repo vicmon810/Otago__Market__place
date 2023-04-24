@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
-import Navbar from "./navbar";
+import Navbar from "../navbar/navbar";
 
 export default function Edit() {
   const [form, setForm] = useState({
