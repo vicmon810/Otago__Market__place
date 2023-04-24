@@ -3,10 +3,9 @@ import { useNavigate } from "react-router";
 
 export default function Register() {
   const [form, setForm] = useState({
-    User_Name: "",
+    email: "",
     password: "",
-    Email: "",
-    Contact_Number: "",
+    number: "",
   });
   const navigate = useNavigate();
 
@@ -21,6 +20,7 @@ export default function Register() {
   async function onSubmit(e) {
     e.preventDefault();
 
+    // TODO: add authentication
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newItem = { ...form };
 
@@ -35,16 +35,61 @@ export default function Register() {
       return;
     });
 
-    setForm({ User_Name: "", password: "", Email: "", Contact_Number: "" });
+    setForm({ Email: "", Password: "", Number: "" });
     navigate("/");
   }
 
   // This following section will display the form that takes the input from the item.
   return (
     <div>
-      <h3>Create New Record</h3>
+      <h3>Register for OtagoMarketplace</h3>
       <form onSubmit={onSubmit}>
+      <div className="form-group">
+          <label htmlFor="Email">Faculty Email (.ac.nz)</label>
+          <input
+            type="text"
+            className="form-control"
+            id="Email"
+            value={form.email}
+            onChange={(e) => updateForm({ Email: e.target.value })}
+          />
+        </div>
         <div className="form-group">
+          <label htmlFor="Password">Password</label>
+          <input
+            type="text"
+            className="form-control"
+            id="password"
+            value={form.password}
+            // TODO: add restrictions
+            onChange={(e) => updateForm({ password: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="Number">Phone Number</label>
+          <input
+            type="number"
+            className="form-control"
+            id="number"
+            value={form.Contact_Number}
+            // TODO: add restrictions (valid/NZ phone number)
+            onChange={(e) => updateForm({ Contact_Number: e.target.value })}
+          />
+        </div>
+        {
+          <div className="form-group">
+            <input
+              type="submit"
+              value="Register"
+              className="btn btn-primary"
+            />
+          </div>
+        }
+      </form>
+    </div>
+    
+    /* Use faculty email for login
+    <div className="form-group">
           <label htmlFor="name">User Name</label>
           <input
             type="text"
@@ -54,48 +99,6 @@ export default function Register() {
             onChange={(e) => updateForm({ User_Name: e.target.value })}
           />
         </div>
-
-        <div className="form-group">
-          <label htmlFor="Product_name">password</label>
-          <input
-            type="text"
-            className="form-control"
-            id="password"
-            value={form.passwordField}
-            onChange={(e) => updateForm({ password: e.target.value })}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="Create_Date">Email</label>
-          <input
-            type="text"
-            className="form-control"
-            id="Email"
-            value={form.Email}
-            onChange={(e) => updateForm({ Email: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="Image">Contact Number</label>
-          <input
-            type="number"
-            className="form-control"
-            id="Contact_Number"
-            value={form.Contact_Number}
-            onChange={(e) => updateForm({ Contact_Number: e.target.value })}
-          />
-        </div>
-        {
-          <div className="form-group">
-            <input
-              type="submit"
-              value="Create Item"
-              className="btn btn-primary"
-            />
-          </div>
-        }
-      </form>
-    </div>
+    */
   );
 }
