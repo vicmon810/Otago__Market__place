@@ -85,7 +85,6 @@ const updateUser = async (req, res) => {
     password = hasher.digest('hex');
 
     let userUpdate = {
-      $set: {
       name: req.body.name,
       surname: req.body.surname,
       email: req.body.email,
@@ -94,8 +93,7 @@ const updateUser = async (req, res) => {
       number: req.body.number,
       activationDate: req.body.number.activationDate,
       //pfp: req.body.pfp,
-      },
-    };
+      };
     db_connection
       .collection("user")
       .updateOne(myquery, userUpdate, function (err, result) {
@@ -119,7 +117,6 @@ const createAccount = async (req, res) => {
     hasher = hasher.update(req.body.password + "salt12345)(*&^");
     password = hasher.digest('hex');
     let account = {
-      $set: {
       name: req.body.name,
       surname: req.body.surname,
       email: req.body.email,
@@ -128,7 +125,7 @@ const createAccount = async (req, res) => {
       number: req.body.number,
       activationDate: req.body.number.activationDate,
       //pfp: req.body.pfp,
-    }};
+    };
     console.log(account);
     db_connect.collection("user").insertOne(account, function (err, result) {
       if (err) throw err;
