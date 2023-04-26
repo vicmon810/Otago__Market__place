@@ -1,9 +1,7 @@
 //const accModel = require("../model/account");
 const express = require("express");
 const dbo = require("../db/conn");
-const {
-  ObjectID
-} = require("mongodb");
+const { ObjectID } = require("mongodb");
 
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
@@ -13,16 +11,16 @@ const getUser = async (req, res) => {
   try {
     let db_connect = dbo.getDb();
     let myquery = {
-      _id: ObjectId(req.params.id)
+      _id: ObjectId(req.params.id),
     };
-    db_connect.collection("user").findOne(myquery, function(err, result) {
+    db_connect.collection("user").findOne(myquery, function (err, result) {
       if (err) throw err;
       res.status(200).json(result);
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: "Internal server error"
+      message: "Internal server error",
     });
   }
 };
@@ -34,14 +32,14 @@ const getAdmin = async (req, res) => {
     db_connect
       .collection("admin")
       .find({})
-      .toArray(function(err, result) {
+      .toArray(function (err, result) {
         if (err) throw err;
         res.status(200).json(result);
       });
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: "Internal server error"
+      message: "Internal server error",
     });
   }
 };
@@ -51,9 +49,9 @@ const deleteUser = async (req, res) => {
   try {
     let db_connection = dbo.getDb();
     let myquery = {
-      _id: ObjectId(req.params.id)
+      _id: ObjectId(req.params.id),
     };
-    db_connection.collection("user").deleteOne(myquery, function(err, result) {
+    db_connection.collection("user").deleteOne(myquery, function (err, result) {
       if (err) throw err;
       console.log("One account deleted successfully");
       res.status(204).json(result);
@@ -61,7 +59,7 @@ const deleteUser = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: "Internal server error"
+      message: "Internal server error",
     });
   }
 };
@@ -71,14 +69,14 @@ const updateUser = async (req, res) => {
   try {
     let db_connection = dbo.getDb();
     let myquery = {
-      _id: ObjectId(req.params.id)
+      _id: ObjectId(req.params.id),
     };
     let userUpdate = {
       $set: {
         User_id: req.body.User_id,
-        User_name: req.body.User_name,
+        User_Name: req.body.User_Name,
         password: req.body.password,
-        Email: req.body.email,
+        Email: req.body.Email,
         Department: req.body.Department,
         Contact_Number: req.body.Contact_Number,
         Profile_Picture: req.body.Profile_Picture,
@@ -86,7 +84,7 @@ const updateUser = async (req, res) => {
     };
     db_connection
       .collection("user")
-      .updateOne(myquery, userUpdate, function(err, result) {
+      .updateOne(myquery, userUpdate, function (err, result) {
         if (err) throw err;
         console.log("one user info updated");
         res.status(200).json(result);
@@ -94,7 +92,7 @@ const updateUser = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: "Internal server error"
+      message: "Internal server error",
     });
   }
 };
@@ -105,22 +103,22 @@ const createAccount = async (req, res) => {
     let db_connect = dbo.getDb();
     let account = {
       User_id: req.body.User_id,
-      User_name: req.body.User_name,
+      User_name: req.body.User_Name,
       password: req.body.password,
-      Email: req.body.email,
+      Email: req.body.Email,
       Department: req.body.Department,
       Contact_Number: req.body.Contact_Number,
       Profile_Picture: req.body.Profile_Picture,
     };
     console.log(account);
-    db_connect.collection("user").insertOne(account, function(err, result) {
+    db_connect.collection("user").insertOne(account, function (err, result) {
       if (err) throw err;
       res.json(result);
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: "Internal server error"
+      message: "Internal server error",
     });
   }
 };
@@ -130,7 +128,7 @@ const verifyLogin = async (req, res) => {
     const db_connect = dbo.getDb();
     const collection = db_connect.collection("user");
     const result = await collection.findOne({
-      User_Name: req.body.name
+      User_Name: req.body.name,
     });
     // check if the password matches
     if (result) {
@@ -138,17 +136,17 @@ const verifyLogin = async (req, res) => {
         res.status(200).json(result);
       }
       res.status(401).json({
-        message: "Invalid username or password"
+        message: "Invalid username or password",
       });
     } else {
       res.status(401).json({
-        message: "Invalid username or password"
+        message: "Invalid username or password",
       });
     }
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: "Internal server error"
+      message: "Internal server error",
     });
   }
 };

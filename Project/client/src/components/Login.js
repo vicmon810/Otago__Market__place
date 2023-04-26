@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import "./Login.css";
 
 function LoginForm() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -17,7 +17,7 @@ function LoginForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Username:", username);
+    console.log("Email:", email);
     console.log("Password:", password);
     // Add code to submit login information to backend API here
   };
@@ -26,15 +26,16 @@ function LoginForm() {
     <div className="login-form-container">
       <h1 className="login-form-title">Login</h1>
       <form className="login-form" onSubmit={handleSubmit}>
-        <label htmlFor="username" className="login-form-label">
-          Username:
+        <form action="Project/client/src/components/create.js"></form>
+        <label htmlFor="email" className="login-form-label">
+          Email:
         </label>
         <input
           type="text"
-          id="username"
+          id="email"
           className="login-form-input"
-          value={username}
-          onChange={handleUsernameChange}
+          value={email}
+          onChange={handleEmailChange}
         />
 
         <label htmlFor="password" className="login-form-label">

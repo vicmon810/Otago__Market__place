@@ -1,61 +1,25 @@
-import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import "./App.css";
-
-function LoginForm() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Username:", username);
-    console.log("Password:", password);
-    // Add code to submit login information to backend API here
-  };
-
+// We import all the components we need in our app
+import Navbar from "./components/navbar";
+import RecordList from "./components/recordList";
+import Edit from "./components/edit";
+import Create from "./components/createItem";
+import LoginForm from "./components/Login";
+import Register from "./components/createAccount";
+const App = () => {
   return (
-    <div className="login-form-container">
-      <h1 className="login-form-title">Login</h1>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <label htmlFor="username" className="login-form-label">
-          Username:
-        </label>
-        <input
-          type="text"
-          id="username"
-          className="login-form-input"
-          value={username}
-          onChange={handleUsernameChange}
-        />
-
-        <label htmlFor="password" className="login-form-label">
-          Password:
-        </label>
-        <input
-          type="password"
-          id="password"
-          className="login-form-input"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-
-        {error && <p className="login-form-error">{error}</p>}
-
-        <button type="submit" className="login-form-button">
-          Login
-        </button>
-      </form>
+    <div>
+      <Navbar />
+      <Routes>
+        <Route exact path="/" element={<RecordList />} />
+        <Route path="/edit/:id" element={<Edit />} />
+        <Route path="/create" element={<Create />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="register" element={<Register />} />
+      </Routes>
     </div>
   );
-}
+};
 
-export default LoginForm;
+export default App;
