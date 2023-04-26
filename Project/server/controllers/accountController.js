@@ -2,6 +2,18 @@
 const express = require("express");
 const dbo = require("../db/conn");
 const { ObjectID } = require("mongodb");
+var nodemailer = require('nodemailer');
+
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'otagomarketplace@gmail.com',
+    pass: 'thispasswordhasbeenstoredinsecurelyforconvenience'
+  }
+});
+
+
 
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
@@ -152,15 +164,28 @@ const verifyLogin = async (req, res) => {
 };
 
 const messageUser = async (req, res) => {
+
+
   try {
     const db_connect = dbo.getDb();
     const collection = db_connect.collection("user");
     const result = await collection.findOne({
-      User_Name: req.body.name,
+      User_Name: req.body.username,
     });
-    // check if the password matches
     if (result) {
-      //email
+      var mailOptions = {
+        from: 'otagomarketplace@gmail.com',
+        to: result.Email,
+        subject:  req.body.subject,
+        text: req.body.message
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
     } else {
       res.status(500).json({
         message: "Internal server error",
