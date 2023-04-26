@@ -49,12 +49,12 @@ const createItem = async (req, res) => {
     let db_connect = dbo.getDb();
     let item = {
       Product_id: req.body.Product_id,
-      Product_name: req.body.Product_name,
+      Product_name: req.body.Title,
       Quantity: req.body.Quantity,
-      Location: req.body.Locations,
-      Product_description: req.body.Product_description,
-      Product_category: req.body.Product_category,
-      Create_time: req.body.Create_time,
+      Location: req.body.Location,
+      Product_description: req.body.Description,
+      Product_category: req.body.Category,
+      Create_time: req.body.Timestamp,
       Owner_account: req.body.Owner_account,
       Owner_contact: {
         Email: req.body.Email,
