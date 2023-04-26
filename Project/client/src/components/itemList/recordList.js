@@ -84,9 +84,9 @@ export default function RecordList() {
     return records.map((record) => {
       return (
         <Record
-          record={record}
-          deleteRecord={() => deleteRecord(record._id)}
-          key={record._id}
+          record={record.toString()}
+          deleteRecord={() => deleteRecord(record._id).toString()}
+          key={record._id.toString()}
         />
       );
     });
