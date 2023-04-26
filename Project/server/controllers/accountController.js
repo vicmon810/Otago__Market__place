@@ -1,10 +1,8 @@
-//const accModel = require("../model/account");
+const accModel = require("../model/account");
 const express = require("express");
 const dbo = require("../db/conn");
 const crypto = require('crypto');
-const { ObjectID } = require("mongodb");
 var nodemailer = require('nodemailer');
-
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -14,8 +12,6 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-
-
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
 
@@ -24,7 +20,7 @@ const getUser = async (req, res) => {
   try {
     let db_connect = dbo.getDb();
     let myquery = {
-      _id: ObjectId(req.params.id),
+      email: ObjectId(req.params.email),
     };
     db_connect.collection("user").findOne(myquery, function (err, result) {
       if (err) throw err;
@@ -62,7 +58,7 @@ const deleteUser = async (req, res) => {
   try {
     let db_connection = dbo.getDb();
     let myquery = {
-      _id: ObjectId(req.params.id),
+      email: ObjectId(req.params.email),
     };
     db_connection.collection("user").deleteOne(myquery, function (err, result) {
       if (err) throw err;
@@ -82,7 +78,7 @@ const updateUser = async (req, res) => {
   try {
     let db_connection = dbo.getDb();
     let myquery = {
-      _id: ObjectId(req.params.id),
+      email: ObjectId(req.params.email),
     };
     let hasher = crypto.createHash('sha256');
     hasher = hasher.update(req.body.password + "salt12345)(*&^");
@@ -90,13 +86,14 @@ const updateUser = async (req, res) => {
 
     let userUpdate = {
       $set: {
-        User_id: req.body.User_id,
-        User_Name: req.body.User_Name,
-        password: password,
-        Email: req.body.Email,
-        Department: req.body.Department,
-        Contact_Number: req.body.Contact_Number,
-        Profile_Picture: req.body.Profile_Picture,
+      name: req.body.name,
+      surname: req.body.surname,
+      email: req.body.email,
+      password: req.body.password,
+      department: req.body.department,
+      number: req.body.number,
+      activationDate: req.body.number.activationDate,
+      //pfp: req.body.pfp,
       },
     };
     db_connection
@@ -122,14 +119,16 @@ const createAccount = async (req, res) => {
     hasher = hasher.update(req.body.password + "salt12345)(*&^");
     password = hasher.digest('hex');
     let account = {
-      User_id: req.body.User_id,
-      User_name: req.body.User_Name,
-      password: password,
-      Email: req.body.Email,
-      Department: req.body.Department,
-      Contact_Number: req.body.Contact_Number,
-      Profile_Picture: req.body.Profile_Picture,
-    };
+      $set: {
+      name: req.body.name,
+      surname: req.body.surname,
+      email: req.body.email,
+      password: req.body.password,
+      department: req.body.department,
+      number: req.body.number,
+      activationDate: req.body.number.activationDate,
+      //pfp: req.body.pfp,
+    }};
     console.log(account);
     db_connect.collection("user").insertOne(account, function (err, result) {
       if (err) throw err;
@@ -184,12 +183,12 @@ const messageUser = async (req, res) => {
     const db_connect = dbo.getDb();
     const collection = db_connect.collection("user");
     const result = await collection.findOne({
-      User_Name: req.body.username,
+      email: req.body.email,
     });
     if (result) {
       var mailOptions = {
         from: 'otagomarketplace@gmail.com',
-        to: result.Email,
+        to: result.email,
         subject:  req.body.subject,
         text: req.body.message
       };
