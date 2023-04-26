@@ -22,7 +22,6 @@ const getAllItems = async (req, res) => {
       message: "Internal server error",
     });
   }
-  return result;
 };
 
 const getSingleItem = async (req, res) => {

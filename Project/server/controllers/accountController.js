@@ -82,13 +82,13 @@ const updateUser = async (req, res) => {
     };
     let hasher = crypto.createHash('sha256');
     hasher = hasher.update(req.body.password + "salt12345)(*&^");
-    password = hasher.digest('hex');
+    hashed_password = hasher.digest('hex');
 
     let userUpdate = {
       name: req.body.name,
       surname: req.body.surname,
       email: req.body.email,
-      password: req.body.password,
+      password: hashed_password,
       department: req.body.department,
       number: req.body.number,
       activationDate: req.body.activationDate,
