@@ -6,6 +6,7 @@ export default function Register() {
     email: "",
     password: "",
     number: "",
+    department: "",
   });
   const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ export default function Register() {
       return;
     });
 
-    setForm({ Email: "", Password: "", Number: "" });
+    setForm({ email: "", password: "", number: "", department: "" });
     navigate("/");
   }
 
@@ -49,9 +50,10 @@ export default function Register() {
           <input
             type="text"
             className="form-control"
-            id="Email"
+            id="email"
             value={form.email}
-            onChange={(e) => updateForm({ Email: e.target.value })}
+            // TODO: add restrictions (faculty email)
+            onChange={(e) => updateForm({ email: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -71,12 +73,36 @@ export default function Register() {
             type="number"
             className="form-control"
             id="number"
-            value={form.Contact_Number}
+            value={form.number}
             // TODO: add restrictions (valid/NZ phone number)
-            onChange={(e) => updateForm({ Contact_Number: e.target.value })}
+            onChange={(e) => updateForm({ number: e.target.value })}
           />
         </div>
-        {
+        <div className="form-group">
+          <label htmlFor="Department">Department</label>
+          <div></div>
+          <select id = "department" onChange={(e) => updateForm({ department: e.target.value })} >  
+            <option> --Choose Department-- </option>  
+            <optgroup label="Academic Divisions">
+              <option> Division of Commerce/School of Business</option>  
+              <option> Division of Health Sciences </option>  
+              <option> Division of Humanities </option>  
+              <option> Division of Sciences </option>  
+            </optgroup>
+            <optgroup label="Service Divisions">
+              <option> Academic Division </option>  
+              <option> Accomodation Services Division </option>  
+              <option> Financial Services Division </option>  
+              <option> Human Resources Division </option>  
+              <option> Information Technology Services Division </option> 
+              <option> External Engagement Division </option> 
+              <option> Property Services Division </option> 
+              <option> Research & Enterprise Division </option> 
+              <option> Student Services Division </option> 
+            </optgroup>
+            <option> Other </option>  
+          </select> 
+        </div>
           <div className="form-group">
             <input
               type="submit"
@@ -84,21 +110,10 @@ export default function Register() {
               className="btn btn-primary"
             />
           </div>
-        }
       </form>
+      <br></br>
+      <body> Disclaimer: OtagoMarketplace is a platform for members (faculty and staff) of the University of Otago. </body> 
     </div>
     
-    /* Use faculty email for login
-    <div className="form-group">
-          <label htmlFor="name">User Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="User_Name"
-            value={form.User_Name}
-            onChange={(e) => updateForm({ User_Name: e.target.value })}
-          />
-        </div>
-    */
   );
 }
