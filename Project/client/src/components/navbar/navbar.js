@@ -15,22 +15,13 @@ export default function Navbar() {
           {" "}
           Home
         </NavLink>
-        <NavLink className="nav-link" to="/create">
-          Add listing
-        </NavLink>
-        <NavLink className="nav-link" to="/login">
-          Log in
-        </NavLink>
-        <NavLink className="nav-link" to="/register">
-          Register
-        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
-          aria-expanded="false"
+          aria-expanded="true"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
