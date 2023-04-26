@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import "/Users/apple/Info310/OtagoMarketplace/Project/client/src/components/Login.css";
 
 function LoginForm() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -17,7 +17,7 @@ function LoginForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Username:", username);
+    console.log("Email:", email);
     console.log("Password:", password);
     // Add code to submit login information to backend API here
   };
@@ -27,15 +27,15 @@ function LoginForm() {
       <h1 className="login-form-title">Login</h1>
       <form className="login-form" onSubmit={handleSubmit}>
         <form action="Project/client/src/components/create.js"></form>
-        <label htmlFor="username" className="login-form-label">
-          Username:
+        <label htmlFor="email" className="login-form-label">
+          Email:
         </label>
         <input
           type="text"
-          id="username"
+          id="email"
           className="login-form-input"
-          value={username}
-          onChange={handleUsernameChange}
+          value={email}
+          onChange={handleEmailChange}
         />
 
         <label htmlFor="password" className="login-form-label">

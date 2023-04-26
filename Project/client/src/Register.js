@@ -1,6 +1,22 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 
+<<<<<<< HEAD
+
+const RegisterModal = ({ isOpen, onClose }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Make POST request to server with form data
+  };
+=======
 export default function Create() {
   const [form, setForm] = useState({
     name: "",
@@ -38,9 +54,11 @@ export default function Create() {
     setForm({ name: "", position: "", level: "" });
     navigate("/");
   }
+>>>>>>> e68a7692b194e147567c2073be7adaf183fa935b
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose}>
+
+    <RegisterModal isOpen={isModalOpen} onRequestClose={onClose}>
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -70,7 +88,7 @@ export default function Create() {
         <button type="submit">Register</button>
       </form>
       <button onClick={onClose}>Cancel</button>
-    </Modal>
+    </RegisterModal>
   );
 };
 

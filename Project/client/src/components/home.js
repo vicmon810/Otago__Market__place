@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import navbar from "./navbar/navbar";
+=======
+>>>>>>> e09f8fbd79fb0ae7a73a5d69be5eb080db68a547
 import "./Login.css";
 import Navbar from "./navbar/navbar";
 
