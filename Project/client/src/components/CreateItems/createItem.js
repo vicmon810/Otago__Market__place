@@ -27,11 +27,11 @@ export default function Create() {
   async function onSubmit(e) {
     e.preventDefault();
 
-    updateForm({ Timestamp: Math.floor((new Date()).getTime() / 1000) }); //UTC/Unix timestamp
+    updateForm({ Timestamp: Math.floor(new Date().getTime() / 1000) }); //UTC/Unix timestamp
 
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newItem = { ...form };
-
+    console.log(newItem);
     await fetch("http://localhost:8000/api/item_routes/items/", {
       method: "POST",
       headers: {
@@ -59,15 +59,16 @@ export default function Create() {
   }
 
   function validateImageSize(_, input) {
-    const ImageSize = document.getElementById("Image").files[0].size / 1024 / 1024; // in MB
+    const ImageSize =
+      document.getElementById("Image").files[0].size / 1024 / 1024; // in MB
     if (ImageSize > 20) {
-      alert('File size exceeds 20 MB');
+      alert("File size exceeds 20 MB");
       // $(file).val(''); //for clearing with Jquery
     } else {
       updateForm({ Image: input }); // soft restriction, must restrict on server-side as well
     }
   }
-  
+
   // This following section will display the form that takes the input from the item.
   return (
     <div>
@@ -86,15 +87,18 @@ export default function Create() {
         <div className="form-group">
           <label htmlFor="Category">Category</label>
           <div></div>
-          <select id = "Category" onChange={(e) => updateForm({ Category: e.target.value })} >  
-            <option> --Choose Category-- </option>  
-            <option> Appliances </option>  
-            <option> Clothing </option>  
-            <option> Electronics </option>  
-            <option> Furniture </option>  
-            <option> Stationary </option>  
-            <option> Other </option>  
-          </select> 
+          <select
+            id="Category"
+            onChange={(e) => updateForm({ Category: e.target.value })}
+          >
+            <option> --Choose Category-- </option>
+            <option> Appliances </option>
+            <option> Clothing </option>
+            <option> Electronics </option>
+            <option> Furniture </option>
+            <option> Stationary </option>
+            <option> Other </option>
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="Quantity">Quantity</label>
@@ -103,7 +107,7 @@ export default function Create() {
             className="form-control"
             id="Quantity"
             value={form.Quantity}
-            placeholder = "1"
+            placeholder="1"
             onChange={(e) => updateForm({ Quantity: e.target.value })}
           />
         </div>
@@ -124,11 +128,10 @@ export default function Create() {
             className="form-control"
             id="Description"
             value={form.Description}
-            onChange={(e) => updateForm({ Description: e.target.value })
-            }
+            onChange={(e) => updateForm({ Description: e.target.value })}
           />
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="Image">Image(s)</label>
           <input
@@ -140,7 +143,7 @@ export default function Create() {
             onChange={(e) => validateImageSize(e.target.files)}
           />
         </div>
-         
+
         {
           /* <div className="form-group">
           <div className="form-check form-check-inline">

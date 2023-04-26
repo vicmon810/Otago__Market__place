@@ -2,18 +2,15 @@
 const express = require("express");
 const dbo = require("../db/conn");
 const { ObjectID } = require("mongodb");
-var nodemailer = require('nodemailer');
-
+var nodemailer = require("nodemailer");
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
-    user: 'otagomarketplace@gmail.com',
-    pass: 'thispasswordhasbeenstoredinsecurelyforconvenience'
-  }
+    user: "otagomarketplace@gmail.com",
+    pass: "thispasswordhasbeenstoredinsecurelyforconvenience",
+  },
 });
-
-
 
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
@@ -136,6 +133,7 @@ const createAccount = async (req, res) => {
 };
 
 const verifyLogin = async (req, res) => {
+  console.log("trigger");
   try {
     const db_connect = dbo.getDb();
     const collection = db_connect.collection("user");
@@ -164,8 +162,6 @@ const verifyLogin = async (req, res) => {
 };
 
 const messageUser = async (req, res) => {
-
-
   try {
     const db_connect = dbo.getDb();
     const collection = db_connect.collection("user");
@@ -174,16 +170,16 @@ const messageUser = async (req, res) => {
     });
     if (result) {
       var mailOptions = {
-        from: 'otagomarketplace@gmail.com',
+        from: "otagomarketplace@gmail.com",
         to: result.Email,
-        subject:  req.body.subject,
-        text: req.body.message
+        subject: req.body.subject,
+        text: req.body.message,
       };
-      transporter.sendMail(mailOptions, function(error, info){
+      transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
           console.log(error);
         } else {
-          console.log('Email sent: ' + info.response);
+          console.log("Email sent: " + info.response);
         }
       });
     } else {
@@ -205,9 +201,6 @@ module.exports = {
   createAccount,
   updateUser,
   deleteUser,
-<<<<<<< HEAD
-  verifyLogin,
-=======
   messageUser,
->>>>>>> cab894e45befeeaedbe19e2664f647f593b33246
+  verifyLogin,
 };
