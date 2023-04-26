@@ -91,7 +91,7 @@ const updateUser = async (req, res) => {
       password: req.body.password,
       department: req.body.department,
       number: req.body.number,
-      activationDate: req.body.number.activationDate,
+      activationDate: req.body.activationDate,
       //pfp: req.body.pfp,
       };
     db_connection
@@ -123,7 +123,7 @@ const createAccount = async (req, res) => {
       password: req.body.password,
       department: req.body.department,
       number: req.body.number,
-      activationDate: req.body.number.activationDate,
+      activationDate: Math.floor((new Date()).getTime() / 1000),
       //pfp: req.body.pfp,
     };
     console.log(account);
@@ -174,7 +174,6 @@ const verifyLogin = async (req, res) => {
 };
 
 const messageUser = async (req, res) => {
-
 
   try {
     const db_connect = dbo.getDb();
