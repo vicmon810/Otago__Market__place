@@ -3,30 +3,27 @@ import { Link } from "react-router-dom";
 
 const Record = (props) => (
   <tr>
-    <tr>Product ID</tr>
-    <tr>{props.record.Product_id}</tr>
-    <tr>Product Name</tr>
-    <tr>{props.record.Product_name}</tr>
+    <tr>Title</tr>
+    <tr>{props.record.title}</tr>
+    <tr>Category</tr>
+    <tr>{props.record.category}</tr>
     <tr>Quantity</tr>
-    <tr>{props.record.Quantity}</tr>
-    <tr>Locations</tr>
-    <tr>{props.record.Locations}</tr>
-    <tr>Product Description</tr>
-    <tr>{props.record.Product_Description}</tr>
-    <tr>Product Category</tr>
-    <tr>{props.record.product_Category}</tr>
-    <tr>Create Date</tr>
-    <tr>{props.record.Create_Date}</tr>
-    <tr>Owner Account</tr>
-    <tr>{props.record.Owner_Account}</tr>
-    <tr>Email</tr>
-    <tr>{props.record.Owner_Contact?.Email}</tr>
-    <tr>Phone Number</tr>
-    <tr>{props.record.Owner_Contact?.Phone}</tr>
-    <tr>Image</tr>
-    <tr>{props.record.Image}</tr>
-    <tr>Product Features</tr>
-    <tr>{props.record.Product_Features}</tr>
+    <tr>{props.record.quantity}</tr>
+    <tr>Location</tr>
+    <tr>{props.record.location}</tr>
+    <tr>Description</tr>
+    <tr>{props.record.description}</tr>
+    <tr>Listing posted on</tr>
+    <tr>{props.record.listingDate}</tr>
+    <tr>by</tr>
+    <tr>{props.record.userAccount}</tr>
+    <tr>Contact information</tr>
+    <tr>Email: {props.record.contactInfo?.email}</tr>
+    <tr>Phone Number:{props.record.contactInfo?.number}</tr>
+    <tr>Image(s)</tr>
+    <tr>{props.record.images}</tr>
+    <tr>Product ID</tr>
+    <tr>{props.record.product_id}</tr>
     <tr>
       <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
         Edit
@@ -53,19 +50,15 @@ export default function RecordList() {
       const response = await fetch(
         `http://localhost:8000/api/item_routes/items`
       );
-
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`;
         window.alert(message);
         return;
       }
-
       const records = await response.json();
       setRecords(records);
     }
-
     getRecords();
-
     return;
   }, [records.length]);
 
@@ -81,7 +74,9 @@ export default function RecordList() {
 
   // This method will map out the records on the table
   function recordList() {
+    console.log('records',records);
     return records.map((record) => {
+      console.log('record',record);
       return (
         <Record
           record={record.toString()}
@@ -95,7 +90,7 @@ export default function RecordList() {
   // This following section will display the table with the records of individuals.
   return (
     <div>
-      <h3>Record List</h3>
+      <h3>All Listings</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <tbody>{recordList()}</tbody>
       </table>

@@ -1,18 +1,17 @@
 const itemModel = require("../model/item");
 const express = require("express");
 const dbo = require("../db/conn");
-const { ObjectID } = require("mongodb");
 
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
-//GET all items
 
+//GET all items
 const getAllItems = async (req, res) => {
   try {
     let db_connect = dbo.getDb("test");
     const items = await db_connect
       .collection("items")
-      .find({})
+      .find()
       .toArray(function (err, result) {
         if (err) throw err;
         res.status(200).json(result);
@@ -23,6 +22,7 @@ const getAllItems = async (req, res) => {
       message: "Internal server error",
     });
   }
+  return result;
 };
 
 const getSingleItem = async (req, res) => {
@@ -48,21 +48,18 @@ const createItem = async (req, res) => {
   try {
     let db_connect = dbo.getDb();
     let item = {
-      Product_id: req.body.Product_id,
-      Product_name: req.body.Title,
-      Quantity: req.body.Quantity,
-      Location: req.body.Location,
-      Product_description: req.body.Description,
-      Product_category: req.body.Category,
-      Create_time: req.body.Timestamp,
-      Owner_account: req.body.Owner_account,
-      Owner_contact: {
-        Email: req.body.Email,
-        Phone: req.body.Phone,
-      },
-      Image: req.body.Image,
-      Product_Features: req.body.Product_Features,
-      Tags: req.body.Tags,
+      product_id: req.body.product_id,
+      title: req.body.title,
+      category: req.body.category,
+      quantity: req.body.quantity,
+      location: req.body.location,
+      description: req.body.description,
+      images: req.body.images,
+      listingDate: Math.floor((new Date()).getTime() / 1000),
+      userAccount: req.body.userAccount,
+      contactInfo: {
+        email: req.body.email,
+        number: req.body.number, }
     };
     console.log(item);
     db_connect.collection("items").insertOne(item, function (err, result) {
@@ -85,23 +82,18 @@ const updateItem = async (req, res) => {
       _id: ObjectId(req.params.id),
     };
     let newItem = {
-      $set: {
-        Product_id: req.params.Product_id,
-        Product_name: req.body.Product_name,
-        Quantity: req.body.Quantity,
-        Location: req.body.Location,
-        Product_description: req.body.Product_description,
-        Product_category: req.body.Product_category,
-        Create_time: req.body.Create_time,
-        Owner_account: req.body.Owner_account,
-        Owner_contact: {
-          Email: req.body.Email,
-          Phone: req.body.Phone,
-        },
-        Image: req.body.Image,
-        Product_Features: req.body.Product_Features,
-        Tags: req.body.Tags,
-      },
+      product_id: req.body.product_id,
+      title: req.body.title,
+      category: req.body.category,
+      quantity: req.body.quantity,
+      location: req.body.location,
+      description: req.body.description,
+      images: req.body.images,
+      listingDate: req.body.listingDate,
+      userAccount: req.body.userAccount,
+      contactInfo: {
+        email: req.body.email,
+        number: req.body.number, }
     };
     console.log(newItem);
     db_connect
