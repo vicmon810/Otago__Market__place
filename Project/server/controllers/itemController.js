@@ -1,18 +1,17 @@
 const itemModel = require("../model/item");
 const express = require("express");
 const dbo = require("../db/conn");
-const { ObjectID } = require("mongodb");
 
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
-//GET all items
 
+//GET all items
 const getAllItems = async (req, res) => {
   try {
     let db_connect = dbo.getDb("test");
     const items = await db_connect
       .collection("items")
-      .find({})
+      .find()
       .toArray(function (err, result) {
         if (err) throw err;
         res.status(200).json(result);
@@ -49,14 +48,20 @@ const createItem = async (req, res) => {
   try {
     let db_connect = dbo.getDb();
     let item = {
+      product_id: req.body.product_id,
       title: req.body.title,
       category: req.body.category,
-      location: req.body.location,
       quantity: req.body.quantity,
+      location: req.body.location,
       description: req.body.description,
       images: req.body.images,
-      listingDate: req.body.listingDate,
-      owner: req.body.owner,
+      images64: req.body.images64,
+      listingDate: Math.floor(new Date().getTime() / 1000),
+      userAccount: req.body.userAccount,
+      contactInfo: {
+        email: req.body.email,
+        number: req.body.number,
+      },
     };
     console.log(item);
     db_connect.collection("items").insertOne(item, function (err, result) {
@@ -79,15 +84,19 @@ const updateItem = async (req, res) => {
       _id: ObjectId(req.params.id),
     };
     let newItem = {
-      $set: {
-        title: req.body.title,
-        category: req.body.category,
-        location: req.body.location,
-        quantity: req.body.quantity,
-        description: req.body.description,
-        images: req.body.images,
-        listingDate: req.body.listingDate,
-        owner: req.body.owner,
+      product_id: req.body.product_id,
+      title: req.body.title,
+      category: req.body.category,
+      quantity: req.body.quantity,
+      location: req.body.location,
+      description: req.body.description,
+      images: req.body.images,
+      images64: req.body.images64,
+      listingDate: req.body.listingDate,
+      userAccount: req.body.userAccount,
+      contactInfo: {
+        email: req.body.email,
+        number: req.body.number,
       },
     };
     console.log(newItem);

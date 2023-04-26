@@ -3,14 +3,17 @@ import { useNavigate } from "react-router";
 
 export default function Create() {
   const [form, setForm] = useState({
+    product_id: "", //product ID should be generated automatically (by formula)
     title: "",
     category: "",
-    Location: "",
     quantity: "",
+    location: "",
     description: "",
     images: "",
+    images64: "",
     listingDate: "",
-    owner: "",
+    userAccount: "",
+    contactInfo: { email: "", number: "" },
   });
   const navigate = useNavigate();
 
@@ -24,12 +27,9 @@ export default function Create() {
   // This function will handle the submission.
   async function onSubmit(e) {
     e.preventDefault();
-
-    updateForm({ Timestamp: Math.floor(new Date().getTime() / 1000) }); //UTC/Unix timestamp
-
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newItem = { ...form };
-    console.log(newItem);
+    console.log(JSON.stringify(newItem));
     await fetch("http://localhost:8000/api/item_routes/items/", {
       method: "POST",
       headers: {
@@ -42,27 +42,47 @@ export default function Create() {
     });
 
     setForm({
+      product_id: "", //product ID should be generated automatically (by formula)
       title: "",
       category: "",
-      Location: "",
       quantity: "",
+      location: "",
       description: "",
       images: "",
+      images64: "",
       listingDate: "",
-      owner: "",
+      userAccount: "",
+      contactInfo: { email: "", number: "" },
     });
     navigate("/");
   }
 
-  function validateImageSize(_, input) {
-    const ImageSize =
-      document.getElementById("Image").files[0].size / 1024 / 1024; // in MB
-    if (ImageSize > 20) {
-      alert("File size exceeds 20 MB");
-      // $(file).val(''); //for clearing with Jquery
-    } else {
-      updateForm({ Image: input }); // soft restriction, must restrict on server-side as well
+  function validateImageSize(eventTarget) {
+    //let clickSubmit = document.getElementById('submit');
+    let fileInput = document.getElementById("images").files;
+    console.log("fileInput", fileInput);
+    if (fileInput.length > 0) {
+      const imageSize = fileInput[0].size / 1024 / 1024; // in MB
+      console.log("ImageSize", imageSize);
+      if (imageSize > 16) {
+        alert("File size exceeds 16 MB"); // 16MB for storage with MongoDB
+        // $(file).val(''); //for clearing with Jquery
+      } else {
+        const [imageFile] = fileInput;
+        const fileReader = new FileReader();
+        fileReader.onload = () => {
+          const srcData = fileReader.result;
+          console.log("srcData:", srcData);
+          updateForm({ images64: srcData });
+        };
+        fileReader.readAsDataURL(imageFile);
+        //updateForm({ images: eventTarget[0] });
+      }
     }
+    /*
+      updateForm({ images: '' }); // soft restriction, must restrict on server-side as well
+    };
+    */
   }
 
   // This following section will display the form that takes the input from the item.
@@ -76,7 +96,7 @@ export default function Create() {
             type="text"
             className="form-control"
             id="title"
-            value={form.title}
+            value={form.ittle}
             onChange={(e) => updateForm({ title: e.target.value })}
           />
         </div>
@@ -84,7 +104,7 @@ export default function Create() {
           <label htmlFor="Category">Category</label>
           <div></div>
           <select
-            id="Category"
+            id="category"
             onChange={(e) => updateForm({ category: e.target.value })}
           >
             <option> --Choose Category-- </option>
@@ -122,8 +142,8 @@ export default function Create() {
           <input
             type="text"
             className="form-control"
-            id="Description"
-            value={form.Description}
+            id="description"
+            value={form.description}
             onChange={(e) => updateForm({ description: e.target.value })}
           />
         </div>
@@ -134,57 +154,13 @@ export default function Create() {
             type="file"
             accept="image/*"
             className="form-control"
-            id="Image"
-            value={form.Image}
+            id="images"
+            value={form.images}
             onChange={(e) => validateImageSize(e.target.files)}
           />
         </div>
 
         {
-          /* <div className="form-group">
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="positionOptions"
-              id="positionIntern"
-              value="Intern"
-              checked={form.level === "Intern"}
-              onChange={(e) => updateForm({ level: e.target.value })}
-            />
-            <label htmlFor="positionIntern" className="form-check-label">
-              Intern
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="positionOptions"
-              id="positionJunior"
-              value="Junior"
-              checked={form.level === "Junior"}
-              onChange={(e) => updateForm({ level: e.target.value })}
-            />
-            <label htmlFor="positionJunior" className="form-check-label">
-              Junior
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="positionOptions"
-              id="positionSenior"
-              value="Senior"
-              checked={form.level === "Senior"}
-              onChange={(e) => updateForm({ level: e.target.value })}
-            />
-            <label htmlFor="positionSenior" className="form-check-label">
-              Senior
-            </label>
-          </div>
-        </div> */
           <div className="form-group">
             <input
               type="submit"
@@ -195,43 +171,5 @@ export default function Create() {
         }
       </form>
     </div>
-
-    /* product ID should be generated automatically (by formula)
-    <div className="form-group">
-          <label htmlFor="name">Product Id</label>
-          <input
-            type="text"
-            className="form-control"
-            id="Product_id"
-            value={form.Product_id}
-            onChange={(e) => updateForm({ Product_id: e.target.value })}
-          />
-    </div>*/
-
-    /* timestamp should be recorded automatically
-    <div className="form-group">
-      <label htmlFor="Timestamp">Timestamp Date</label>
-      <input
-        type="text"
-        className="form-control"
-        id="Timestamp"
-        value={form.Timestamp}
-        onChange={(e) => updateForm({ Timestamp: e.target.value })}
-      />
-    </div>
-    */
-
-    /* this is the same as Description
-    <div className="form-group">
-          <label htmlFor="Product_features">Product Features</label>
-          <input
-            type="text"
-            className="form-control"
-            id="Product_Features"
-            value={form.Product_Features}
-            onChange={(e) => updateForm({ Product_Features: e.target.value })}
-          />
-    </div>
-    */
   );
 }

@@ -21,7 +21,7 @@ const Record = (props) => (
     <tr>Email: {props.record.contactInfo?.email}</tr>
     <tr>Phone Number:{props.record.contactInfo?.number}</tr>
     <tr>Image(s)</tr>
-    <tr>{props.record.images}</tr>
+    <img id="base64image" src={props.record.images64} />
     <tr>Product ID</tr>
     <tr>{props.record.product_id}</tr>
     <tr>

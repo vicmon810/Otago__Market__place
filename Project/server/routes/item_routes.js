@@ -14,7 +14,6 @@ routes.get("/items", getAllItems);
 routes.get("/item/:id", getSingleItem);
 // POST a new item
 routes.post("/items", createItem);
-
 //DELETE a item
 routes.delete("/item/:id", deleteItem);
 // UPDATE a item

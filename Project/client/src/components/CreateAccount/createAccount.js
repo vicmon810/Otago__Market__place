@@ -9,7 +9,7 @@ export default function Register() {
     password: "",
     number: "",
     department: "",
-    activationDate: "",
+    activationDate: ""
   });
   const navigate = useNavigate();
 
@@ -23,8 +23,6 @@ export default function Register() {
   // This function will handle the submission.
   async function onSubmit(e) {
     e.preventDefault();
-    updateForm({ activationDate: Math.floor((new Date()).getTime() / 1000) }); //UTC/Unix timestamp
-
     // TODO: add authentication
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newItem = { ...form };
@@ -41,7 +39,7 @@ export default function Register() {
       return;
     });
 
-    setForm({name: "", surname: "", email: "", password: "", number: "", department: "", activationDate: "", });
+    setForm({name: "", surname: "", email: "", password: "", number: "", department: "", activationDate: ""});
     navigate("/");
   }
 
