@@ -44,6 +44,7 @@ const getSingleItem = async (req, res) => {
 
 //create a new item
 const createItem = async (req, res) => {
+  console.log(req.body);
   try {
     let db_connect = dbo.getDb();
     let item = {
@@ -55,11 +56,12 @@ const createItem = async (req, res) => {
       description: req.body.description,
       images: req.body.images,
       images64: req.body.images64,
-      listingDate: Math.floor((new Date()).getTime() / 1000),
+      listingDate: Math.floor(new Date().getTime() / 1000),
       userAccount: req.body.userAccount,
       contactInfo: {
         email: req.body.email,
-        number: req.body.number, }
+        number: req.body.number,
+      },
     };
     console.log(item);
     db_connect.collection("items").insertOne(item, function (err, result) {
@@ -94,7 +96,8 @@ const updateItem = async (req, res) => {
       userAccount: req.body.userAccount,
       contactInfo: {
         email: req.body.email,
-        number: req.body.number, }
+        number: req.body.number,
+      },
     };
     console.log(newItem);
     db_connect

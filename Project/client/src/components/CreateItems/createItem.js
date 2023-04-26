@@ -13,7 +13,7 @@ export default function Create() {
     images64: "",
     listingDate: "",
     userAccount: "",
-    contactInfo: {email:"", number:""}
+    contactInfo: { email: "", number: "" },
   });
   const navigate = useNavigate();
 
@@ -52,45 +52,46 @@ export default function Create() {
       images64: "",
       listingDate: "",
       userAccount: "",
-      contactInfo: {email:"", number:""}
+      contactInfo: { email: "", number: "" },
     });
     navigate("/");
   }
 
   function validateImageSize(eventTarget) {
     //let clickSubmit = document.getElementById('submit');
-    let fileInput = document.getElementById('images').files;
-    console.log('fileInput', fileInput);
-    if (fileInput.length > 0){
-      const imageSize = fileInput[0].size/1024/1024; // in MB
-      console.log('ImageSize', imageSize);
+    let fileInput = document.getElementById("images").files;
+    console.log("fileInput", fileInput);
+    if (fileInput.length > 0) {
+      const imageSize = fileInput[0].size / 1024 / 1024; // in MB
+      console.log("ImageSize", imageSize);
       if (imageSize > 16) {
-        alert('File size exceeds 16 MB');   // 16MB for storage with MongoDB
+        alert("File size exceeds 16 MB"); // 16MB for storage with MongoDB
         // $(file).val(''); //for clearing with Jquery
       } else {
         const [imageFile] = fileInput;
         const fileReader = new FileReader();
         fileReader.onload = () => {
           const srcData = fileReader.result;
-          console.log('srcData:', srcData);
+          console.log("srcData:", srcData);
           updateForm({ images64: srcData });
         };
         fileReader.readAsDataURL(imageFile);
         //updateForm({ images: eventTarget[0] });
-    }}
+      }
+    }
     /*
       updateForm({ images: '' }); // soft restriction, must restrict on server-side as well
     };
     */
-    }
-  
+  }
+
   // This following section will display the form that takes the input from the item.
   return (
     <div>
       <h3>Add listing</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label htmlFor="Title">Title</label>
+          <label htmlFor="title">Title</label>
           <input
             type="text"
             className="form-control"
@@ -102,15 +103,18 @@ export default function Create() {
         <div className="form-group">
           <label htmlFor="Category">Category</label>
           <div></div>
-          <select id = "category" onChange={(e) => updateForm({ category: e.target.value })} >  
-            <option> --Choose Category-- </option>  
-            <option> Appliances </option>  
-            <option> Clothing </option>  
-            <option> Electronics </option>  
-            <option> Furniture </option>  
-            <option> Stationary </option>  
-            <option> Other </option>  
-          </select> 
+          <select
+            id="category"
+            onChange={(e) => updateForm({ category: e.target.value })}
+          >
+            <option> --Choose Category-- </option>
+            <option> Appliances </option>
+            <option> Clothing </option>
+            <option> Electronics </option>
+            <option> Furniture </option>
+            <option> Stationary </option>
+            <option> Other </option>
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="Quantity">Quantity</label>
@@ -119,7 +123,7 @@ export default function Create() {
             className="form-control"
             id="quantity"
             value={form.quantity}
-            placeholder = "1"
+            placeholder="1"
             onChange={(e) => updateForm({ quantity: e.target.value })}
           />
         </div>
@@ -140,11 +144,10 @@ export default function Create() {
             className="form-control"
             id="description"
             value={form.description}
-            onChange={(e) => updateForm({ description: e.target.value })
-            }
+            onChange={(e) => updateForm({ description: e.target.value })}
           />
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="Image">Image(s)</label>
           <input
@@ -156,7 +159,7 @@ export default function Create() {
             onChange={(e) => validateImageSize(e.target.files)}
           />
         </div>
-         
+
         {
           <div className="form-group">
             <input

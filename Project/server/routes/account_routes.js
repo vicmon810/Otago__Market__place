@@ -6,7 +6,7 @@ const {
   updateUser,
   deleteUser,
   messageUser,
-  verifyLogin
+  verifyLogin,
 } = require("../controllers/accountController");
 
 const routes = express.Router();
@@ -24,6 +24,6 @@ routes.patch("/account/:id", updateUser);
 // POST a message
 routes.post("/message", messageUser);
 //POST login
-routes.post("/login",verifyLogin);
+routes.post("/login", verifyLogin);
 
 module.exports = routes;

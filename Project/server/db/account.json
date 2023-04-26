@@ -1,5 +1,43 @@
 [
   {
+<<<<<<< HEAD
+    "User_Id": "STA001",
+    "User_Name": "admin",
+    "password": "c89d2029fe9ac9cb9385e96e626efc5f811255192d363dbdd1bc0b0f83126244",
+    "Email": "admin@123.com",
+    "Department": "",
+    "Contact_Number": "",
+     },
+  {
+    "User_Id": "USR002",
+    "User_Name": "johndoe",
+    "password": "8d9ed55ffc919f9fea989fed9c0a4a2276bae38c45db429d05dbef327d18416f",
+    "Email": "johndoe@email.com",
+    "Department": "Sales",
+    "Contact_Number": "555-1234",
+    "Profile_Picture": "",
+    "admin": "false"
+  },
+  {
+    "User_Id": "USR004",
+    "User_Name": "sarahjones",
+    "password": "f68dc30cbbf6f4d3921a6a1a9b6fc777868fda4c31e347a3b13f9fdd5e2ea28d",
+    "Email": "sarahjones@example.com",
+    "Department": "Support",
+    "Contact_Number": "555-9876",
+    "Profile_Picture": "",
+    "admin": "false"
+  },
+  {
+    "User_Id": "USR005",
+    "User_Name": "charrely",
+    "password": "f68dc30cbbf6f4d3921a6a1a9b6fc777868fda4c31e347a3b13f9fdd5e2ea28d",
+    "Email": "charrely@example.com",
+    "Department": "Operations",
+    "Contact_Number": "555-4321",
+    "Profile_Picture": "",
+    "admin": "false"
+=======
     "name": "sample",
     "surname": "sample",
     "email": "sample",
@@ -7,5 +45,6 @@
     "number": "1",
     "department": "",
     "activationDate": ""
+>>>>>>> 535de1ae807033c5c8bee3aec4e89d85662a4148
   }
 ]

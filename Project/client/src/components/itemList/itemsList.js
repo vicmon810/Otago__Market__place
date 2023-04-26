@@ -21,7 +21,7 @@ const Record = (props) => (
     <tr>Email: {props.record.contactInfo?.email}</tr>
     <tr>Phone Number:{props.record.contactInfo?.number}</tr>
     <tr>Image(s)</tr>
-    <img id='base64image' src={props.record.images64}/>
+    <img id="base64image" src={props.record.images64} />
     <tr>Product ID</tr>
     <tr>{props.record.product_id}</tr>
     <tr>
@@ -74,9 +74,9 @@ export default function RecordList() {
 
   // This method will map out the records on the table
   function recordList() {
-    console.log('records',records);
+    console.log("records", records);
     return records.map((record) => {
-      console.log('record',record);
+      console.log("record", record);
       return (
         <Record
           record={record}
@@ -86,7 +86,7 @@ export default function RecordList() {
           record={record.toString()}
           deleteRecord={() => deleteRecord(record._id).toString()}
           key={record._id.toString()}
-          */ 
+          */
         />
       );
     });

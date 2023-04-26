@@ -15,7 +15,15 @@ export default function Navbar() {
           {" "}
           Home
         </NavLink>
-
+        <NavLink className="nav-link" to="/create">
+          Add listing
+        </NavLink>
+        <NavLink className="nav-link" to="/login">
+          Log in
+        </NavLink>
+        <NavLink className="nav-link" to="/register">
+          Register
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
