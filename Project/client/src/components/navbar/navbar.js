@@ -37,6 +37,9 @@ export default function Navbar() {
             <NavLink className="nav-link" to="/register">
               Register
             </NavLink>
+            <NavLink className="nav-link" to="/profile">
+              Profile
+            </NavLink>
           </ul>
         </div>
       </nav>

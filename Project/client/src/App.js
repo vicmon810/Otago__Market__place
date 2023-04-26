@@ -8,6 +8,7 @@ import Create from "./components/CreateItems/createItem";
 import LoginForm from "./components/login/Login";
 import MessageForm from "./components/sendMessage/sendMessage";
 import Register from "./components/CreateAccount/createAccount";
+import GetProfile from "./components/profile";
 const App = () => {
   return (
     <div>
@@ -18,7 +19,8 @@ const App = () => {
         <Route path="/create" element={<Create />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="register" element={<Register />} />
-        <Route path="message" element={<MessageForm />} />
+        <Route path="/profile" element={<GetProfile />} />
+        <Route path="/message" element={<MessageForm />} />
       </Routes>
     </div>
   );
