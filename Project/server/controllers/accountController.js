@@ -157,4 +157,5 @@ module.exports = {
   createAccount,
   updateUser,
   deleteUser,
+  verifyLogin,
 };
