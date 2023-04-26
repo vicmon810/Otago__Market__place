@@ -1,6 +1,7 @@
 //const accModel = require("../model/account");
 const express = require("express");
 const dbo = require("../db/conn");
+const crypto = require('crypto');
 const { ObjectID } = require("mongodb");
 var nodemailer = require('nodemailer');
 
@@ -83,11 +84,15 @@ const updateUser = async (req, res) => {
     let myquery = {
       _id: ObjectId(req.params.id),
     };
+    let hasher = crypto.createHash('sha256');
+    hasher = hasher.update(req.body.password + "salt12345)(*&^");
+    password = hasher.digest('hex');
+
     let userUpdate = {
       $set: {
         User_id: req.body.User_id,
         User_Name: req.body.User_Name,
-        password: req.body.password,
+        password: password,
         Email: req.body.Email,
         Department: req.body.Department,
         Contact_Number: req.body.Contact_Number,
@@ -113,10 +118,13 @@ const updateUser = async (req, res) => {
 const createAccount = async (req, res) => {
   try {
     let db_connect = dbo.getDb();
+    let hasher = crypto.createHash('sha256');
+    hasher = hasher.update(req.body.password + "salt12345)(*&^");
+    password = hasher.digest('hex');
     let account = {
       User_id: req.body.User_id,
       User_name: req.body.User_Name,
-      password: req.body.password,
+      password: password,
       Email: req.body.Email,
       Department: req.body.Department,
       Contact_Number: req.body.Contact_Number,
@@ -144,7 +152,10 @@ const verifyLogin = async (req, res) => {
     });
     // check if the password matches
     if (result) {
-      if (result.password == req.body.password) {
+      let hasher = crypto.createHash('sha256');
+      hasher = hasher.update(req.body.password + "salt12345)(*&^");
+      password = hasher.digest('hex');
+      if (result.password == password) {
         res.status(200).json(result);
       }
       res.status(401).json({
