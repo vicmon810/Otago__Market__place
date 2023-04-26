@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 //import Navbar from "./navbar";
 
-
-import "/Users/apple/Info310/OtagoMarketplace/Project/client/src/components/Login.css";
+import "/Users/apple/Info310/OtagoMarketplace/Project/client/src/CSS/Login.css";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -21,19 +20,15 @@ function LoginForm() {
     event.preventDefault();
     console.log("Email:", email);
     console.log("Password:", password);
-  
-    // Make an HTTP POST request to  backend API
-    fetch("http://localhost:8000/api/account_routes/login", 
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    })
-    
-  };
-  
 
-  
+    // Make an HTTP POST request to  backend API
+    fetch("http://localhost:8000/api/account_routes/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+  };
+
   return (
     <div className="login-form-container">
       <h1 className="login-form-title">Login</h1>

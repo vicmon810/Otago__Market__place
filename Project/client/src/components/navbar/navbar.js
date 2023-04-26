@@ -1,8 +1,8 @@
 import React from "react";
 
 // We import bootstrap to make our application look better.
-import "bootstrap/dist/css/bootstrap.css";
-
+// import "bootstrap/dist/css/bootstrap.css";
+import ".././CSS/navbar.css";
 // We import NavLink to utilize the react router.
 import { NavLink } from "react-router-dom";
 
@@ -14,15 +14,6 @@ export default function Navbar() {
         <NavLink className="navbar-brand" to="/">
           {" "}
           Home
-        </NavLink>
-        <NavLink className="nav-link" to="/create">
-          Add listing
-        </NavLink>
-        <NavLink className="nav-link" to="/login">
-          Log in
-        </NavLink>
-        <NavLink className="nav-link" to="/register">
-          Register
         </NavLink>
         <button
           className="navbar-toggler"
