@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import App from "./Login";
 import { BrowserRouter } from "react-router-dom";
 
-
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

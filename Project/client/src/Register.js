@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 
+
 const RegisterModal = ({ isOpen, onClose }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     // Make POST request to server with form data
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose}>
+
+    <RegisterModal isOpen={isModalOpen} onRequestClose={onClose}>
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -30,7 +36,7 @@ const RegisterModal = ({ isOpen, onClose }) => {
         <button type="submit">Register</button>
       </form>
       <button onClick={onClose}>Cancel</button>
-    </Modal>
+    </RegisterModal>
   );
 };
 
