@@ -79,9 +79,14 @@ export default function RecordList() {
       console.log('record',record);
       return (
         <Record
+          record={record}
+          deleteRecord={() => deleteRecord(record._id)}
+          key={record._id}
+          /* ALT: these fix the object/component error but may result in listings not being displayed
           record={record.toString()}
           deleteRecord={() => deleteRecord(record._id).toString()}
           key={record._id.toString()}
+          */ 
         />
       );
     });
