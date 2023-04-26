@@ -148,8 +148,11 @@ const verifyLogin = async (req, res) => {
     const db_connect = dbo.getDb();
     const collection = db_connect.collection("user");
     const result = await collection.findOne({
-      User_Name: req.body.name,
+      Email: req.body.email,
     });
+
+    //console.log(req.body.email);
+    //console.log(result);
     // check if the password matches
     if (result) {
       let hasher = crypto.createHash('sha256');
@@ -217,4 +220,5 @@ module.exports = {
   updateUser,
   deleteUser,
   messageUser,
+  verifyLogin
 };
