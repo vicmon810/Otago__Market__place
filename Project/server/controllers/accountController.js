@@ -151,10 +151,34 @@ const verifyLogin = async (req, res) => {
   }
 };
 
+const messageUser = async (req, res) => {
+  try {
+    const db_connect = dbo.getDb();
+    const collection = db_connect.collection("user");
+    const result = await collection.findOne({
+      User_Name: req.body.name,
+    });
+    // check if the password matches
+    if (result) {
+      //email
+    } else {
+      res.status(500).json({
+        message: "Internal server error",
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
 module.exports = {
   getUser,
   getAdmin,
   createAccount,
   updateUser,
   deleteUser,
+  messageUser,
 };

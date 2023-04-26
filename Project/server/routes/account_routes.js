@@ -5,6 +5,7 @@ const {
   createAccount,
   updateUser,
   deleteUser,
+  messageUser,
 } = require("../controllers/accountController");
 
 const routes = express.Router();
@@ -19,5 +20,7 @@ routes.post("/account", createAccount);
 routes.delete("/account/:id", deleteUser);
 // UPDATE an account
 routes.patch("/account/:id", updateUser);
+// POST a message
+routes.post("/message", messageUser);
 
 module.exports = routes;
