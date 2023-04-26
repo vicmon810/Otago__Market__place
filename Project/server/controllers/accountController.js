@@ -1,4 +1,4 @@
-//const accModel = require("../model/account");
+const accModel = require("../model/account");
 const express = require("express");
 const dbo = require("../db/conn");
 const { ObjectID } = require("mongodb");
@@ -20,7 +20,7 @@ const getUser = async (req, res) => {
   try {
     let db_connect = dbo.getDb();
     let myquery = {
-      _id: ObjectId(req.params.id),
+      email: ObjectId(req.params.email),
     };
     db_connect.collection("user").findOne(myquery, function (err, result) {
       if (err) throw err;
@@ -58,7 +58,7 @@ const deleteUser = async (req, res) => {
   try {
     let db_connection = dbo.getDb();
     let myquery = {
-      _id: ObjectId(req.params.id),
+      email: ObjectId(req.params.email),
     };
     db_connection.collection("user").deleteOne(myquery, function (err, result) {
       if (err) throw err;
@@ -78,17 +78,22 @@ const updateUser = async (req, res) => {
   try {
     let db_connection = dbo.getDb();
     let myquery = {
-      _id: ObjectId(req.params.id),
+      email: ObjectId(req.params.email),
     };
+    let hasher = crypto.createHash("sha256");
+    hasher = hasher.update(req.body.password + "salt12345)(*&^");
+    password = hasher.digest("hex");
+
     let userUpdate = {
       $set: {
-        User_id: req.body.User_id,
-        User_Name: req.body.User_Name,
+        name: req.body.name,
+        surname: req.body.surname,
+        email: req.body.email,
         password: req.body.password,
-        Email: req.body.Email,
-        Department: req.body.Department,
-        Contact_Number: req.body.Contact_Number,
-        Profile_Picture: req.body.Profile_Picture,
+        department: req.body.department,
+        number: req.body.number,
+        activationDate: req.body.number.activationDate,
+        //pfp: req.body.pfp,
       },
     };
     db_connection
@@ -110,14 +115,20 @@ const updateUser = async (req, res) => {
 const createAccount = async (req, res) => {
   try {
     let db_connect = dbo.getDb();
+    let hasher = crypto.createHash("sha256");
+    hasher = hasher.update(req.body.password + "salt12345)(*&^");
+    password = hasher.digest("hex");
     let account = {
-      User_id: req.body.User_id,
-      User_name: req.body.User_Name,
-      password: req.body.password,
-      Email: req.body.Email,
-      Department: req.body.Department,
-      Contact_Number: req.body.Contact_Number,
-      Profile_Picture: req.body.Profile_Picture,
+      $set: {
+        name: req.body.name,
+        surname: req.body.surname,
+        email: req.body.email,
+        password: req.body.password,
+        department: req.body.department,
+        number: req.body.number,
+        activationDate: req.body.number.activationDate,
+        //pfp: req.body.pfp,
+      },
     };
     console.log(account);
     db_connect.collection("user").insertOne(account, function (err, result) {
@@ -138,11 +149,17 @@ const verifyLogin = async (req, res) => {
     const db_connect = dbo.getDb();
     const collection = db_connect.collection("user");
     const result = await collection.findOne({
-      User_Name: req.body.name,
+      Email: req.body.email,
     });
+
+    //console.log(req.body.email);
+    //console.log(result);
     // check if the password matches
     if (result) {
-      if (result.password == req.body.password) {
+      let hasher = crypto.createHash("sha256");
+      hasher = hasher.update(req.body.password + "salt12345)(*&^");
+      password = hasher.digest("hex");
+      if (result.password == password) {
         res.status(200).json(result);
       }
       res.status(401).json({
@@ -166,12 +183,12 @@ const messageUser = async (req, res) => {
     const db_connect = dbo.getDb();
     const collection = db_connect.collection("user");
     const result = await collection.findOne({
-      User_Name: req.body.username,
+      email: req.body.email,
     });
     if (result) {
       var mailOptions = {
         from: "otagomarketplace@gmail.com",
-        to: result.Email,
+        to: result.email,
         subject: req.body.subject,
         text: req.body.message,
       };

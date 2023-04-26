@@ -23,7 +23,7 @@ routes.delete("/account/:id", deleteUser);
 routes.patch("/account/:id", updateUser);
 // POST a message
 routes.post("/message", messageUser);
-// Login an account
+//POST login
 routes.post("/login", verifyLogin);
 
 module.exports = routes;
