@@ -55,6 +55,7 @@ const createItem = async (req, res) => {
       location: req.body.location,
       description: req.body.description,
       images: req.body.images,
+      images64: req.body.images64,
       listingDate: Math.floor((new Date()).getTime() / 1000),
       userAccount: req.body.userAccount,
       contactInfo: {
@@ -89,6 +90,7 @@ const updateItem = async (req, res) => {
       location: req.body.location,
       description: req.body.description,
       images: req.body.images,
+      images64: req.body.images64,
       listingDate: req.body.listingDate,
       userAccount: req.body.userAccount,
       contactInfo: {

@@ -10,6 +10,7 @@ export default function Create() {
     location: "",
     description: "",
     images: "",
+    images64: "",
     listingDate: "",
     userAccount: "",
     contactInfo: {email:"", number:""}
@@ -48,6 +49,7 @@ export default function Create() {
       location: "",
       description: "",
       images: "",
+      images64: "",
       listingDate: "",
       userAccount: "",
       contactInfo: {email:"", number:""}
@@ -55,15 +57,32 @@ export default function Create() {
     navigate("/");
   }
 
-  function validateImageSize(_, input) {
-    const ImageSize = document.getElementById("Image").files[0].size / 1024 / 1024; // in MB
-    if (ImageSize > 20) {
-      alert('File size exceeds 20 MB');
-      // $(file).val(''); //for clearing with Jquery
-    } else {
-      updateForm({ Image: input }); // soft restriction, must restrict on server-side as well
+  function validateImageSize(eventTarget) {
+    //let clickSubmit = document.getElementById('submit');
+    let fileInput = document.getElementById('images').files;
+    console.log('fileInput', fileInput);
+    if (fileInput.length > 0){
+      const imageSize = fileInput[0].size/1024/1024; // in MB
+      console.log('ImageSize', imageSize);
+      if (imageSize > 16) {
+        alert('File size exceeds 16 MB');   // 16MB for storage with MongoDB
+        // $(file).val(''); //for clearing with Jquery
+      } else {
+        const [imageFile] = fileInput;
+        const fileReader = new FileReader();
+        fileReader.onload = () => {
+          const srcData = fileReader.result;
+          console.log('srcData:', srcData);
+          updateForm({ images64: srcData });
+        };
+        fileReader.readAsDataURL(imageFile);
+        //updateForm({ images: eventTarget[0] });
+    }}
+    /*
+      updateForm({ images: '' }); // soft restriction, must restrict on server-side as well
+    };
+    */
     }
-  }
   
   // This following section will display the form that takes the input from the item.
   return (
