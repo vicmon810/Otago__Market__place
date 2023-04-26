@@ -3,16 +3,14 @@ import { useNavigate } from "react-router";
 
 export default function Create() {
   const [form, setForm] = useState({
-    Product_id: "",
-    Title: "",
-    Quantity: "",
+    title: "",
+    category: "",
     Location: "",
-    Description: "",
-    Category: "",
-    Timestamp: "",
-    Owner_account: "",
-    Image: "",
-    //Product_Features: "",
+    quantity: "",
+    description: "",
+    images: "",
+    listingDate: "",
+    owner: "",
   });
   const navigate = useNavigate();
 
@@ -44,16 +42,14 @@ export default function Create() {
     });
 
     setForm({
-      Product_id: "",
-      Product_name: "",
-      Quantity: "",
+      title: "",
+      category: "",
       Location: "",
-      Description: "",
-      Category: "",
-      Timestamp: "",
-      Owner_account: "",
-      Image: "",
-      //Product_Features: "",
+      quantity: "",
+      description: "",
+      images: "",
+      listingDate: "",
+      owner: "",
     });
     navigate("/");
   }
@@ -75,13 +71,13 @@ export default function Create() {
       <h3>Add listing</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label htmlFor="Title">Title</label>
+          <label htmlFor="title">Title</label>
           <input
             type="text"
             className="form-control"
-            id="Title"
-            value={form.Title}
-            onChange={(e) => updateForm({ Title: e.target.value })}
+            id="title"
+            value={form.title}
+            onChange={(e) => updateForm({ title: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -89,7 +85,7 @@ export default function Create() {
           <div></div>
           <select
             id="Category"
-            onChange={(e) => updateForm({ Category: e.target.value })}
+            onChange={(e) => updateForm({ category: e.target.value })}
           >
             <option> --Choose Category-- </option>
             <option> Appliances </option>
@@ -105,10 +101,10 @@ export default function Create() {
           <input
             type="number"
             className="form-control"
-            id="Quantity"
-            value={form.Quantity}
+            id="quantity"
+            value={form.quantity}
             placeholder="1"
-            onChange={(e) => updateForm({ Quantity: e.target.value })}
+            onChange={(e) => updateForm({ quantity: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -116,9 +112,9 @@ export default function Create() {
           <input
             type="text"
             className="form-control"
-            id="Location"
-            value={form.Location}
-            onChange={(e) => updateForm({ Location: e.target.value })}
+            id="location"
+            value={form.location}
+            onChange={(e) => updateForm({ location: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -128,7 +124,7 @@ export default function Create() {
             className="form-control"
             id="Description"
             value={form.Description}
-            onChange={(e) => updateForm({ Description: e.target.value })}
+            onChange={(e) => updateForm({ description: e.target.value })}
           />
         </div>
 

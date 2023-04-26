@@ -2,6 +2,7 @@ const accModel = require("../model/account");
 const express = require("express");
 const dbo = require("../db/conn");
 const { ObjectID } = require("mongodb");
+const crypto = require("crypto");
 var nodemailer = require("nodemailer");
 
 var transporter = nodemailer.createTransport({
@@ -119,18 +120,17 @@ const createAccount = async (req, res) => {
     hasher = hasher.update(req.body.password + "salt12345)(*&^");
     password = hasher.digest("hex");
     let account = {
-      $set: {
-        name: req.body.name,
-        surname: req.body.surname,
-        email: req.body.email,
-        password: req.body.password,
-        department: req.body.department,
-        number: req.body.number,
-        activationDate: req.body.number.activationDate,
-        //pfp: req.body.pfp,
-      },
+      // $set: {
+      name: req.body.name,
+      surname: req.body.surname,
+      email: req.body.email,
+      password: req.body.password,
+      department: req.body.department,
+      number: req.body.number,
+      activationDate: req.body.number.activationDate,
+      //   //pfp: req.body.pfp,
+      // },
     };
-    console.log(account);
     db_connect.collection("user").insertOne(account, function (err, result) {
       if (err) throw err;
       res.json(result);
@@ -144,7 +144,7 @@ const createAccount = async (req, res) => {
 };
 
 const verifyLogin = async (req, res) => {
-  console.log("trigger");
+  console.log("HAHA");
   try {
     const db_connect = dbo.getDb();
     const collection = db_connect.collection("user");
@@ -152,19 +152,20 @@ const verifyLogin = async (req, res) => {
       Email: req.body.email,
     });
 
-    //console.log(req.body.email);
-    //console.log(result);
     // check if the password matches
+    console.log(result);
     if (result) {
       let hasher = crypto.createHash("sha256");
       hasher = hasher.update(req.body.password + "salt12345)(*&^");
       password = hasher.digest("hex");
+      // console.log(password);
       if (result.password == password) {
-        res.status(200).json(result);
+        res.redirect("http://localhost:3000");
+      } else {
+        res.status(401).json({
+          message: "Invalid username or password",
+        });
       }
-      res.status(401).json({
-        message: "Invalid username or password",
-      });
     } else {
       res.status(401).json({
         message: "Invalid username or password",

@@ -6,9 +6,7 @@
     "Email": "admin@123.com",
     "Department": "",
     "Contact_Number": "",
-    "Profile_Picture": "",
-    "admin": "true"
-  },
+     },
   {
     "User_Id": "USR002",
     "User_Name": "johndoe",

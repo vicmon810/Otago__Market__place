@@ -45,24 +45,18 @@ const getSingleItem = async (req, res) => {
 
 //create a new item
 const createItem = async (req, res) => {
+  console.log(req.body);
   try {
     let db_connect = dbo.getDb();
     let item = {
-      Product_id: req.body.Product_id,
-      Product_name: req.body.Title,
-      Quantity: req.body.Quantity,
-      Location: req.body.Location,
-      Product_description: req.body.Description,
-      Product_category: req.body.Category,
-      Create_time: req.body.Timestamp,
-      Owner_account: req.body.Owner_account,
-      Owner_contact: {
-        Email: req.body.Email,
-        Phone: req.body.Phone,
-      },
-      Image: req.body.Image,
-      Product_Features: req.body.Product_Features,
-      Tags: req.body.Tags,
+      title: req.body.title,
+      category: req.body.category,
+      location: req.body.location,
+      quantity: req.body.quantity,
+      description: req.body.description,
+      images: req.body.images,
+      listingDate: req.body.listingDate,
+      owner: req.body.owner,
     };
     console.log(item);
     db_connect.collection("items").insertOne(item, function (err, result) {
@@ -86,21 +80,14 @@ const updateItem = async (req, res) => {
     };
     let newItem = {
       $set: {
-        Product_id: req.params.Product_id,
-        Product_name: req.body.Product_name,
-        Quantity: req.body.Quantity,
-        Location: req.body.Location,
-        Product_description: req.body.Product_description,
-        Product_category: req.body.Product_category,
-        Create_time: req.body.Create_time,
-        Owner_account: req.body.Owner_account,
-        Owner_contact: {
-          Email: req.body.Email,
-          Phone: req.body.Phone,
-        },
-        Image: req.body.Image,
-        Product_Features: req.body.Product_Features,
-        Tags: req.body.Tags,
+        title: req.body.title,
+        category: req.body.category,
+        location: req.body.location,
+        quantity: req.body.quantity,
+        description: req.body.description,
+        images: req.body.images,
+        listingDate: req.body.listingDate,
+        owner: req.body.owner,
       },
     };
     console.log(newItem);
