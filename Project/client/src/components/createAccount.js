@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 
 export default function Register() {
   const [form, setForm] = useState({
+    name: "",
+    surname: "",
     email: "",
     password: "",
     number: "",
@@ -24,19 +26,20 @@ export default function Register() {
     // TODO: add authentication
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newItem = { ...form };
-
+    const newItem_json = JSON.stringify(newItem);
+    console.log(newItem);
     await fetch("http://localhost:8000/api/account_routes/account", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newItem),
+      body: newItem_json,
     }).catch((error) => {
       window.alert(error);
       return;
     });
 
-    setForm({ email: "", password: "", number: "", department: "" });
+    setForm({name: "", surname: "", email: "", password: "", number: "", department: "" });
     navigate("/");
   }
 
@@ -45,6 +48,26 @@ export default function Register() {
     <div>
       <h3>Register for OtagoMarketplace</h3>
       <form onSubmit={onSubmit}>
+      <div className="form-group">
+          <label htmlFor="Name">First Name</label>
+          <input
+            type="text"
+            className="form-control"
+            id="name"
+            value={form.name}
+            onChange={(e) => updateForm({ name: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="Surname">Last Name</label>
+          <input
+            type="text"
+            className="form-control"
+            id="surname"
+            value={form.surname}
+            onChange={(e) => updateForm({ surname: e.target.value })}
+          />
+        </div>
       <div className="form-group">
           <label htmlFor="Email">Faculty Email (.ac.nz)</label>
           <input
