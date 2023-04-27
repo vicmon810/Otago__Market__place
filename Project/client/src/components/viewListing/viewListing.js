@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import deleteRecord from "../itemsList/itemsList.js";
 import ".//../../CSS/itemsList.css";
 
 export default function ViewListing() {
   const [listing, setListing] = useState([]);
+  const navigate = useNavigate();
   const params = useParams();
+  const id = params.id.toString();
+
+  async function deleteListing(){
+    await fetch(`http://localhost:8000/api/item_routes/item/${id}`, {method: "DELETE",
+      }).catch((error) => {
+      window.alert(error);
+      return;
+    });
+    navigate('/');
+  }
 
   // This method fetches the records from the database.
   useEffect(() => {
     async function fetchItem() {
-      const id = params.id.toString();
       const response = await fetch(
         `http://localhost:8000/api/item_routes/item/${id}`
       );
@@ -47,9 +56,7 @@ export default function ViewListing() {
 
       <Link className="btn btn-link" to={`/edit/${listing._id}`}>Edit</Link>
       <button className="btn btn-link"
-        onClick={() => {
-          listing.deleteRecord(listing._id);
-        }}
+        onClick={() => {deleteListing(listing._id);}}
       >Delete</button>
     </div>
   );

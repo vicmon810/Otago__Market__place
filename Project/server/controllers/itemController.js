@@ -114,12 +114,12 @@ const updateItem = async (req, res) => {
   }
 };
 
-//delete a item
+//delete an item
 const deleteItem = async (req, res) => {
   try {
     let db_connection = dbo.getDb();
     let myquery = {
-      _id: ObjectID(req.params.id),
+      _id: ObjectId(req.params.id),
     };
     db_connection
       .collection("items")

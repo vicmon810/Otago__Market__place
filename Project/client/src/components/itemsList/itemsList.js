@@ -16,12 +16,6 @@ const Record = (props) => (
           <div>Listed on{props.record.listingDate}</div>
           <div>by {props.record.userAccount}</div> 
           <div>ID: {props.record.product_id}</div> 
-          {/* <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link>
-          <button className="btn btn-link"
-            onClick={() => {
-              props.deleteRecord(props.record._id);
-            }}
-          >Delete</button> */}
         </div>
   </div>
 );
@@ -65,13 +59,7 @@ export default function RecordList() {
       return (
         <Record
           record={record}
-          deleteRecord={() => deleteRecord(record._id)}
           key={record._id}
-          /* ALT: these fix the object/component error but may result in listings not being displayed
-          record={record.toString()}
-          deleteRecord={() => deleteRecord(record._id).toString()}
-          key={record._id.toString()}
-          */
         />
       );
     });
