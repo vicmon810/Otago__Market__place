@@ -27,6 +27,12 @@ export default function Create() {
   // This function will handle the submission.
   async function onSubmit(e) {
     e.preventDefault();
+
+    // Get logged-in user details
+    const curruser = localStorage.getItem("currUser");
+    const curruser_parsed = JSON.parse(curruser);
+    form.userAccount = curruser_parsed._id;
+   
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newItem = { ...form };
     console.log('pushing newItem',JSON.stringify(newItem));

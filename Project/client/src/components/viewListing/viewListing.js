@@ -5,6 +5,7 @@ import ".//../../CSS/itemsList.css";
 
 export default function ViewListing() {
   const [listing, setListing] = useState([]);
+  const [lister, setLister] = useState([]);
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id.toString();
@@ -33,8 +34,24 @@ export default function ViewListing() {
       setListing(item);
     }
     fetchItem();
+    fetchLister();
     return;
   });
+
+  // Fetch lister
+  async function fetchLister() {
+    const response = await fetch(
+      `http://localhost:8000/api/account_routes/account/${listing.userAccount}`, {method: 'GET'}
+      );
+    // if (!response.ok) {
+    //   const message = `An error occured: ${response.statusText}`;
+    //   window.alert(message);
+    //   return;
+    // }
+    const listingLister = await response.json();
+    setLister(listingLister);
+    }
+
   return (
     <div>
       <h1>Item Listing</h1>
@@ -47,12 +64,12 @@ export default function ViewListing() {
       <div>Location:{listing.location}</div>
       <div>Description:{listing.description}</div>
       <div>Listed on{listing.listingDate}</div>
-      <div>by {listing.userAccount}</div> 
+      <div>by {lister.name} {lister.surname}</div> 
       <div>ID: {listing.product_id}</div> 
 
       <div>Contact Information</div>
-      <p>Email: {listing.contactInfo?.email}</p>
-      <p>Phone Number: {listing.contactInfo?.number}</p>
+      <div>Email: {lister.email}</div>
+      <div>Phone Number: {lister.number}</div>
 
       <Link className="btn btn-link" to={`/edit/${listing._id}`}>Edit</Link>
       <button className="btn btn-link"
