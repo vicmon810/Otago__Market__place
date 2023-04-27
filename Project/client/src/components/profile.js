@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-const sampleid = '64498ec5baa9cb6fdf795063';
-
 export default function GetProfile() {
   const [profile, setProfile] = useState([]);
+  const curruser = localStorage.getItem("currUser");
+  const curruser_parsed=JSON.parse(curruser);
 
   useEffect(() => {
     async function getUser() {
-      const response = await fetch(`http://localhost:8000/api/account_routes/account/${sampleid}`, {method: "GET"});
+      const response = await fetch(`http://localhost:8000/api/account_routes/account/${curruser_parsed._id}`, {method: "GET"});
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`;
         window.alert(message);

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import ".//../../CSS/Login.css";
 
-
 export default function LoginForm() {
-  const [login, setLogin] = useState({login:"", password:""});
+  const [login, setLogin] = useState({email:"", password:""});
+  const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated")|| false));
+  const currUser = useState(localStorage.getItem(localStorage.getItem("currUser")|| false));
   const navigate = useNavigate();
 
   // These methods will update the state properties.
@@ -27,16 +28,32 @@ export default function LoginForm() {
       window.alert(error);
       return;
     });
-    console.log('response:',response);
 
-    console.log('response.ok:',response.ok);
     if (!response.ok) {
       const message = `An error occured: ${response.statusText}`;
       window.alert(message);
       return;
     } else {
-      console.log('success! attempting to redirect you! list something!');
-      navigate('/create');
+      console.log('Logged In! attempting to redirect you! list something!');
+      setauthenticated(true);
+      localStorage.setItem("authenticated", true);
+      
+      async function GetUserByEmail() {
+        const response = await fetch(`http://localhost:8000/api/account_routes/account/email/${login.email}`, {method: "GET"});
+        if (!response.ok) {
+          const message = `An error occured: ${response.statusText}`;
+          window.alert(message);
+          return;
+        }
+        const user = await response.json();
+        localStorage.setItem("currUser", JSON.stringify(user));
+      }
+      GetUserByEmail();
+      const curruser = localStorage.getItem("currUser");
+      const curruser_parsed=JSON.parse(curruser);
+      window.alert(`Welcome ${curruser_parsed.name}! You have successfully logged in.`);
+      navigate('/');
+      return;
     }
   }
   

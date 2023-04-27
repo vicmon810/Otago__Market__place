@@ -1,7 +1,6 @@
 const accModel = require("../model/account");
 const express = require("express");
 const dbo = require("../db/conn");
-const { ObjectID } = require("mongodb");
 const crypto = require("crypto");
 var nodemailer = require("nodemailer");
 
@@ -22,6 +21,25 @@ const getUser = async (req, res) => {
     let db_connect = dbo.getDb();
     let myquery = {
       _id: ObjectId(req.params.id),
+    };
+    db_connect.collection("user").findOne(myquery, function (err, result) {
+      if (err) throw err;
+      res.status(200).json(result);
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
+//get a single account info
+const getUserByEmail = async (req, res) => {
+  try {
+    let db_connect = dbo.getDb();
+    let myquery = {
+      email: req.params.email,
     };
     db_connect.collection("user").findOne(myquery, function (err, result) {
       if (err) throw err;
@@ -143,7 +161,6 @@ const createAccount = async (req, res) => {
 const verifyLogin = async (req, res) => {
   console.log("req.body.email", req.body.email);
   console.log("req.body.password", req.body.password);
-
   try {
     const db_connect = dbo.getDb();
     const collection = db_connect.collection("user");
@@ -152,7 +169,7 @@ const verifyLogin = async (req, res) => {
     });
 
     // check if the password matches
-    console.log(result);
+    console.log('result',result);
     if (result) {
       console.log('valid email');
       let hasher = crypto.createHash("sha256");
@@ -160,7 +177,8 @@ const verifyLogin = async (req, res) => {
       password = hasher.digest("hex");
       if (result.password == password) {
         console.log('correct password, going back to client login');
-        res.redirect("http://localhost:3000/"); // must set value for valid return
+        res.json(result);
+        
       } else {
         console.log('wrong password for existing email');
         res.status(401).json({
@@ -223,4 +241,5 @@ module.exports = {
   deleteUser,
   messageUser,
   verifyLogin,
+  getUserByEmail,
 };
