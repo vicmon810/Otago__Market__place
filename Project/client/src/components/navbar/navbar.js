@@ -1,48 +1,35 @@
-import React from "react";
-
-// We import bootstrap to make our application look better.
+import React, {useState} from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
-// We import NavLink to utilize the react router.
-import { NavLink } from "react-router-dom";
+const Navbar = props => {
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+  const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
-// Here, we display our Navbar
-export default function Navbar() {
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <NavLink className="navbar-brand" to="/">
-          {" "}
-          Home
-        </NavLink>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="true"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
-            <NavLink className="nav-link" to="/create">
-              Add listing
-            </NavLink>
-            <NavLink className="nav-link" to="/login">
-              Log in
-            </NavLink>
-            <NavLink className="nav-link" to="/register">
-              Register
-            </NavLink>
-            <NavLink className="nav-link" to="/profile">
-              Profile
-            </NavLink>
-          </ul>
-        </div>
-      </nav>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+      <a class="navbar-brand text-info font-weight-bolder" href="/">
+        <span className="">otagoMarketplace</span>
+      </a>
+      <button class="custom-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded={!isNavCollapsed ? true : false} aria-label="Toggle navigation" onClick={handleNavCollapse}>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarToggleExternalContent">
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="search otagoMarketplace" aria-label="Search"/>
+          <button class="btn btn-outline-success" type="submit"
+          onClick={() => {
+            //TODO: add search functionality;
+          }}>Go</button>
+        </form>
+        <a className="nav-link text-info" href="/create">Add Listing</a>
+        <a className="nav-link text-info" href="/login">Login</a>
+        <a className="nav-link text-info" href="/register">Register</a>
+        <a className="nav-link text-info" href="/profile">Profile</a>
+      </div>
+    </nav>
   );
 }
+
+export default Navbar;
+
+//See: https://johnotu.medium.com/how-to-toggle-bootstrap-navbar-collapse-button-in-react-without-jquery-1d5c2fb0751c
