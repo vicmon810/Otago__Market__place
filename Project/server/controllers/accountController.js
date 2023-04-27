@@ -141,29 +141,34 @@ const createAccount = async (req, res) => {
 };
 
 const verifyLogin = async (req, res) => {
-  console.log("HAHA");
+  console.log("req.body.email", req.body.email);
+  console.log("req.body.password", req.body.password);
+
   try {
     const db_connect = dbo.getDb();
     const collection = db_connect.collection("user");
     const result = await collection.findOne({
-      Email: req.body.email,
+      email: req.body.email,
     });
 
     // check if the password matches
     console.log(result);
     if (result) {
+      console.log('valid email');
       let hasher = crypto.createHash("sha256");
       hasher = hasher.update(req.body.password + "salt12345)(*&^");
       password = hasher.digest("hex");
-      // console.log(password);
       if (result.password == password) {
-        res.redirect("http://localhost:3000");
+        console.log('correct password, going back to client login');
+        res.redirect("http://localhost:3000/"); // must set value for valid return
       } else {
+        console.log('wrong password for existing email');
         res.status(401).json({
           message: "Invalid username or password",
         });
       }
     } else {
+      console.log('invalid email');
       res.status(401).json({
         message: "Invalid username or password",
       });
