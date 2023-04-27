@@ -1,44 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import ".//../../CSS/itemsList.css";
 
 const Record = (props) => (
-  <tr>
-    <tr>Title</tr>
-    <tr>{props.record.title}</tr>
-    <tr>Category</tr>
-    <tr>{props.record.category}</tr>
-    <tr>Quantity</tr>
-    <tr>{props.record.quantity}</tr>
-    <tr>Location</tr>
-    <tr>{props.record.location}</tr>
-    <tr>Description</tr>
-    <tr>{props.record.description}</tr>
-    <tr>Listing posted on</tr>
-    <tr>{props.record.listingDate}</tr>
-    <tr>by</tr>
-    <tr>{props.record.userAccount}</tr>
-    <tr>Contact information</tr>
-    <tr>Email: {props.record.contactInfo?.email}</tr>
-    <tr>Phone Number:{props.record.contactInfo?.number}</tr>
-    <tr>Image(s)</tr>
-    <img id="base64image" src={props.record.images64} />
-    <tr>Product ID</tr>
-    <tr>{props.record.product_id}</tr>
-    <tr>
-      <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
-        Edit
-      </Link>{" "}
-      |
-      <button
-        className="btn btn-link"
-        onClick={() => {
-          props.deleteRecord(props.record._id);
-        }}
-      >
-        Delete
-      </button>
-    </tr>
-  </tr>
+    <div class="column">
+      <div class="card">
+          <Link className="btn btn-link" to={`/item/${props.record._id}`}>{props.record.title}</Link>
+          <br></br>
+          <img id="base64image" src={props.record.images64} alt="No image(s)"/>
+          <br></br>
+          <div>Category: {props.record.category}</div>
+          <div>Quantity:{props.record.quantity}</div>
+          <div>Location:{props.record.location}</div>
+          <div>Description:{props.record.description}</div>
+          <div>Listed on{props.record.listingDate}</div>
+          <div>by {props.record.userAccount}</div> 
+          <div>ID: {props.record.product_id}</div> 
+          {/* <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link>
+          <button className="btn btn-link"
+            onClick={() => {
+              props.deleteRecord(props.record._id);
+            }}
+          >Delete</button> */}
+        </div>
+  </div>
 );
 
 export default function RecordList() {
@@ -99,6 +84,9 @@ export default function RecordList() {
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <tbody>{recordList()}</tbody>
       </table>
+      <div class="grid-container">
+        <div class="grid-item">1</div>
+      </div>
     </div>
   );
 }
