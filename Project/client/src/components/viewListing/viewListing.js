@@ -40,6 +40,7 @@ export default function ViewListing() {
 
   // Fetch lister
   async function fetchLister() {
+    if (listing.userAccount){
     const response = await fetch(
       `http://localhost:8000/api/account_routes/account/${listing.userAccount}`, {method: 'GET'}
       );
@@ -51,6 +52,7 @@ export default function ViewListing() {
     const listingLister = await response.json();
     setLister(listingLister);
     }
+  }
 
   return (
     <div>
