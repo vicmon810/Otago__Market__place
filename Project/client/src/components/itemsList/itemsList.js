@@ -53,9 +53,9 @@ export default function RecordList() {
 
   // This method will map out the records on the table
   function recordList() {
+    if (records.length>0){
     console.log("records", records);
     return records.map((record) => {
-      console.log("record", record);
       return (
         <Record
           record={record}
@@ -63,18 +63,13 @@ export default function RecordList() {
         />
       );
     });
+    }
   }
 
-  // This following section will display the table with the records of individuals.
   return (
     <div>
       <h3>All Listings</h3>
-      <table className="table table-striped" style={{ marginTop: 20 }}>
-        <tbody>{recordList()}</tbody>
-      </table>
-      <div class="grid-container">
-        <div class="grid-item">1</div>
-      </div>
+      {recordList()}
     </div>
   );
 }
