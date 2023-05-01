@@ -6,17 +6,17 @@ const Navbar = props => {
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-      <a class="navbar-brand text-info font-weight-bolder" href="/">
+    <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+      <a className="navbar-brand text-info font-weight-bolder" href="/">
         <span className="">otagoMarketplace</span>
       </a>
-      <button class="custom-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded={!isNavCollapsed ? true : false} aria-label="Toggle navigation" onClick={handleNavCollapse}>
-        <span class="navbar-toggler-icon"></span>
+      <button className ="custom-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded={!isNavCollapsed ? true : false} aria-label="Toggle navigation" onClick={handleNavCollapse}>
+        <span className ="navbar-toggler-icon"></span>
       </button>
-      <div class={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarToggleExternalContent">
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="search otagoMarketplace" aria-label="Search"/>
-          <button class="btn btn-outline-success" type="submit"
+      <div className ={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarToggleExternalContent">
+        <form className ="d-flex">
+          <input className="form-control me-2" type="search" placeholder="search otagoMarketplace" aria-label="Search"/>
+          <button className="btn btn-outline-success" type="submit"
           onClick={() => {
             //TODO: add search functionality;
           }}>Go</button>

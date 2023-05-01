@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import ".//../../CSS/itemsList.css";
 
 const Record = (props) => (
-    <div class="column">
-      <div class="card">
+    <div className="column">
+      <div className="card">
           <Link className="btn btn-link" to={`/item/${props.record._id}`}>{props.record.title}</Link>
           <br></br>
           <img id="base64image" src={props.record.images64} alt="No image(s)"/>
