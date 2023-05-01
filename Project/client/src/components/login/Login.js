@@ -83,13 +83,13 @@ export default function LoginForm() {
           value={login.password}
           onChange={(e) => updateForm({ password: e.target.value })}
         />
-
-        {/* {error && <p className="login-form-error">{error}</p>} */}
-
+        
         <button type="submit" className="login-form-button">
           Login
         </button>
+
       </form>
+      <a href="/register"> Register </a>
     </div>
   );
 }
