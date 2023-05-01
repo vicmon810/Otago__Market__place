@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import ".//../../CSS/navbar.css";
 
 const Navbar = props => {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
@@ -21,10 +22,10 @@ const Navbar = props => {
             //TODO: add search functionality;
           }}>Go</button>
         </form>
-        <a className="nav-link text-info" href="/create">Add Listing</a>
-        <a className="nav-link text-info" href="/login">Login</a>
-        <a className="nav-link text-info" href="/register">Register</a>
-        <a className="nav-link text-info" href="/profile">Profile</a>
+        <a className="nav-link text-info" href="/create"> Add Listing </a>
+        <a className="nav-link text-info" href="/login"> Login </a>
+        <a className="nav-link text-info" href="/register"> Register </a>
+        <a className="nav-link text-info" href="/profile"> Profile </a>
       </div>
     </nav>
   );
