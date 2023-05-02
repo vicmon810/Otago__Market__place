@@ -1,39 +1,76 @@
 import React, { useState } from "react";
-//import Navbar from "./navbar";
-
+import { useNavigate } from "react-router";
 import ".//../../CSS/Login.css";
 
-function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+export default function LoginForm() {
+  const [login, setLogin] = useState({ email: "", password: "" });
+  const [authenticated, setauthenticated] = useState(
+    localStorage.getItem(localStorage.getItem("authenticated") || false)
+  );
+  const currUser = useState(
+    localStorage.getItem(localStorage.getItem("currUser") || false)
+  );
+  const navigate = useNavigate();
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-
-    // Make an HTTP POST request to  backend API
-    fetch("http://localhost:8000/api/account_routes/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+  // These methods will update the state properties.
+  function updateForm(value) {
+    return setLogin((prev) => {
+      return { ...prev, ...value };
     });
-  };
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const newLogin = { ...login };
+    const newLogin_json = JSON.stringify(newLogin);
+
+    console.log("fetching login with details:", newLogin_json);
+    const response = await fetch(
+      "http://localhost:8000/api/account_routes/login/",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: newLogin_json,
+      }
+    ).catch((error) => {
+      window.alert(error);
+      return;
+    });
+
+    if (!response.ok) {
+      const message = `An error occured: ${response.statusText}`;
+      window.alert(message);
+      return;
+    } else {
+      console.log("Logged In! attempting to redirect you! list something!");
+      setauthenticated(true);
+      localStorage.setItem("authenticated", true);
+
+      async function GetUserByEmail() {
+        const response = await fetch(
+          `http://localhost:8000/api/account_routes/account/email/${login.email}`,
+          { method: "GET" }
+        );
+        if (!response.ok) {
+          const message = `An error occured: ${response.statusText}`;
+          window.alert(message);
+          return;
+        }
+        const user = await response.json();
+        localStorage.setItem("currUser", JSON.stringify(user));
+      }
+      GetUserByEmail();
+      const curruser = localStorage.getItem("currUser");
+      const curruser_parsed = JSON.parse(curruser);
+      navigate("/");
+      return;
+    }
+  }
 
   return (
     <div className="login-form-container">
       <h1 className="login-form-title">Login</h1>
       <form className="login-form" onSubmit={handleSubmit}>
-        <form action="Project/client/src/components/create.js"></form>
         <label htmlFor="email" className="login-form-label">
           Email:
         </label>
@@ -41,8 +78,8 @@ function LoginForm() {
           type="text"
           id="email"
           className="login-form-input"
-          value={email}
-          onChange={handleEmailChange}
+          value={login.email}
+          onChange={(e) => updateForm({ email: e.target.value })}
         />
 
         <label htmlFor="password" className="login-form-label">
@@ -52,18 +89,15 @@ function LoginForm() {
           type="password"
           id="password"
           className="login-form-input"
-          value={password}
-          onChange={handlePasswordChange}
+          value={login.password}
+          onChange={(e) => updateForm({ password: e.target.value })}
         />
-
-        {error && <p className="login-form-error">{error}</p>}
 
         <button type="submit" className="login-form-button">
           Login
         </button>
       </form>
+      <a href="/register"> Register </a>
     </div>
   );
 }
-
-export default LoginForm;

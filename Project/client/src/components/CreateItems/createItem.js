@@ -27,9 +27,15 @@ export default function Create() {
   // This function will handle the submission.
   async function onSubmit(e) {
     e.preventDefault();
+
+    // Get logged-in user details
+    const curruser = localStorage.getItem("currUser");
+    const curruser_parsed = JSON.parse(curruser);
+    form.userAccount = curruser_parsed._id;
+   
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newItem = { ...form };
-    console.log(JSON.stringify(newItem));
+    console.log('pushing newItem',JSON.stringify(newItem));
     await fetch("http://localhost:8000/api/item_routes/items/", {
       method: "POST",
       headers: {
@@ -73,6 +79,7 @@ export default function Create() {
         fileReader.onload = () => {
           const srcData = fileReader.result;
           console.log("srcData:", srcData);
+          //document.getElementById('images64').value = srcData;
           updateForm({ images64: srcData });
         };
         fileReader.readAsDataURL(imageFile);
@@ -96,7 +103,7 @@ export default function Create() {
             type="text"
             className="form-control"
             id="title"
-            value={form.ittle}
+            value={form.title}
             onChange={(e) => updateForm({ title: e.target.value })}
           />
         </div>

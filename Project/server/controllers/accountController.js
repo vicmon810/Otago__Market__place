@@ -1,7 +1,6 @@
 const accModel = require("../model/account");
 const express = require("express");
 const dbo = require("../db/conn");
-const { ObjectID } = require("mongodb");
 const crypto = require("crypto");
 var nodemailer = require("nodemailer");
 
@@ -22,6 +21,25 @@ const getUser = async (req, res) => {
     let db_connect = dbo.getDb();
     let myquery = {
       _id: ObjectId(req.params.id),
+    };
+    db_connect.collection("user").findOne(myquery, function (err, result) {
+      if (err) throw err;
+      res.status(200).json(result);
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
+//get a single account info
+const getUserByEmail = async (req, res) => {
+  try {
+    let db_connect = dbo.getDb();
+    let myquery = {
+      email: req.params.email,
     };
     db_connect.collection("user").findOne(myquery, function (err, result) {
       if (err) throw err;
@@ -141,29 +159,34 @@ const createAccount = async (req, res) => {
 };
 
 const verifyLogin = async (req, res) => {
-  console.log("HAHA");
+  console.log("req.body.email", req.body.email);
+  console.log("req.body.password", req.body.password);
   try {
     const db_connect = dbo.getDb();
     const collection = db_connect.collection("user");
     const result = await collection.findOne({
-      Email: req.body.email,
+      email: req.body.email,
     });
 
     // check if the password matches
-    console.log(result);
+    console.log('result',result);
     if (result) {
+      console.log('valid email');
       let hasher = crypto.createHash("sha256");
       hasher = hasher.update(req.body.password + "salt12345)(*&^");
       password = hasher.digest("hex");
-      // console.log(password);
       if (result.password == password) {
-        res.redirect("http://localhost:3000");
+        console.log('correct password, going back to client login');
+        res.json(result);
+        
       } else {
+        console.log('wrong password for existing email');
         res.status(401).json({
           message: "Invalid username or password",
         });
       }
     } else {
+      console.log('invalid email');
       res.status(401).json({
         message: "Invalid username or password",
       });
@@ -218,4 +241,5 @@ module.exports = {
   deleteUser,
   messageUser,
   verifyLogin,
+  getUserByEmail,
 };

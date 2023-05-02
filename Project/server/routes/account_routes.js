@@ -7,12 +7,15 @@ const {
   deleteUser,
   messageUser,
   verifyLogin,
+  getUserByEmail,
 } = require("../controllers/accountController");
 
 const routes = express.Router();
 
 //GET a Single account profile page
 routes.get("/account/:id", getUser);
+//GET a Single account profile page BY EMAIL
+routes.get("/account/email/:email", getUserByEmail);
 //GET a ADMIN Page
 routes.get("/admin", getAdmin);
 // POST a new account
@@ -25,5 +28,4 @@ routes.patch("/account/:id", updateUser);
 routes.post("/message", messageUser);
 //POST login
 routes.post("/login", verifyLogin);
-
 module.exports = routes;
