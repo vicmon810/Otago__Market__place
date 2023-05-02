@@ -9,14 +9,17 @@ export default function ViewListing() {
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id.toString();
+  const curruser = localStorage.getItem("currUser");
+  const curruser_parsed = JSON.parse(curruser);
 
-  async function deleteListing(){
-    await fetch(`http://localhost:8000/api/item_routes/item/${id}`, {method: "DELETE",
-      }).catch((error) => {
+  async function deleteListing() {
+    await fetch(`http://localhost:8000/api/item_routes/item/${id}`, {
+      method: "DELETE",
+    }).catch((error) => {
       window.alert(error);
       return;
     });
-    navigate('/');
+    navigate("/");
   }
 
   // This method fetches the records from the database.
@@ -36,41 +39,79 @@ export default function ViewListing() {
     fetchItem();
     // Fetch lister
     async function fetchLister() {
-      if (listing.userAccount){
-      const response = await fetch(
-        `http://localhost:8000/api/account_routes/account/${listing.userAccount}`, {method: 'GET'}
+      if (listing.userAccount) {
+        const response = await fetch(
+          `http://localhost:8000/api/account_routes/account/${listing.userAccount}`,
+          { method: "GET" }
         );
-      const listingLister = await response.json();
-      setLister(listingLister);
+        const listingLister = await response.json();
+        setLister(listingLister);
       }
-  }
+    }
     fetchLister();
     return;
   });
 
-  return (
-    <div>
-      <h1>Item Listing</h1>
-      <div className='title'>{listing.title}</div>
-      <br></br>
-      <img id="base64image" src={listing.images64} alt="No image(s)"/>
-      <br></br>
-      <div>Category: {listing.category}</div>
-      <div>Quantity:{listing.quantity}</div>
-      <div>Location:{listing.location}</div>
-      <div>Description:{listing.description}</div>
-      <div>Listed on {listing.listingDate}</div>
-      <div>by {lister.name} {lister.surname}</div> 
-      <div>ID: {listing.product_id}</div> 
+  if (curruser_parsed.email === lister.email) {
+    // console.log(curruser_parsed.email);
+    // console.log(lister.email);
+    return (
+      <div>
+        <h1>Item Listing</h1>
+        <div className="title">{listing.title}</div>
+        <br></br>
+        <img id="base64image" src={listing.images64} alt="No image(s)" />
+        <br></br>
+        <div>Category: {listing.category}</div>
+        <div>Quantity:{listing.quantity}</div>
+        <div>Location:{listing.location}</div>
+        <div>Description:{listing.description}</div>
+        <div>Listed on {listing.listingDate}</div>
+        <div>
+          by {lister.name} {lister.surname}
+        </div>
+        <div>ID: {listing.product_id}</div>
 
-      <div>Contact Information</div>
-      <div>Email: {lister.email}</div>
-      <div>Phone Number: {lister.number}</div>
+        <div>Contact Information</div>
+        <div>Email: {lister.email}</div>
+        <div>Phone Number: {lister.number}</div>
+        <Link className="btn btn-link" to={`/edit/${listing._id}`}>
+          Edit
+        </Link>
+        <button
+          className="btn btn-link"
+          onClick={() => {
+            deleteListing(listing._id);
+          }}
+        >
+          Delete
+        </button>
+      </div>
+    );
+  } else {
+    //  console.log(curruser_parsed.email);
+    //  console.log(lister.email);
+    return (
+      <div>
+        <h1>Item Listing</h1>
+        <div className="title">{listing.title}</div>
+        <br></br>
+        <img id="base64image" src={listing.images64} alt="No image(s)" />
+        <br></br>
+        <div>Category: {listing.category}</div>
+        <div>Quantity:{listing.quantity}</div>
+        <div>Location:{listing.location}</div>
+        <div>Description:{listing.description}</div>
+        <div>Listed on {listing.listingDate}</div>
+        <div>
+          by {lister.name} {lister.surname}
+        </div>
+        <div>ID: {listing.product_id}</div>
 
-      <Link className="btn btn-link" to={`/edit/${listing._id}`}>Edit</Link>
-      <button className="btn btn-link"
-        onClick={() => {deleteListing(listing._id);}}
-      >Delete</button>
-    </div>
-  );
+        <div>Contact Information</div>
+        <div>Email: {lister.email}</div>
+        <div>Phone Number: {lister.number}</div>
+      </div>
+    );
+  }
 }

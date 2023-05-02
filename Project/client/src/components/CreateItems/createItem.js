@@ -31,11 +31,12 @@ export default function Create() {
     // Get logged-in user details
     const curruser = localStorage.getItem("currUser");
     const curruser_parsed = JSON.parse(curruser);
+    console.log(curruser);
     form.userAccount = curruser_parsed._id;
-   
+
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newItem = { ...form };
-    console.log('pushing newItem',JSON.stringify(newItem));
+    console.log("pushing newItem", JSON.stringify(newItem));
     await fetch("http://localhost:8000/api/item_routes/items/", {
       method: "POST",
       headers: {
