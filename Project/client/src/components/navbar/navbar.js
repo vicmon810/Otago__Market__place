@@ -3,9 +3,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import ".//../../CSS/navbar.css";
 
 const Navbar = (props) => {
-  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+  const [isNavCollapsed, setIsNavCollapsed] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const handleSearchInputChange = (event) => {
+    setSearchInput(event.target.value);
+  };
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
-
+  console.log(props);
   const [authenticated, setauthenticated] = useState(
     localStorage.getItem("authenticated")
   );
@@ -40,12 +44,16 @@ const Navbar = (props) => {
               type="search"
               placeholder="search otagoMarketplace"
               aria-label="Search"
+              value={searchInput}
+              onChange={handleSearchInputChange}
             />
             <button
               className="btn btn-outline-success"
               type="submit"
+              disabled={!searchInput}
+              size={searchInput.toString()}
               onClick={() => {
-                //TODO: add search functionality;
+                console.log(searchInput);
               }}
             >
               Go

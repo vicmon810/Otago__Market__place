@@ -1,23 +1,119 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ".//../../CSS/itemsList.css";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import PersonIcon from "@mui/icons-material/Person";
+import CategoryIcon from "@mui/icons-material/Category";
+import LocationIcon from "@mui/icons-material/LocationOn";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import DescIcon from "@mui/icons-material/Description";
+import NumbersIcon from "@mui/icons-material/Numbers";
+
+import { TypeAnimation } from "react-type-animation";
 
 const Record = (props) => (
   <div className="column">
-    <div className="card">
-      <Link className="btn btn-link" to={`/item/${props.record._id}`}>
+    <div className="card" style={{ backgroundColor: "white" }}>
+      <Button size="large" href={`/item/${props.record._id}`}>
         {props.record.title}
-      </Link>
+      </Button>
       <br></br>
       <img id="base64image" src={props.record.images64} alt="No image(s)" />
       <br></br>
-      <div>Category: {props.record.category}</div>
-      <div>Quantity:{props.record.quantity}</div>
-      <div>Location:{props.record.location}</div>
-      <div>Description:{props.record.description}</div>
-      <div>Listed on {props.record.listingDate}</div>
-      <div>by {props.record.userAccount}</div>
-      <div>ID: {props.record.product_id}</div>
+
+      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "white" }}>
+        <nav aria-label="main mailbox folders">
+          <List>
+            <ListItem disablePadding>
+              <ListItemIcon>
+                <CategoryIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Category:"
+                secondary={props.record.category}
+              />
+            </ListItem>
+          </List>
+        </nav>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <InventoryIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Quantity:"
+              secondary={props.record.quantity}
+            />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <LocationIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Location:"
+              secondary={props.record.location}
+            />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <DescIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Description:"
+              secondary={props.record.description}
+            />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <CalendarMonthIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Listing Date:"
+              secondary={props.record.listingDate}
+            />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <PersonIcon />
+            </ListItemIcon>
+            <ListItemText primary="Posted by:" />
+            <ListItemText secondary={props.record.userAccount} />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <NumbersIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Product ID:"
+              secondary={props.record.product_id}
+            />
+          </ListItem>
+        </List>
+      </Box>
     </div>
   </div>
 );
@@ -39,9 +135,6 @@ export default function RecordList() {
       }
       const records = await response.json();
       setRecords(records);
-      if (curruser_parsed === records.userAccount) {
-        console.log("Test");
-      }
     }
     getRecords();
     return;
@@ -68,7 +161,27 @@ export default function RecordList() {
 
   return (
     <div>
-      <h3>All Listings</h3>
+      <span style={{ fontSize: "2em" }}>
+        <span size>View all the </span>{" "}
+        <TypeAnimation
+          sequence={[
+            "Keyboard", // Types 'One'
+            3000, // Waits 1s
+            "Monitor", // Deletes 'One' and types 'Two'
+            3000, // Waits 2s
+            "Coffee Table", // Types 'Three' without deleting 'Two'
+            () => {
+              console.log("Sequence completed"); // Place optional callbacks anywhere in the array
+            },
+          ]}
+          wrapper="span"
+          cursor={true}
+          repeat={Infinity}
+          style={{ display: "inline-block" }}
+        />{" "}
+      </span>
+
+      <br></br>
       {recordList()}
     </div>
   );

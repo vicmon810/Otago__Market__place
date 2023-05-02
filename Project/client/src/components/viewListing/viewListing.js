@@ -51,10 +51,8 @@ export default function ViewListing() {
     fetchLister();
     return;
   });
-
+  //this will make sure user can only edit/deleted items they created
   if (curruser_parsed.email === lister.email) {
-    // console.log(curruser_parsed.email);
-    // console.log(lister.email);
     return (
       <div>
         <h1>Item Listing</h1>
@@ -71,21 +69,6 @@ export default function ViewListing() {
           by {lister.name} {lister.surname}
         </div>
         <div>ID: {listing.product_id}</div>
-
-        <div>Contact Information</div>
-        <div>Email: {lister.email}</div>
-        <div>Phone Number: {lister.number}</div>
-        <Link className="btn btn-link" to={`/edit/${listing._id}`}>
-          Edit
-        </Link>
-        <button
-          className="btn btn-link"
-          onClick={() => {
-            deleteListing(listing._id);
-          }}
-        >
-          Delete
-        </button>
       </div>
     );
   } else {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import LoginForm from "../login/Login";
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -40,7 +41,7 @@ export default function Register() {
     });
 
     setForm({name: "", surname: "", email: "", password: "", number: "", department: "", activationDate: ""});
-    navigate("/");
+    navigate(LoginForm);
   }
 
   // This following section will display the form that takes the input from the item.

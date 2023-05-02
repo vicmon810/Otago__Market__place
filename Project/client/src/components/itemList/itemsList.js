@@ -43,9 +43,6 @@ const Record = (props) => (
 
 export default function RecordList() {
   const [records, setRecords] = useState([]);
-  const curruser = localStorage.getItem("currUser");
-  const curruser_parsed = JSON.parse(curruser);
-  // console.log(curruser);
 
   // This method fetches the records from the database.
   useEffect(() => {
@@ -60,9 +57,6 @@ export default function RecordList() {
       }
       const records = await response.json();
       setRecords(records);
-      if (curruser_parsed === records.userAccount) {
-        console.log("Test");
-      }
     }
     getRecords();
     return;
