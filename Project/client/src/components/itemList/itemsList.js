@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import ".//../../CSS/items.css";
 const Record = (props) => (
   <tr>
     <tr>Title</tr>

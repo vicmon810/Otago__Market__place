@@ -1,12 +1,11 @@
 [
   {
-<<<<<<< HEAD
     "User_Id": "STA001",
     "User_Name": "admin",
     "password": "c89d2029fe9ac9cb9385e96e626efc5f811255192d363dbdd1bc0b0f83126244",
     "Email": "admin@123.com",
     "Department": "",
-    "Contact_Number": "",
+    "Contact_Number": ""
      },
   {
     "User_Id": "USR002",
@@ -37,14 +36,6 @@
     "Contact_Number": "555-4321",
     "Profile_Picture": "",
     "admin": "false"
-=======
-    "name": "sample",
-    "surname": "sample",
-    "email": "sample",
-    "password": "pass",
-    "number": "1",
-    "department": "",
-    "activationDate": ""
->>>>>>> 535de1ae807033c5c8bee3aec4e89d85662a4148
   }
+
 ]

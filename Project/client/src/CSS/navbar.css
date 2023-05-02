@@ -1,6 +1,6 @@
 .navbar {
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
+  background-color: #0d4e9d;
+  border-bottom: 1px solid #850c0c;
   padding: 1rem;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -32,7 +32,7 @@
 
 @media (max-width: 768px) {
   .navbar-nav {
-    background-color: #fff;
+    background-color: #8ae0eb;
     padding: 1rem;
   }
   .nav-link {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 //import Navbar from "./navbar";
 
-import "/Users/apple/Info310/OtagoMarketplace/Project/client/src/CSS/Login.css";
+import ".//../../CSS/Login.css";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
