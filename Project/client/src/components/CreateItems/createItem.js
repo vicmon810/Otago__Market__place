@@ -3,13 +3,11 @@ import { useNavigate } from "react-router";
 
 export default function Create() {
   const [form, setForm] = useState({
-    product_id: "", //product ID should be generated automatically (by formula)
     title: "",
     category: "",
     quantity: "",
     location: "",
     description: "",
-    images: "",
     images64: "",
     listingDate: "",
     userAccount: "",
@@ -48,13 +46,11 @@ export default function Create() {
     });
 
     setForm({
-      product_id: "", //product ID should be generated automatically (by formula)
       title: "",
       category: "",
       quantity: "",
       location: "",
       description: "",
-      images: "",
       images64: "",
       listingDate: "",
       userAccount: "",
@@ -158,7 +154,7 @@ export default function Create() {
             accept="image/*"
             className="form-control"
             id="images"
-            value={form.images}
+            //value={form.images}
             onChange={(e) => validateImageSize(e.target.files)}
           />
         </div>

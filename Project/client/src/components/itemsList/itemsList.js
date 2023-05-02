@@ -15,7 +15,9 @@ const Record = (props) => (
           <div>Description:{props.record.description}</div>
           <div>Listed on {props.record.listingDate}</div>
           <div>by {props.record.userAccount}</div> 
-          <div>ID: {props.record.product_id}</div> 
+
+          <div>Listing ID: {props.record._id}</div> 
+
         </div>
   </div>
 );
