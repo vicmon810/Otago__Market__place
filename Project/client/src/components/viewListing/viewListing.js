@@ -61,7 +61,7 @@ export default function ViewListing() {
       <div>Description:{listing.description}</div>
       <div>Listed on {listing.listingDate}</div>
       <div>by {lister.name} {lister.surname}</div> 
-      <div>ID: {listing.product_id}</div> 
+      <div>Listing ID: {listing._id}</div> 
 
       <div>Contact Information</div>
       <div>Email: {lister.email}</div>

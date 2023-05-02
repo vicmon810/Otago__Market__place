@@ -3,13 +3,11 @@ import { useNavigate } from "react-router";
 
 export default function Create() {
   const [form, setForm] = useState({
-    product_id: "", //product ID should be generated automatically (by formula)
     title: "",
     category: "",
     quantity: "",
     location: "",
     description: "",
-    images: "",
     images64: "",
     listingDate: "",
     userAccount: "",
@@ -48,13 +46,11 @@ export default function Create() {
     });
 
     setForm({
-      product_id: "", //product ID should be generated automatically (by formula)
       title: "",
       category: "",
       quantity: "",
       location: "",
       description: "",
-      images: "",
       images64: "",
       listingDate: "",
       userAccount: "",
@@ -76,20 +72,16 @@ export default function Create() {
       } else {
         const [imageFile] = fileInput;
         const fileReader = new FileReader();
-        fileReader.onload = () => {
-          const srcData = fileReader.result;
-          console.log("srcData:", srcData);
-          //document.getElementById('images64').value = srcData;
-          updateForm({ images64: srcData });
-        };
-        fileReader.readAsDataURL(imageFile);
-        //updateForm({ images: eventTarget[0] });
+
+        fileReader.onloadend = function(){
+          console.log('RESULT', fileReader.result);
+          var res = fileReader.result;
+          console.log('res0', res);
+          updateForm({ images64: fileReader.result });
+      }
+        fileReader.readAsDataURL(imageFile); 
       }
     }
-    /*
-      updateForm({ images: '' }); // soft restriction, must restrict on server-side as well
-    };
-    */
   }
 
   // This following section will display the form that takes the input from the item.
@@ -162,7 +154,7 @@ export default function Create() {
             accept="image/*"
             className="form-control"
             id="images"
-            value={form.images}
+            //value={form.images}
             onChange={(e) => validateImageSize(e.target.files)}
           />
         </div>
