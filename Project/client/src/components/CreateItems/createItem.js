@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+
 
 export default function Create() {
   const [form, setForm] = useState({
@@ -13,6 +17,15 @@ export default function Create() {
     userAccount: "",
     contactInfo: { email: "", number: "" },
   });
+
+  const options = [
+    { label: 'Clothing', id: 1 },
+    { label: 'Electronics', id: 2 },
+    { label: 'Furniture', id: 1 },
+    { label: 'Stationary', id: 2 },
+    { label: 'Other', id: 2 },
+  ];
+
   const navigate = useNavigate();
 
   // These methods will update the state properties.
@@ -87,89 +100,96 @@ export default function Create() {
 
   // This following section will display the form that takes the input from the item.
   return (
-    <div>
-      <h3>Add listing</h3>
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            className="form-control"
-            id="title"
-            value={form.title}
-            onChange={(e) => updateForm({ title: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="Category">Category</label>
-          <div></div>
-          <select
-            id="category"
-            onChange={(e) => updateForm({ category: e.target.value })}
-          >
-            <option> --Choose Category-- </option>
-            <option> Appliances </option>
-            <option> Clothing </option>
-            <option> Electronics </option>
-            <option> Furniture </option>
-            <option> Stationary </option>
-            <option> Other </option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="Quantity">Quantity</label>
-          <input
-            type="number"
-            className="form-control"
-            id="quantity"
-            value={form.quantity}
-            placeholder="1"
-            onChange={(e) => updateForm({ quantity: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="Location">Location</label>
-          <input
-            type="text"
-            className="form-control"
-            id="location"
-            value={form.location}
-            onChange={(e) => updateForm({ location: e.target.value })}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="Description">Description</label>
-          <input
-            type="text"
-            className="form-control"
-            id="description"
-            value={form.description}
-            onChange={(e) => updateForm({ description: e.target.value })}
-          />
-        </div>
+    <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    }}>
 
-        <div className="form-group">
-          <label htmlFor="Image">Image(s)</label>
-          <input
-            type="file"
-            accept="image/*"
-            className="form-control"
-            id="images"
-            //value={form.images}
-            onChange={(e) => validateImageSize(e.target.files)}
-          />
-        </div>
+    <Box
+      component="form"
+      alignItems="center"
+      sx={{
+        width: 400,
+        height: 500,
+        backgroundColor: 'white',
+        
+      }}
+      noValidate
+      autoComplete="off"
+    >
+  
+        <h3>Add listing</h3>
+        <form onSubmit={onSubmit}>
 
-        {
+        <TextField
+          label="Title"
+          defaultValue=""
+          id="title"
+          value={form.title}
+          onChange={(e) => updateForm({ title: e.target.value })}
+          variant="standard" />
+        
+        <Autocomplete
+          disablePortal
+          id="category"
+          options={options}
+          sx={{ width: 400 }}
+          renderInput={(params) => <TextField {...params} 
+          label="Category" 
+          id="category"
+          onChange={(e) => updateForm({ category: e.target.value })}/>}
+        />
+          
+          <TextField
+          label="Quantity"
+          defaultValue=""
+          id="quantity"
+              value={form.quantity}
+              placeholder="1"
+              onChange={(e) => updateForm({ quantity: e.target.value })}
+          variant="standard" />
+          
+          <div>
+          <TextField
+          label="Location"
+          defaultValue=""
+          id="location"
+              value={form.location}
+              onChange={(e) => updateForm({ location: e.target.value })}
+          variant="standard" />
+          </div>
+
+        <div>
+          <TextField
+          label="Description"
+          defaultValue=""
+          id="description"
+              value={form.description}
+              onChange={(e) => updateForm({ description: e.target.value })}
+          variant="standard" />       
+        </div>
+      
+
           <div className="form-group">
+            <label htmlFor="Image">Image(s)</label>
+            <input
+              type="file"
+              accept="image/*"
+              className="form-control"
+              id="images"
+              //value={form.images}
+              onChange={(e) => validateImageSize(e.target.files)} />
+          </div> 
+
+          {<div className="form-group">
             <input
               type="submit"
               value="Add listing"
-              className="btn btn-primary"
-            />
+              className="btn btn-primary" />
+          </div>}
+        </form>
+          </Box>
           </div>
-        }
-      </form>
-    </div>
   );
 }
