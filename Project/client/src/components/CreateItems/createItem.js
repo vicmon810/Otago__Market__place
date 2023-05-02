@@ -76,20 +76,16 @@ export default function Create() {
       } else {
         const [imageFile] = fileInput;
         const fileReader = new FileReader();
-        fileReader.onload = () => {
-          const srcData = fileReader.result;
-          console.log("srcData:", srcData);
-          //document.getElementById('images64').value = srcData;
-          updateForm({ images64: srcData });
-        };
-        fileReader.readAsDataURL(imageFile);
-        //updateForm({ images: eventTarget[0] });
+
+        fileReader.onloadend = function(){
+          console.log('RESULT', fileReader.result);
+          var res = fileReader.result;
+          console.log('res0', res);
+          updateForm({ images64: fileReader.result });
+      }
+        fileReader.readAsDataURL(imageFile); 
       }
     }
-    /*
-      updateForm({ images: '' }); // soft restriction, must restrict on server-side as well
-    };
-    */
   }
 
   // This following section will display the form that takes the input from the item.
