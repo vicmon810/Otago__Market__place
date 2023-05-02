@@ -51,7 +51,7 @@ export default function ViewListing() {
   return (
     <div>
       <h1>Item Listing</h1>
-      <div class='title'>{listing.title}</div>
+      <div className='title'>{listing.title}</div>
       <br></br>
       <img id="base64image" src={listing.images64} alt="No image(s)"/>
       <br></br>
