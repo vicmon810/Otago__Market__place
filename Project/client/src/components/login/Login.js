@@ -61,7 +61,6 @@ export default function LoginForm() {
     <div className="login-form-container">
       <h1 className="login-form-title">Login</h1>
       <form className="login-form" onSubmit={handleSubmit}>
-        <form action="Project/client/src/components/create.js"></form>
         <label htmlFor="email" className="login-form-label">
           Email:
         </label>
@@ -83,7 +82,7 @@ export default function LoginForm() {
           value={login.password}
           onChange={(e) => updateForm({ password: e.target.value })}
         />
-        
+
         <button type="submit" className="login-form-button">
           Login
         </button>
