@@ -59,7 +59,7 @@ export default function ViewListing() {
       <div>Quantity:{listing.quantity}</div>
       <div>Location:{listing.location}</div>
       <div>Description:{listing.description}</div>
-      <div>Listed on{listing.listingDate}</div>
+      <div>Listed on {listing.listingDate}</div>
       <div>by {lister.name} {lister.surname}</div> 
       <div>ID: {listing.product_id}</div> 
 

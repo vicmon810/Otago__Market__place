@@ -5,6 +5,21 @@ const dbo = require("../db/conn");
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
 
+function getTime(){
+  UNIX_timestamp=Math.floor(new Date().getTime() / 1000);
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var time = date + ' ' + month + ' ' + year;
+  // var hour = a.getHours();
+  // var min = a.getMinutes();
+  // var sec = a.getSeconds();
+  // var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  return time;
+}
+
 //GET all items
 const getAllItems = async (req, res) => {
   try {
@@ -56,7 +71,7 @@ const createItem = async (req, res) => {
       description: req.body.description,
       images: req.body.images,
       images64: req.body.images64,
-      listingDate: Math.floor(new Date().getTime() / 1000),
+      listingDate: getTime(),
       userAccount: req.body.userAccount,
       contactInfo: {
         email: req.body.email,
