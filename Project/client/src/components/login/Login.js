@@ -51,7 +51,6 @@ export default function LoginForm() {
       GetUserByEmail();
       const curruser = localStorage.getItem("currUser");
       const curruser_parsed=JSON.parse(curruser);
-      window.alert(`Welcome ${curruser_parsed.name}! You have successfully logged in.`);
       navigate('/');
       return;
     }
