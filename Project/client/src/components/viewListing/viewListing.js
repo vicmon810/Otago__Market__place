@@ -34,25 +34,19 @@ export default function ViewListing() {
       setListing(item);
     }
     fetchItem();
+    // Fetch lister
+    async function fetchLister() {
+      if (listing.userAccount){
+      const response = await fetch(
+        `http://localhost:8000/api/account_routes/account/${listing.userAccount}`, {method: 'GET'}
+        );
+      const listingLister = await response.json();
+      setLister(listingLister);
+      }
+  }
     fetchLister();
     return;
   });
-
-  // Fetch lister
-  async function fetchLister() {
-    if (listing.userAccount){
-    const response = await fetch(
-      `http://localhost:8000/api/account_routes/account/${listing.userAccount}`, {method: 'GET'}
-      );
-    // if (!response.ok) {
-    //   const message = `An error occured: ${response.statusText}`;
-    //   window.alert(message);
-    //   return;
-    // }
-    const listingLister = await response.json();
-    setLister(listingLister);
-    }
-  }
 
   return (
     <div>
