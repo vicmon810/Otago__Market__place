@@ -80,7 +80,7 @@ const Navbar = (props) => {
                 search();
               }}
             >
-              Go
+              Search
             </button>
           </form>
           <a className="nav-link text-info" href="/create">

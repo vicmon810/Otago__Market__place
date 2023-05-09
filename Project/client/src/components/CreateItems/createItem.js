@@ -72,7 +72,7 @@ export default function Create() {
       userAccount: "",
       contactInfo: { email: "", number: "" },
     });
-    navigate("/");
+    navigate("/lists");
   }
 
   function validateImageSize(eventTarget) {

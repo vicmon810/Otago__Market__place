@@ -15,7 +15,6 @@ import {
   Box,
   Grid,
 } from "@mui/material";
-import { TypeAnimation } from "react-type-animation";
 import loginBackground from "../../assets/loginbg.jpg";
 import American from "../../assets/American Captain.ttf";
 
