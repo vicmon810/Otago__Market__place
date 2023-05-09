@@ -201,7 +201,16 @@ export default function ViewListing() {
   });
   if (curruser_parsed.email === lister.email) {
     // TODO: allow user to edit/delete listing if it belongs to them
-    return <Record record={[listing, lister]} key={listing._id} />;
+    return (
+      <div>
+      <Record record={[listing, lister]} key={listing._id} />
+      {/* TODO: FIX EDIT AND LINK HERE */}
+      {/* <Link className="btn btn-link" to={`/edit/${listing._id}`}>Edit</Link> */}
+      <button class="btn btn-secondary ml-auto"
+        onClick={() => {deleteListing(listing._id);}}
+      >Delete</button>
+      </div>
+    );
 
   } else {
     return (
