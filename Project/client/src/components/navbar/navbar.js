@@ -80,7 +80,7 @@ const Navbar = (props) => {
             Profile{" "}
           </a>
         </div>
-        <span className="nav-link text-info">Welcome: {getUser()}!</span>
+        <span className="nav-link text-info">Welcome {getUser()}!</span>
         <button
           className="btn btn-outline-success"
           type="submit"
