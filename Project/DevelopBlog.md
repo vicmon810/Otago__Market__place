@@ -1,4 +1,4 @@
-# 2 may 2023
+# 2/May/2023
 Current issue: 
         * after enter right account name and password, user have to refresh in order to access their own account
         * search function 
@@ -9,6 +9,8 @@ Current issue:
         * Notify user 
         * greeting on navbar
         * "your listings" page for user to view the listings that are created by them
+        * user profile pictures (from a sample set)
+        * multiple item images
 
 # 21/Apr/2023
 Basically back-end is finished, can start to tidy up and can rename those routers. 
