@@ -3,6 +3,156 @@ import { useParams, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import ".//../../CSS/itemsList.css";
 
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
+import CategoryIcon from "@mui/icons-material/Category";
+import LocationIcon from "@mui/icons-material/LocationOn";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import DescIcon from "@mui/icons-material/Description";
+import NumbersIcon from "@mui/icons-material/Numbers";
+
+const Record = (props) => (
+  <div style={{ backgroundColor: "white" }}>
+    <Button size="large" href={`/item/${props.record[0]._id}`}>
+      {props.record[0].title}
+    </Button>
+    <br></br>
+
+    <Grid container spacing={2}>
+      <Grid item xs={8}>
+        <Box>
+          <img
+            id="base64image"
+            width="500"
+            src={props.record[0].images64}
+            alt="No image(s)"
+          />
+        </Box>
+      </Grid>
+
+      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "white" }}>
+        <nav aria-label="main mailbox folders">
+          <List>
+            <ListItem disablePadding>
+              <ListItemIcon>
+                <CategoryIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Category:"
+                secondary={props.record[0].category}
+              />
+            </ListItem>
+          </List>
+        </nav>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <InventoryIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Quantity:"
+              secondary={props.record[0].quantity}
+            />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <LocationIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Location:"
+              secondary={props.record[0].location}
+            />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <DescIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Description:"
+              secondary={props.record[0].description}
+            />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <CalendarMonthIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Listing Date:"
+              secondary={props.record[0].listingDate}
+            />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <PersonIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Posted by:"
+              secondary={props.record[1].name + " " + props.record[1].surname}
+            />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <EmailIcon />
+            </ListItemIcon>
+            <ListItemText primary="Email:" secondary={props.record[1].email} />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <PhoneIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Phone Number:"
+              secondary={props.record[1].number}
+            />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <NumbersIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Product ID:"
+              secondary={props.record[0]._id}
+            />
+          </ListItem>
+        </List>
+      </Box>
+    </Grid>
+  </div>
+);
+
 export default function ViewListing() {
   const [listing, setListing] = useState([]);
   const [lister, setLister] = useState([]);
@@ -51,47 +201,24 @@ export default function ViewListing() {
     fetchLister();
     return;
   });
-  //this will make sure user can only edit/deleted items they created
   if (curruser_parsed.email === lister.email) {
+    // TODO: allow user to edit/delete listing if it belongs to them
     return (
       <div>
-        <h1>Item Listing</h1>
-        <div className="title">{listing.title}</div>
-        <br></br>
-        <img id="base64image" src={listing.images64} alt="No image(s)" />
-        <br></br>
-        <div>Category: {listing.category}</div>
-        <div>Quantity:{listing.quantity}</div>
-        <div>Location:{listing.location}</div>
-        <div>Description:{listing.description}</div>
-        <div>Listed on {listing.listingDate}</div>
-        <div>
-          by {lister.name} {lister.surname}
-        </div>
-        <button>Contact Owner</button>
+        <Record record={[listing, lister]} key={listing._id} />
+        {/* TODO: FIX EDIT AND LINK HERE */}
+        {/* <Link className="btn btn-link" to={`/edit/${listing._id}`}>Edit</Link> */}
+        <button
+          class="btn btn-secondary ml-auto"
+          onClick={() => {
+            deleteListing(listing._id);
+          }}
+        >
+          Delete
+        </button>
       </div>
     );
   } else {
-    return (
-      <div>
-        <h1>Item Listing</h1>
-        <div className="title">{listing.title}</div>
-        <br></br>
-        <img id="base64image" src={listing.images64} alt="No image(s)" />
-        <br></br>
-        <div>Category: {listing.category}</div>
-        <div>Quantity:{listing.quantity}</div>
-        <div>Location:{listing.location}</div>
-        <div>Description:{listing.description}</div>
-        <div>Listed on {listing.listingDate}</div>
-        <div>
-          by {lister.name} {lister.surname}
-        </div>
-        <div>Contact Information</div>
-        <div>Email: {lister.email}</div>
-        <div>Phone Number: {lister.number}</div>
-        <button>Contact Owner</button>
-      </div>
-    );
+    return <Record record={[listing, lister]} key={listing._id} />;
   }
 }

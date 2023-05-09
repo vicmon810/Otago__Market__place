@@ -42,7 +42,7 @@ const Navbar = (props) => {
     console.log("LOGGED-IN NAVBAR");
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <a className="navbar-brand text-info font-weight-bolder" href="/">
+        <a className="navbar-brand text-info font-weight-bolder" href="/lists">
           <span className="">otagoMarketplace</span>
         </a>
         <button
@@ -91,7 +91,7 @@ const Navbar = (props) => {
             Profile{" "}
           </a>
         </div>
-        <span className="nav-link text-info">Welcome: {getUser()}!</span>
+        <span className="nav-link text-info">Welcome {getUser()}!</span>
         <button
           className="btn btn-outline-success"
           type="submit"

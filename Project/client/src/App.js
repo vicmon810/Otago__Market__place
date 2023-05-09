@@ -15,11 +15,11 @@ const App = () => {
     <div>
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<RecordList />} />
+        <Route exact path="/" element={<LoginForm />} />
         <Route path="/item/:id" element={<ViewListing />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/create" element={<Create />} />
-        <Route path="/login" element={<LoginForm />} />
+        <Route path="/lists" element={<RecordList />} />
         <Route path="register" element={<Register />} />
         <Route path="/profile" element={<GetProfile />} />
         <Route path="/message" element={<MessageForm />} />
