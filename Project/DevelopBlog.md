@@ -2,7 +2,7 @@
 current issues:
 - edit and delete item specific to the account that listed the item
 - email notifications
-- profile display
+- profile display picture
 - search feature
 - filter by category feature
 
