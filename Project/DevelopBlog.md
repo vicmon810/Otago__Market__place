@@ -8,6 +8,7 @@ Current issue:
         * filter by category 
         * Notify user 
         * greeting on navbar
+        * "your listings" page for user to view the listings that are created by them
         * user profile pictures (from a sample set)
         * multiple item images
 
