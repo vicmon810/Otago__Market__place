@@ -166,14 +166,16 @@ const deleteItem = async (req, res) => {
 const searchItem = async (req, res) => {
   try {
     const db_connection = dbo.getDb();
-    const query = { name: req.params.searchInput };
+    const query = { title: { $regex: req.params.searchInput, $options: "i" } };
+    console.log(query);
     const items = await db_connection.collection("items").find(query).toArray();
-    console.log(items);
+
     if (items.length === 0) {
       return res.status(404).json({
         message: "No items found",
       });
     }
+    console.log(items);
     res.status(200).json(items);
   } catch (err) {
     res.status(500).json({

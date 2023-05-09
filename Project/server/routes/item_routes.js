@@ -20,6 +20,6 @@ routes.delete("/item/:id", deleteItem);
 // UPDATE a item
 routes.patch("/item/:id", updateItem);
 //Search items
-routes.get("/items/:name", searchItem);
+routes.get("/items/:searchInput", searchItem);
 
 module.exports = routes;

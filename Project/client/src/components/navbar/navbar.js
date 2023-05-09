@@ -5,6 +5,8 @@ import ".//../../CSS/navbar.css";
 const Navbar = (props) => {
   const [isNavCollapsed, setIsNavCollapsed] = useState("");
   const [searchInput, setSearchInput] = useState("");
+  const [searchResults, setSearchResults] = useState([]); // state variable to store search results
+
   const handleSearchInputChange = (event) => {
     setSearchInput(event.target.value);
   };
@@ -26,17 +28,20 @@ const Navbar = (props) => {
     return name;
   };
   async function search() {
-    console.log("HERE");
+    console.log("hey");
     const response = await fetch(
       `http://localhost:8000/api/item_routes/items/${searchInput}`
     );
     if (!response.ok) {
       const message = `An error occured: ${response.statusText}`;
+      console.log(message);
       return;
     }
-    console.log(response);
-    // const records = await response.json();
+    const data = await response.json();
+    //Update search result
+    setSearchResults(data);
   }
+
   console.log("navbar authenticated:", authenticated);
 
   if (authenticated === "true") {
@@ -73,7 +78,7 @@ const Navbar = (props) => {
             />
             <button
               className="btn btn-outline-success"
-              type="submit"
+              type="button"
               disabled={!searchInput}
               size={searchInput.toString()}
               onClick={() => {
@@ -132,17 +137,19 @@ const Navbar = (props) => {
               type="search"
               placeholder="search otagoMarketplace"
               aria-label="Search"
+              value={searchInput}
+              onChange={handleSearchInputChange}
             />
             <button
               className="btn btn-outline-success"
-              type="submit"
+              type="button"
               disabled={!searchInput}
               size={searchInput.toString()}
               onClick={() => {
                 search();
               }}
             >
-              Go
+              Search
             </button>
           </form>
           {/* <a className="nav-link text-info" href="/create"> Add Listing </a> */}

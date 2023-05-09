@@ -16,9 +16,10 @@ import LocationIcon from "@mui/icons-material/LocationOn";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DescIcon from "@mui/icons-material/Description";
 import NumbersIcon from "@mui/icons-material/Numbers";
+import navbar from "../../components/navbar/navbar";
 
 import { TypeAnimation } from "react-type-animation";
-
+console.log(navbar.searchResult);
 const Record = (props) => (
   <div className="column">
     <div className="card" style={{ backgroundColor: "white" }}>
@@ -91,26 +92,12 @@ const Record = (props) => (
             />
           </ListItem>
         </List>
-
-        {/* <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary="Posted by:" />
-            <ListItemText secondary={props.record.userAccount} />
-          </ListItem>
-        </List> */}
-
         <List>
           <ListItem disablePadding>
             <ListItemIcon>
               <NumbersIcon />
             </ListItemIcon>
-            <ListItemText
-              primary="Product ID:"
-              secondary={props.record._id}
-            />
+            <ListItemText primary="Product ID:" secondary={props.record._id} />
           </ListItem>
         </List>
       </Box>
@@ -121,6 +108,7 @@ const Record = (props) => (
 
 export default function RecordList() {
   const [records, setRecords] = useState([]);
+
   const curruser = localStorage.getItem("currUser");
   const curruser_parsed = JSON.parse(curruser);
   // This method fetches the records from the database.
@@ -162,26 +150,6 @@ export default function RecordList() {
 
   return (
     <div>
-      {/* <span style={{ fontSize: "2em" }}>
-        <span size>View all the </span>{" "}
-        <TypeAnimation
-          sequence={[
-            "Keyboard", // Types 'One'
-            3000, // Waits 1s
-            "Monitor", // Deletes 'One' and types 'Two'
-            3000, // Waits 2s
-            "Coffee Table", // Types 'Three' without deleting 'Two'
-            () => {
-              console.log("Sequence completed"); // Place optional callbacks anywhere in the array
-            },
-          ]}
-          wrapper="span"
-          cursor={true}
-          repeat={Infinity}
-          style={{ display: "inline-block" }}
-        />{" "}
-      </span> */}
-
       <br></br>
       {recordList()}
     </div>
