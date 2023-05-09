@@ -31,7 +31,9 @@ export default function Create() {
   // These methods will update the state properties.
   function updateForm(value) {
     return setForm((prev) => {
+      //return { ...prev, ...value, category: value.label };
       return { ...prev, ...value };
+
     });
   }
 
@@ -117,14 +119,13 @@ export default function Create() {
       }}
       noValidate
       autoComplete="off"
+      onSubmit={onSubmit}
     >
   
         <h3>Add listing</h3>
-        <form onSubmit={onSubmit}>
 
         <TextField
           label="Title"
-          defaultValue=""
           id="title"
           value={form.title}
           onChange={(e) => updateForm({ title: e.target.value })}
@@ -134,16 +135,24 @@ export default function Create() {
           disablePortal
           id="category"
           options={options}
+          getOptionLabel={(option) => option.label} // Specify how to extract the label from the option
           sx={{ width: 400 }}
-          renderInput={(params) => <TextField {...params} 
-          label="Category" 
-          id="category"
-          onChange={(e) => updateForm({ category: e.target.value })}/>}
-        />
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Category"
+              id="category"
+            />
+          )}
+          isOptionEqualToValue={(option, value) =>
+            option.id === value.id
+          }
+          onChange={(event, value) => updateForm({ category: value ? value.label : "" })}
+          />
+
           
           <TextField
           label="Quantity"
-          defaultValue=""
           id="quantity"
               value={form.quantity}
               placeholder="1"
@@ -153,7 +162,6 @@ export default function Create() {
           <div>
           <TextField
           label="Location"
-          defaultValue=""
           id="location"
               value={form.location}
               onChange={(e) => updateForm({ location: e.target.value })}
@@ -163,7 +171,6 @@ export default function Create() {
         <div>
           <TextField
           label="Description"
-          defaultValue=""
           id="description"
               value={form.description}
               onChange={(e) => updateForm({ description: e.target.value })}
@@ -188,7 +195,6 @@ export default function Create() {
               value="Add listing"
               className="btn btn-primary" />
           </div>}
-        </form>
           </Box>
           </div>
   );
