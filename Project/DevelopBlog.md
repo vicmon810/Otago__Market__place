@@ -5,7 +5,7 @@ current issues:
 - profile display picture
 - search feature
 - filter by category feature
-
+- require registration details (else errors due to null ex in welcome msg)
 # 2/May/2023
 Current issue: 
         * after enter right account name and password, user have to refresh in order to access their own account
