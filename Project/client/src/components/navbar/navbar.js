@@ -13,6 +13,8 @@ const Navbar = (props) => {
   const [authenticated, setauthenticated] = useState(
     localStorage.getItem("authenticated")
   );
+  const user = localStorage.getItem("currUser");
+  const name = JSON.parse(user).name; //current login user
   console.log("navbar authenticated:", authenticated);
 
   if (authenticated === "true") {
@@ -68,6 +70,7 @@ const Navbar = (props) => {
             Profile{" "}
           </a>
         </div>
+        <span className="nav-link text-info">Welcome: {name}!</span>
       </nav>
     );
   } else {
