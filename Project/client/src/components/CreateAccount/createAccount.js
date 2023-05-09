@@ -10,7 +10,7 @@ export default function Register() {
     password: "",
     number: "",
     department: "",
-    activationDate: ""
+    activationDate: "",
   });
   const navigate = useNavigate();
 
@@ -40,7 +40,15 @@ export default function Register() {
       return;
     });
 
-    setForm({name: "", surname: "", email: "", password: "", number: "", department: "", activationDate: ""});
+    setForm({
+      name: "",
+      surname: "",
+      email: "",
+      password: "",
+      number: "",
+      department: "",
+      activationDate: "",
+    });
     navigate(LoginForm);
   }
 
@@ -49,7 +57,7 @@ export default function Register() {
     <div>
       <h3>Register for OtagoMarketplace</h3>
       <form onSubmit={onSubmit}>
-      <div className="form-group">
+        <div className="form-group">
           <label htmlFor="Name">First Name</label>
           <input
             type="text"
@@ -69,7 +77,7 @@ export default function Register() {
             onChange={(e) => updateForm({ surname: e.target.value })}
           />
         </div>
-      <div className="form-group">
+        <div className="form-group">
           <label htmlFor="Email">Faculty Email (.ac.nz)</label>
           <input
             type="text"
@@ -83,7 +91,7 @@ export default function Register() {
         <div className="form-group">
           <label htmlFor="Password">Password</label>
           <input
-            type="text"
+            type="password"
             className="form-control"
             id="password"
             value={form.password}
@@ -105,39 +113,41 @@ export default function Register() {
         <div className="form-group">
           <label htmlFor="Department">Department</label>
           <div></div>
-          <select id = "department" onChange={(e) => updateForm({ department: e.target.value })} >  
-            <option> --Choose Department-- </option>  
+          <select
+            id="department"
+            onChange={(e) => updateForm({ department: e.target.value })}
+          >
+            <option> --Choose Department-- </option>
             <optgroup label="Academic Divisions">
-              <option> Division of Commerce/School of Business</option>  
-              <option> Division of Health Sciences </option>  
-              <option> Division of Humanities </option>  
-              <option> Division of Sciences </option>  
+              <option> Division of Commerce/School of Business</option>
+              <option> Division of Health Sciences </option>
+              <option> Division of Humanities </option>
+              <option> Division of Sciences </option>
             </optgroup>
             <optgroup label="Service Divisions">
-              <option> Academic Division </option>  
-              <option> Accomodation Services Division </option>  
-              <option> Financial Services Division </option>  
-              <option> Human Resources Division </option>  
-              <option> Information Technology Services Division </option> 
-              <option> External Engagement Division </option> 
-              <option> Property Services Division </option> 
-              <option> Research & Enterprise Division </option> 
-              <option> Student Services Division </option> 
+              <option> Academic Division </option>
+              <option> Accomodation Services Division </option>
+              <option> Financial Services Division </option>
+              <option> Human Resources Division </option>
+              <option> Information Technology Services Division </option>
+              <option> External Engagement Division </option>
+              <option> Property Services Division </option>
+              <option> Research & Enterprise Division </option>
+              <option> Student Services Division </option>
             </optgroup>
-            <option> Other </option>  
-          </select> 
+            <option> Other </option>
+          </select>
         </div>
-          <div className="form-group">
-            <input
-              type="submit"
-              value="Register"
-              className="btn btn-primary"
-            />
-          </div>
+        <div className="form-group">
+          <input type="submit" value="Register" className="btn btn-primary" />
+        </div>
       </form>
       <br></br>
-      <body> Disclaimer: OtagoMarketplace is a platform for members (faculty and staff) of the University of Otago. </body> 
+      <body>
+        {" "}
+        Disclaimer: OtagoMarketplace is a platform for members (faculty and
+        staff) of the University of Otago.{" "}
+      </body>
     </div>
-    
   );
 }

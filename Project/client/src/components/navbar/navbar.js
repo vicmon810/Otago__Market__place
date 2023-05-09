@@ -13,8 +13,18 @@ const Navbar = (props) => {
   const [authenticated, setauthenticated] = useState(
     localStorage.getItem("authenticated")
   );
-  const user = localStorage.getItem("currUser");
-  const name = JSON.parse(user).name; //current login user
+  const handleLogout = () => {
+    localStorage.removeItem("authenticated");
+    localStorage.removeItem("currUser");
+    window.location.href = "/";
+    const home = window.location.href;
+  };
+  const getUser = () => {
+    const user = localStorage.getItem("currUser");
+    console.log(user);
+    const name = JSON.parse(user).name; //current login user
+    return name;
+  };
   console.log("navbar authenticated:", authenticated);
 
   if (authenticated === "true") {
@@ -70,7 +80,15 @@ const Navbar = (props) => {
             Profile{" "}
           </a>
         </div>
-        <span className="nav-link text-info">Welcome: {name}!</span>
+        <span className="nav-link text-info">Welcome: {getUser()}!</span>
+        <button
+          className="btn btn-outline-success"
+          type="submit"
+          onClick={handleLogout}
+        >
+          {" "}
+          Logout{" "}
+        </button>
       </nav>
     );
   } else {
