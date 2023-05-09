@@ -68,7 +68,7 @@ const Navbar = (props) => {
                 console.log(searchInput);
               }}
             >
-              Go
+              Search
             </button>
           </form>
           <a className="nav-link text-info" href="/create">

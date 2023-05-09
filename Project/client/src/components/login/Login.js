@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 import ".//../../CSS/Login.css";
 import { Link } from 'react-router-dom';
 import { Container, Card, CardContent, Typography, TextField, Button, createTheme, ThemeProvider, CssBaseline, Box, Grid } from '@mui/material';
-import { TypeAnimation } from "react-type-animation";
 import loginBackground from '../../assets/loginbg.jpg';
 import American from '../../assets/American Captain.ttf';
 
@@ -81,7 +80,7 @@ export default function LoginForm() {
       const curruser = localStorage.getItem("currUser");
       const curruser_parsed = JSON.parse(curruser);
       window.alert("Login Successful!");
-      navigate("/");
+      navigate("/lists");
       return;
     }
   }
@@ -109,7 +108,7 @@ export default function LoginForm() {
         <Box sx={styles}>
           <Grid item md={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <span style={{ fontFamily: 'American Captain', fontSize: "55px" }}>
-              <span size>Welcome to OtagoMarketplace </span>
+              <span >Welcome to OtagoMarketplace </span>
             </span>
           </Grid>
         </Box>

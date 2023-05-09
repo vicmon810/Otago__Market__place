@@ -23,6 +23,8 @@ const App = () => {
         <Route path="register" element={<Register />} />
         <Route path="/profile" element={<GetProfile />} />
         <Route path="/message" element={<MessageForm />} />
+        <Route path="/login" element={<LoginForm />} />
+
       </Routes>
     </div>
   );
