@@ -114,6 +114,7 @@ const Record = (props) => (
           </ListItem>
         </List>
       </Box>
+      <button>Contact Owner</button>
     </div>
   </div>
 );
