@@ -68,12 +68,9 @@ export default function ViewListing() {
         <div>
           by {lister.name} {lister.surname}
         </div>
-        <div>ID: {listing.product_id}</div>
       </div>
     );
   } else {
-    //  console.log(curruser_parsed.email);
-    //  console.log(lister.email);
     return (
       <div>
         <h1>Item Listing</h1>
@@ -89,8 +86,6 @@ export default function ViewListing() {
         <div>
           by {lister.name} {lister.surname}
         </div>
-        <div>ID: {listing.product_id}</div>
-
         <div>Contact Information</div>
         <div>Email: {lister.email}</div>
         <div>Phone Number: {lister.number}</div>

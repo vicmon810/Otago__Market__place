@@ -92,7 +92,7 @@ const Record = (props) => (
           </ListItem>
         </List>
 
-        <List>
+        {/* <List>
           <ListItem disablePadding>
             <ListItemIcon>
               <PersonIcon />
@@ -100,7 +100,7 @@ const Record = (props) => (
             <ListItemText primary="Posted by:" />
             <ListItemText secondary={props.record.userAccount} />
           </ListItem>
-        </List>
+        </List> */}
 
         <List>
           <ListItem disablePadding>
@@ -109,7 +109,7 @@ const Record = (props) => (
             </ListItemIcon>
             <ListItemText
               primary="Product ID:"
-              secondary={props.record.product_id}
+              secondary={props.record._id}
             />
           </ListItem>
         </List>
@@ -161,7 +161,7 @@ export default function RecordList() {
 
   return (
     <div>
-      <span style={{ fontSize: "2em" }}>
+      {/* <span style={{ fontSize: "2em" }}>
         <span size>View all the </span>{" "}
         <TypeAnimation
           sequence={[
@@ -179,7 +179,7 @@ export default function RecordList() {
           repeat={Infinity}
           style={{ display: "inline-block" }}
         />{" "}
-      </span>
+      </span> */}
 
       <br></br>
       {recordList()}

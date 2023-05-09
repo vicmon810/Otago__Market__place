@@ -63,7 +63,7 @@ const createItem = async (req, res) => {
   try {
     let db_connect = dbo.getDb();
     let item = {
-      product_id: req.body.product_id,
+      // product_id: req.body.product_id,
       title: req.body.title,
       category: req.body.category,
       quantity: req.body.quantity,
@@ -98,7 +98,7 @@ const updateItem = async (req, res) => {
       _id: ObjectId(req.params.id),
     };
     let newItem = {
-      product_id: req.body.product_id,
+      // product_id: req.body.product_id,
       title: req.body.title,
       category: req.body.category,
       quantity: req.body.quantity,
