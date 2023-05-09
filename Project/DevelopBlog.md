@@ -8,6 +8,7 @@ Current issue:
         * filter by category 
         * Notify user 
         * greeting on navbar
+        * "your listings" page for user to view the listings that are created by them
 
 # 21/Apr/2023
 Basically back-end is finished, can start to tidy up and can rename those routers. 

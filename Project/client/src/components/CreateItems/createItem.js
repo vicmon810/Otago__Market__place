@@ -21,9 +21,9 @@ export default function Create() {
   const options = [
     { label: 'Clothing', id: 1 },
     { label: 'Electronics', id: 2 },
-    { label: 'Furniture', id: 1 },
-    { label: 'Stationary', id: 2 },
-    { label: 'Other', id: 2 },
+    { label: 'Furniture', id: 3 },
+    { label: 'Stationary', id: 4 },
+    { label: 'Other', id: 5 },
   ];
 
   const navigate = useNavigate();
