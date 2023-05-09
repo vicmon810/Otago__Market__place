@@ -31,7 +31,7 @@ const Navbar = (props) => {
     console.log("LOGGED-IN NAVBAR");
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <a className="navbar-brand text-info font-weight-bolder" href="/">
+        <a className="navbar-brand text-info font-weight-bolder" href="/lists">
           <span className="">otagoMarketplace</span>
         </a>
         <button

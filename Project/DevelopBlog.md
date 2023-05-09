@@ -1,3 +1,11 @@
+# 9/May/2023
+current issues:
+- edit and delete item specific to the account that listed the item
+- email notifications
+- profile display
+- search feature
+- filter by category feature
+
 # 2/May/2023
 Current issue: 
         * after enter right account name and password, user have to refresh in order to access their own account
