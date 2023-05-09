@@ -25,6 +25,17 @@ const Navbar = (props) => {
     const name = JSON.parse(user).name; //current login user
     return name;
   };
+  async function search() {
+    const response = await fetch(
+      `http://localhost:8000/api/item_routes/items/${searchInput}`
+    );
+    if (!response.ok) {
+      const message = `An error occured: ${response.statusText}`;
+      return;
+    }
+    console.log(response);
+    // const records = await response.json();
+  }
   console.log("navbar authenticated:", authenticated);
 
   if (authenticated === "true") {
@@ -65,7 +76,7 @@ const Navbar = (props) => {
               disabled={!searchInput}
               size={searchInput.toString()}
               onClick={() => {
-                console.log(searchInput);
+                search();
               }}
             >
               Go

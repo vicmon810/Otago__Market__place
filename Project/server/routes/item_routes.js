@@ -5,6 +5,7 @@ const {
   createItem,
   deleteItem,
   updateItem,
+  searchItem,
 } = require("../controllers/itemController");
 const routes = express.Router();
 
@@ -18,5 +19,7 @@ routes.post("/items", createItem);
 routes.delete("/item/:id", deleteItem);
 // UPDATE a item
 routes.patch("/item/:id", updateItem);
+//Search items
+routes.get("/items/:name", searchItem);
 
 module.exports = routes;

@@ -68,6 +68,7 @@ export default function ViewListing() {
         <div>
           by {lister.name} {lister.surname}
         </div>
+        <button>Contact Owner</button>
       </div>
     );
   } else {
@@ -89,6 +90,7 @@ export default function ViewListing() {
         <div>Contact Information</div>
         <div>Email: {lister.email}</div>
         <div>Phone Number: {lister.number}</div>
+        <button>Contact Owner</button>
       </div>
     );
   }

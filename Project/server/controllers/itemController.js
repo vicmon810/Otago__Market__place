@@ -5,14 +5,27 @@ const dbo = require("../db/conn");
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
 
-function getTime(){
-  UNIX_timestamp=Math.floor(new Date().getTime() / 1000);
+function getTime() {
+  UNIX_timestamp = Math.floor(new Date().getTime() / 1000);
   var a = new Date(UNIX_timestamp * 1000);
-  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   var year = a.getFullYear();
   var month = months[a.getMonth()];
   var date = a.getDate();
-  var time = date + ' ' + month + ' ' + year;
+  var time = date + " " + month + " " + year;
   // var hour = a.getHours();
   // var min = a.getMinutes();
   // var sec = a.getSeconds();
@@ -149,6 +162,27 @@ const deleteItem = async (req, res) => {
   }
 };
 
+//Search items
+const searchItem = async (req, res) => {
+  try {
+    const db_connection = dbo.getDb();
+    const query = { name: req.params.searchInput };
+    const items = await db_connection.collection("items").find(query).toArray();
+    console.log(items);
+    if (items.length === 0) {
+      return res.status(404).json({
+        message: "No items found",
+      });
+    }
+    res.status(200).json(items);
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal Server Error",
+      error: err.message,
+    });
+  }
+};
+
 //Exports function
 module.exports = {
   getAllItems,
@@ -156,4 +190,5 @@ module.exports = {
   createItem,
   updateItem,
   deleteItem,
+  searchItem,
 };
