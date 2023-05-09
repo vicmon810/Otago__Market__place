@@ -26,6 +26,7 @@ const Navbar = (props) => {
     return name;
   };
   async function search() {
+    console.log("HERE");
     const response = await fetch(
       `http://localhost:8000/api/item_routes/items/${searchInput}`
     );
@@ -106,7 +107,7 @@ const Navbar = (props) => {
     console.log("FULL NAVBAR");
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <a className="navbar-brand text-info font-weight-bolder" href="/">
+        <a className="navbar-brand text-info font-weight-bolder" href="/lists">
           <span className="">otagoMarketplace</span>
         </a>
         <button
@@ -135,15 +136,17 @@ const Navbar = (props) => {
             <button
               className="btn btn-outline-success"
               type="submit"
+              disabled={!searchInput}
+              size={searchInput.toString()}
               onClick={() => {
-                //TODO: add search functionality;
+                search();
               }}
             >
               Go
             </button>
           </form>
           {/* <a className="nav-link text-info" href="/create"> Add Listing </a> */}
-          <a className="nav-link text-info" href="/login">
+          <a className="nav-link text-info" href="/">
             {" "}
             Login{" "}
           </a>

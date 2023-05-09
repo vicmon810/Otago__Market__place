@@ -49,7 +49,7 @@ export default function Register() {
       department: "",
       activationDate: "",
     });
-    navigate(LoginForm);
+    navigate("/");
   }
 
   // This following section will display the form that takes the input from the item.

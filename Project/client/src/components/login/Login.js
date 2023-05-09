@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import ".//../../CSS/Login.css";
-import { Link } from 'react-router-dom';
-import { Container, Card, CardContent, Typography, TextField, Button, createTheme, ThemeProvider, CssBaseline, Box, Grid } from '@mui/material';
+import { Link } from "react-router-dom";
+import {
+  Container,
+  Card,
+  CardContent,
+  Typography,
+  TextField,
+  Button,
+  createTheme,
+  ThemeProvider,
+  CssBaseline,
+  Box,
+  Grid,
+} from "@mui/material";
 import { TypeAnimation } from "react-type-animation";
-import loginBackground from '../../assets/loginbg.jpg';
-import American from '../../assets/American Captain.ttf';
-
+import loginBackground from "../../assets/loginbg.jpg";
+import American from "../../assets/American Captain.ttf";
 
 export default function LoginForm() {
   const [login, setLogin] = useState({ email: "", password: "" });
@@ -20,12 +31,12 @@ export default function LoginForm() {
   const theme = createTheme();
 
   const styles = {
-    '@font-face': [
+    "@font-face": [
       {
-        fontFamily: 'American Captain',
+        fontFamily: "American Captain",
         src: `url(${American}) format('truetype')`,
-        fontWeight: 'normal',
-        fontStyle: 'normal',
+        fontWeight: "normal",
+        fontStyle: "normal",
       },
     ],
   };
@@ -80,76 +91,115 @@ export default function LoginForm() {
       GetUserByEmail();
       const curruser = localStorage.getItem("currUser");
       const curruser_parsed = JSON.parse(curruser);
-      window.alert("Login Successful!");
-      navigate("/");
+
+      navigate("/lists");
+      window.location.reload();
       return;
     }
   }
 
   return (
-    
     <Container
       maxWidth="xl"
       sx={{
         p: 4,
-        bgcolor: 'background.radialGradient',
-        overflow: 'hidden',
+        bgcolor: "background.radialGradient",
+        overflow: "hidden",
         backgroundImage: `url(${loginBackground})`,
-        backgroundSize: 'cover',
-        minHeight: '100vh', 
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundSize: "cover",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
+      <Grid container>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Box sx={styles}>
+            <Grid
+              item
+              md={6}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <span
+                style={{ fontFamily: "American Captain", fontSize: "55px" }}
+              >
+                <span size>Welcome to OtagoMarketplace </span>
+              </span>
+            </Grid>
+          </Box>
+        </ThemeProvider>
 
-    <Grid container>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Box sx={styles}>
-          <Grid item md={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <span style={{ fontFamily: 'American Captain', fontSize: "55px" }}>
-              <span size>Welcome to OtagoMarketplace </span>
-            </span>
-          </Grid>
-        </Box>
-      </ThemeProvider>
-
-          <Grid item md={6} sx={{ position: 'relative' }}>
-            <div id="radius-shape-1" sx={{ position: 'absolute', borderRadius: '50%', boxShadow: 5 }}></div>
-            <div id="radius-shape-2" sx={{ position: 'absolute', boxShadow: 5 }}></div>
-            <Card sx={{ my: 5, bgcolor: 'background.glass' }}>
+        <Grid item md={6} sx={{ position: "relative" }}>
+          <div
+            id="radius-shape-1"
+            sx={{ position: "absolute", borderRadius: "50%", boxShadow: 5 }}
+          ></div>
+          <div
+            id="radius-shape-2"
+            sx={{ position: "absolute", boxShadow: 5 }}
+          ></div>
+          <Card sx={{ my: 5, bgcolor: "background.glass" }}>
             <CardContent sx={{ p: 5 }}>
               <form onSubmit={handleSubmit}>
-                <TextField label="Email" variant="standard" 
-                id="email"
-                value={login.email}
-                onChange={(e) => updateForm({ email: e.target.value })}
-                fullWidth sx={{ mt: 4 }} />
-                
-                <TextField label="Password" variant="standard" type="password" 
-                id="password"
-                value={login.password}
-                onChange={(e) => updateForm({ password: e.target.value })}
-                fullWidth sx={{ mt: 4 }} />
+                <TextField
+                  label="Email"
+                  variant="standard"
+                  id="email"
+                  value={login.email}
+                  onChange={(e) => updateForm({ email: e.target.value })}
+                  fullWidth
+                  sx={{ mt: 4 }}
+                />
 
-                <Button type="submit"  variant="contained" size="large" fullWidth sx={{ mt: 4 }}>
+                <TextField
+                  label="Password"
+                  variant="standard"
+                  type="password"
+                  id="password"
+                  value={login.password}
+                  onChange={(e) => updateForm({ password: e.target.value })}
+                  fullWidth
+                  sx={{ mt: 4 }}
+                />
+
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  sx={{ mt: 4 }}
+                >
                   Login
                 </Button>
-                </form>
+              </form>
 
-              <Typography variant="body2" sx={{ mb: 2, textAlign: 'center' }}>
+              <Typography variant="body2" sx={{ mb: 2, textAlign: "center" }}>
                 Don't have an account?
-              </Typography>                
-              <Button type="submit" variant="contained" size="large" fullWidth sx={{ mt: 4, color: 'white' }}>
-                <Link to="/register" style={{ color: 'inherit', textDecoration: 'none' }}>
+              </Typography>
+              <Button
+                type="submit"
+                variant="contained"
+                size="large"
+                fullWidth
+                sx={{ mt: 4, color: "white" }}
+              >
+                <Link
+                  to="/register"
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
                   Register
                 </Link>
               </Button>
-              </CardContent>
-            </Card>
-          </Grid>
+            </CardContent>
+          </Card>
         </Grid>
-      </Container>
+      </Grid>
+    </Container>
   );
 }
