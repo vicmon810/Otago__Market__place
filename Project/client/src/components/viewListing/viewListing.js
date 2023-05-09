@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import ".//../../CSS/itemsList.css";
 
+import Grid from '@mui/material/Grid';
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -22,13 +23,20 @@ import DescIcon from "@mui/icons-material/Description";
 import NumbersIcon from "@mui/icons-material/Numbers";
 
 const Record = (props) => (
-    <div className="card" style={{ backgroundColor: "white" }}>
+    <div  style={{ backgroundColor: "white" }}>
       <Button size="large" href={`/item/${props.record[0]._id}`}>
         {props.record[0].title}
       </Button>
       <br></br>
-      <img id="base64image" src={props.record[0].images64} alt="No image(s)" />
-      <br></br>
+
+      
+      <Grid container spacing={2}>
+        <Grid item xs={8}>
+      <Box>
+      <img id="base64image" width="500"
+      src={props.record[0].images64} alt="No image(s)" />
+      </Box>
+      </Grid>
 
       <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "white" }}>
         <nav aria-label="main mailbox folders">
@@ -138,6 +146,8 @@ const Record = (props) => (
           </ListItem>
         </List>
       </Box>
+      </Grid>
+
     </div>
 );
 
