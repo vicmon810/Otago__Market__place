@@ -3,18 +3,17 @@ const express = require("express");
 const dbo = require("../db/conn");
 const crypto = require("crypto");
 var nodemailer = require("nodemailer");
+const AWS = require('aws-sdk');
 
-var transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "otagomarketplace@gmail.com",
-    pass: "thispasswordhasbeenstoredinsecurelyforconvenience",
-  },
+AWS.config.update({
+  accessKeyId: 'AKIA43B5T2Z2NCESRRBE',
+  secretAccessKey: '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',
+  region: 'ap-southeast-2'
 });
-
+ 
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
-
+ 
 //get a single account info
 const getUser = async (req, res) => {
   try {
@@ -33,7 +32,7 @@ const getUser = async (req, res) => {
     });
   }
 };
-
+ 
 //get a single account info
 const getUserByEmail = async (req, res) => {
   try {
@@ -52,7 +51,7 @@ const getUserByEmail = async (req, res) => {
     });
   }
 };
-
+ 
 //get admin info
 const getAdmin = async (req, res) => {
   try {
@@ -71,7 +70,7 @@ const getAdmin = async (req, res) => {
     });
   }
 };
-
+ 
 //delete user account, should only be called by an admin account
 const deleteUser = async (req, res) => {
   try {
@@ -91,7 +90,7 @@ const deleteUser = async (req, res) => {
     });
   }
 };
-
+ 
 //UPDATE an existing account
 const updateUser = async (req, res) => {
   try {
@@ -102,7 +101,7 @@ const updateUser = async (req, res) => {
     let hasher = crypto.createHash("sha256");
     hasher = hasher.update(req.body.password + "salt12345)(*&^");
     hashed_password = hasher.digest("hex");
-
+ 
     let userUpdate = {
       name: req.body.name,
       surname: req.body.surname,
@@ -127,7 +126,7 @@ const updateUser = async (req, res) => {
     });
   }
 };
-
+ 
 //create a new account
 const createAccount = async (req, res) => {
   try {
@@ -158,7 +157,7 @@ const createAccount = async (req, res) => {
     });
   }
 };
-
+ 
 const verifyLogin = async (req, res) => {
   console.log("req.body.email", req.body.email);
   console.log("req.body.password", req.body.password);
@@ -168,7 +167,7 @@ const verifyLogin = async (req, res) => {
     const result = await collection.findOne({
       email: req.body.email,
     });
-
+ 
     // check if the password matches
     console.log("result", result);
     if (result) {
@@ -198,7 +197,7 @@ const verifyLogin = async (req, res) => {
     });
   }
 };
-
+ 
 const messageUser = async (req, res) => {
   try {
     const db_connect = dbo.getDb();
@@ -207,17 +206,35 @@ const messageUser = async (req, res) => {
       email: req.body.email,
     });
     if (result) {
-      var mailOptions = {
-        from: "otagomarketplace@gmail.com",
-        to: result.email,
-        subject: req.body.subject,
-        text: req.body.message,
+      const ses = new AWS.SES();
+      const params = {
+        Destination: {
+          ToAddresses: [result.email]
+        },
+        Message: {
+          Body: {
+            Html: {
+              Charset: 'UTF-8',
+              Data: 'Your new message from Otago Marketplace regarding item ' + req.body.subject
+            },
+            Text: {
+              Charset: 'UTF-8',
+              Data: req.body.message
+            }
+          },
+          Subject: {
+            Charset: 'UTF-8',
+            Data: "New message on Otago Marketplace"
+          }
+        },
+        Source: 'otagomarketplace@gmail.com'
       };
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
+      
+      ses.sendEmail(params, function(err, data) {
+        if (err) {
+          console.log(err, err.stack);
         } else {
-          console.log("Email sent: " + info.response);
+          console.log('Email sent:', data);
         }
       });
     } else {
@@ -233,6 +250,7 @@ const messageUser = async (req, res) => {
   }
 };
 
+ 
 module.exports = {
   getUser,
   getAdmin,
