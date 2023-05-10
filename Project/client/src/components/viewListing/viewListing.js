@@ -21,9 +21,11 @@ import LocationIcon from "@mui/icons-material/LocationOn";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DescIcon from "@mui/icons-material/Description";
 import NumbersIcon from "@mui/icons-material/Numbers";
+import {Container,} from "@mui/material";
+import generalBackground from "../../assets/GeneralBg.jpg";
 
 const Record = (props) => (
-  <div style={{ backgroundColor: "white" }}>
+  <div style={{ backgroundImage: `url(${generalBackground})` }}>
     <Button size="large" href={`/item/${props.record[0]._id}`}>
       {props.record[0].title}
     </Button>

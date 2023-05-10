@@ -17,8 +17,8 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DescIcon from "@mui/icons-material/Description";
 import NumbersIcon from "@mui/icons-material/Numbers";
 import navbar from "../../components/navbar/navbar";
-
-import { TypeAnimation } from "react-type-animation";
+import generalBackground from "../../assets/GeneralBg.jpg";
+import {Container,} from "@mui/material";
 
 const Record = (props) => (
   <div className="column">
@@ -161,17 +161,46 @@ export default function RecordList() {
 
   if (localStorage.searchStatus === true) {
     return (
+      <Container
+      maxWidth="xl"
+      sx={{
+        p: 4,
+        bgcolor: "background.radialGradient",
+        overflow: "hidden",
+        backgroundImage: `url(${generalBackground})`,
+        backgroundSize: "cover",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <div>
         <br></br>
         {searchResult()}
       </div>
+      </Container>
     );
   } else {
     return (
+      <Container
+      maxWidth="xl"
+      sx={{
+        p: 4,
+        bgcolor: "background.radialGradient",
+        overflow: "hidden",
+        backgroundImage: `url(${generalBackground})`,
+        backgroundSize: "cover",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}>
       <div>
         <br></br>
         {recordList()}
       </div>
+      </Container>
     );
   }
 }

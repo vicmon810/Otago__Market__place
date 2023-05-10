@@ -122,7 +122,7 @@ const Navbar = (props) => {
     console.log("FULL NAVBAR");
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <a className="navbar-brand text-info font-weight-bolder" href="/lists">
+        <a className="navbar-brand text-info font-weight-bolder" href="/login">
           <span className="">otagoMarketplace</span>
         </a>
         <button

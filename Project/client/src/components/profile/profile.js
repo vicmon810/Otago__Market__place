@@ -27,6 +27,8 @@ const Profile = (props) => (
   <div className="column">
     <div style={{ backgroundColor: "white" }}>
       <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "white" }}>
+      {/* {console.log("Image URL or base64 data:", props.images64)} */}
+
         <img
           id="base64image"
           style={{ maxHeight: "500px", maxWidth: "500px" }}

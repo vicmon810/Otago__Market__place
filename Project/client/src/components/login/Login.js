@@ -14,6 +14,7 @@ import {
   CssBaseline,
   Box,
   Grid,
+  useMediaQuery,
 } from "@mui/material";
 import loginBackground from "../../assets/loginbg.jpg";
 import American from "../../assets/American Captain.ttf";
@@ -28,7 +29,7 @@ export default function LoginForm() {
   );
   const navigate = useNavigate();
   const theme = createTheme();
-
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const styles = {
     "@font-face": [
       {
@@ -114,29 +115,44 @@ export default function LoginForm() {
         justifyContent: "center",
       }}
     >
-      <Grid container>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Box sx={styles}>
-            <Grid
-              item
-              md={6}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-              }}
-            >
-              <span
-                style={{ fontFamily: "American Captain", fontSize: "55px" }}
-              >
-                <span size>Welcome to OtagoMarketplace </span>
-              </span>
-            </Grid>
-          </Box>
-        </ThemeProvider>
 
-        <Grid item md={6} sx={{ position: "relative" }}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Box sx={styles}>
+          <Grid
+            item
+            md={6}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <Typography
+              variant={isMobile ? "h5" : "h2"}
+              sx={{ fontFamily: "American Captain", textAlign: "center" }}
+            >
+              Welcome to <br /> 
+              otagoMarketplace
+            </Typography>
+          </Grid>
+        </Box>
+      </ThemeProvider>
+
+        <Grid
+        item
+        md={6}
+        sx={{
+          position: "relative",
+          right: 0,
+          top: 0,
+          bottom: 0,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          p: 5,
+        }}
+        >          
           <div
             id="radius-shape-1"
             sx={{ position: "absolute", borderRadius: "50%", boxShadow: 5 }}
@@ -180,27 +196,31 @@ export default function LoginForm() {
                 </Button>
               </form>
 
+              <Box sx={{ mt: 2 }} />  {/* //linebreak */}
+
               <Typography variant="body2" sx={{ mb: 2, textAlign: "center" }}>
                 Don't have an account?
               </Typography>
+
               <Button
-                type="submit"
                 variant="contained"
                 size="large"
                 fullWidth
-                sx={{ mt: 4, color: "white" }}
+                sx={{
+                  color: "white",
+                  "&:hover": {
+                    color: "white",
+                  },
+                }}
+                component="a"
+                href="/register"
               >
-                <Link
-                  to="/register"
-                  style={{ color: "inherit", textDecoration: "none" }}
-                >
-                  Register
-                </Link>
+                Register
               </Button>
             </CardContent>
           </Card>
         </Grid>
-      </Grid>
+
     </Container>
   );
 }
