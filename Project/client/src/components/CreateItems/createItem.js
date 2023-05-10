@@ -204,17 +204,6 @@ export default function Create() {
           Add listing
         </Button>
 
-        <div className="form-group">
-          <label htmlFor="Image">Image(s)</label>
-          <input
-            type="file"
-            accept="image/*"
-            className="form-control"
-            id="images"
-            //value={form.images}
-            onChange={(e) => validateImageSize(e.target.files)}
-          />
-        </div>
       </Box>
     </div>
   );
