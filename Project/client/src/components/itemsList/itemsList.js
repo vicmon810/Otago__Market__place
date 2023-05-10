@@ -101,7 +101,7 @@ const Record = (props) => (
           </ListItem>
         </List>
       </Box>
-      <button>Contact Owner</button>
+      <a href={"message?item=" + props.record._id}><button>Contact Owner</button></a>
     </div>
   </div>
 );
