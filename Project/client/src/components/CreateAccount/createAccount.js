@@ -16,10 +16,12 @@ import {
   CssBaseline,
   Box,
   Grid,
+  useMediaQuery,
 } from "@mui/material";
 
 export default function Register() {
   const theme = createTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const styles = {
     "@font-face": [
@@ -146,29 +148,43 @@ export default function Register() {
         justifyContent: "center",
       }}
     >
-      <Grid container>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Box sx={styles}>
-            <Grid
-              item
-              md={6}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-              }}
+      
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Box sx={styles}>
+          <Grid
+            item
+            md={6}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <Typography
+              variant={isMobile ? "h5" : "h2"}
+              sx={{ fontFamily: "American Captain", textAlign: "center" }}
             >
-              <span
-                style={{ fontFamily: "American Captain", fontSize: "55px" }}
-              >
-                <span> Register for an Account </span>
-              </span>
-            </Grid>
-          </Box>
-        </ThemeProvider>
+              Register <br /> 
+              for an Account
+            </Typography>
+          </Grid>
+        </Box>
+      </ThemeProvider>
 
-        <Grid item md={6} sx={{ position: "relative" }}>
+      <Grid
+        item
+        md={6}
+        sx={{
+          position: "relative",
+          right: 0,
+          top: 0,
+          bottom: 0,
+          //flexDirection: "column",
+          justifyContent: "center",
+          p: 5,
+        }}
+        >            
           <div
             id="radius-shape-1"
             sx={{ position: "absolute", borderRadius: "50%", boxShadow: 5 }}
@@ -232,13 +248,14 @@ export default function Register() {
                   fullWidth
                   sx={{ mt: 4 }}
                 />
-
+              
+                <Box sx={{ mt: 2 }} />  {/* //linebreak */}
                 <Autocomplete
                   disablePortal
                   id="department"
                   options={options}
                   getOptionLabel={(option) => option.label} // Specify how to extract the label from the option
-                  sx={{ width: 400 }}
+                  sx={{ width: 620 }}
                   renderInput={(params) => (
                     <TextField {...params} label="Department" id="department" />
                   )}
@@ -249,6 +266,7 @@ export default function Register() {
                     updateForm({ department: value ? value.label : "" })
                   }
                 />
+                <Box sx={{ mt: 2 }} />  {/* //linebreak */}
 
                 <div className="form-group">
                   <label htmlFor="Image">Image(s)</label>
@@ -280,7 +298,6 @@ export default function Register() {
             </CardContent>
           </Card>
         </Grid>
-      </Grid>
     </Container>
   );
 }

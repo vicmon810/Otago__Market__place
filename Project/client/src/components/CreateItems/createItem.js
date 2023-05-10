@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import {Button,} from "@mui/material";
 
 export default function Create() {
   const [form, setForm] = useState({
@@ -127,7 +128,10 @@ export default function Create() {
           value={form.title}
           onChange={(e) => updateForm({ title: e.target.value })}
           variant="standard"
+          fullWidth
         />
+        
+        <Box sx={{ mt: 2 }} />  {/* //linebreak */}
 
         <Autocomplete
           disablePortal
@@ -151,6 +155,7 @@ export default function Create() {
           placeholder="1"
           onChange={(e) => updateForm({ quantity: e.target.value })}
           variant="standard"
+          fullWidth
         />
 
         <div>
@@ -160,6 +165,7 @@ export default function Create() {
             value={form.location}
             onChange={(e) => updateForm({ location: e.target.value })}
             variant="standard"
+            fullWidth
           />
         </div>
 
@@ -170,8 +176,10 @@ export default function Create() {
             value={form.description}
             onChange={(e) => updateForm({ description: e.target.value })}
             variant="standard"
+            fullWidth
           />
         </div>
+        <Box sx={{ mt: 2 }} />  {/* //linebreak */}
 
         <div className="form-group">
           <label htmlFor="Image">Image(s)</label>
@@ -185,15 +193,16 @@ export default function Create() {
           />
         </div>
 
-        {
-          <div className="form-group">
-            <input
-              type="submit"
-              value="Add listing"
-              className="btn btn-primary"
-            />
-          </div>
-        }
+        <Button
+          type="submit"
+          variant="contained"
+          size="large"
+          fullWidth
+          color="primary"
+          sx={{ mt: 2 }}
+        >
+          Add listing
+        </Button>
 
         <div className="form-group">
           <label htmlFor="Image">Image(s)</label>
