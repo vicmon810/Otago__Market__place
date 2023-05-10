@@ -174,7 +174,7 @@ export default function ViewListing() {
     navigate("/lists");
   }
   function toEdit() {
-    navigate(`edit/${id}`);
+    navigate(`../edit/${id}`);
   }
   // This method fetches the records from the database.
   useEffect(() => {

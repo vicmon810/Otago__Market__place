@@ -105,30 +105,30 @@ const createItem = async (req, res) => {
 
 // update a single item
 const updateItem = async (req, res) => {
+  console.log("test");
   try {
     let db_connect = dbo.getDb();
     let myquery = {
       _id: ObjectId(req.params.id),
     };
-    let newItem = {
-      // product_id: req.body.product_id,
-      title: req.body.title,
-      category: req.body.category,
-      quantity: req.body.quantity,
-      location: req.body.location,
-      description: req.body.description,
-      images64: req.body.images64,
-      listingDate: req.body.listingDate,
-      userAccount: req.body.userAccount,
-      contactInfo: {
-        email: req.body.email,
-        number: req.body.number,
+    let updateItem = {
+      $set: {
+        title: req.body.title,
+        category: req.body.category,
+        quantity: req.body.quantity,
+        location: req.body.location,
+        description: req.body.description,
+        images64: req.body.images64,
+        listingDate: req.body.listingDate,
+        userAccount: req.body.userAccount,
+        "contactInfo.email": req.body.email,
+        "contactInfo.number": req.body.number,
       },
     };
-    console.log(newItem);
+    console.log(updateItem);
     db_connect
       .collection("items")
-      .updateOne(myquery, newItem, function (err, result) {
+      .updateOne(myquery, updateItem, function (err, result) {
         if (err) throw err;
         res.status(200).json(result);
       });

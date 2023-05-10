@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import React, { useState } from "react";
 // We import all the components we need in our app
 import Navbar from "./components/navbar/navbar";
 import RecordList from "./components/itemsList/itemsList";
@@ -10,7 +10,9 @@ import MessageForm from "./components/sendMessage/sendMessage";
 import Register from "./components/CreateAccount/createAccount";
 import GetProfile from "./components/profile/profile";
 import ViewListing from "./components/viewListing/viewListing";
+
 const App = () => {
+  const [searchResults, setSearchResults] = useState([]);
   return (
     <div>
       <Navbar />
@@ -19,12 +21,14 @@ const App = () => {
         <Route path="/item/:id" element={<ViewListing />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/create" element={<Create />} />
-        <Route path="/lists" element={<RecordList />} />
+        <Route
+          path="/lists"
+          element={<RecordList searchResults={searchResults} />}
+        />
         <Route path="register" element={<Register />} />
         <Route path="/profile" element={<GetProfile />} />
         <Route path="/message" element={<MessageForm />} />
         <Route path="/login" element={<LoginForm />} />
-
       </Routes>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import ".//../../CSS/navbar.css";
+import { getListItemSecondaryActionClassesUtilityClass } from "@mui/material";
 
 const Navbar = (props) => {
   const [isNavCollapsed, setIsNavCollapsed] = useState("");
@@ -11,7 +12,6 @@ const Navbar = (props) => {
     setSearchInput(event.target.value);
   };
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
-  console.log(props);
   const [authenticated, setauthenticated] = useState(
     localStorage.getItem("authenticated")
   );
@@ -29,28 +29,21 @@ const Navbar = (props) => {
       return name;
     }
   };
-  async function search() {
-    console.log("hey");
+  const handleSearch = async (event) => {
+    console.log("HD");
+    event.preventDefault();
     const response = await fetch(
-      `http://localhost:8000/api/item_routes/items/${searchInput}`
+      `http://localhost:8000/api/item_routes/search?query=${searchInput}`
     );
     if (!response.ok) {
-      const message = `An error occured: ${response.statusText}`;
-      console.log(message);
+      const message = `An error occurred: ${response.statusText}`;
+      window.alert(message);
       return;
     }
     const data = await response.json();
-    //Update search result
-    // console.log(data.length);
-    // if (data.length > 0) {
-    //   localStorage.setItem("searchResult", JSON.stringify(data));
-    //   localStorage.setItem("searchStatus", true);
-    //   console.log(localStorage);
-    // } else {
-    //   localStorage.removeItem("searchResult");
-    //   localStorage.removeItem("searchStatus");
-    // }
-  }
+    console.log(data);
+    props.setSearchResults(data + "HEI");
+  };
 
   console.log("navbar authenticated:", authenticated);
 
@@ -88,11 +81,11 @@ const Navbar = (props) => {
             />
             <button
               className="btn btn-outline-success"
-              type="button"
+              type="submit"
               disabled={!searchInput}
               size={searchInput.toString()}
               onClick={() => {
-                search();
+                handleSearch();
               }}
             >
               Search
@@ -122,7 +115,7 @@ const Navbar = (props) => {
     console.log("FULL NAVBAR");
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <a className="navbar-brand text-info font-weight-bolder" href="/login">
+        <a className="navbar-brand text-info font-weight-bolder" href="/">
           <span className="">otagoMarketplace</span>
         </a>
         <button
@@ -152,11 +145,11 @@ const Navbar = (props) => {
             />
             <button
               className="btn btn-outline-success"
-              type="button"
+              type="submit"
               disabled={!searchInput}
               size={searchInput.toString()}
               onClick={() => {
-                search();
+                handleSearch();
               }}
             >
               Search

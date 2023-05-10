@@ -108,7 +108,7 @@ const Record = (props) => (
 
 export default function RecordList() {
   const [records, setRecords] = useState([]);
-
+  const [searchResults, setSearchResults] = useState([]);
   const curruser = localStorage.getItem("currUser");
   const curruser_parsed = JSON.parse(curruser);
   // This method fetches the records from the database.
@@ -148,18 +148,11 @@ export default function RecordList() {
     }
   }
   function searchResult() {
-    const searchResult = JSON.parse(localStorage.searchResult);
-
-    if (searchResult.length > 0) {
-      return searchResult
-        .filter((searchResult) => searchResult.includes(searchResult._id))
-        .map((searchResult) => (
-          <Record record={searchResult} key={searchResult._id} />
-        ));
-    }
+    console.log(searchResults);
+    console.log("HAHA");
   }
 
-  if (localStorage.searchStatus === true) {
+  if (searchResult.length > 0) {
     return (
       <Container
       maxWidth="xl"
