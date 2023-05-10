@@ -169,9 +169,11 @@ export default function ViewListing() {
       window.alert(error);
       return;
     });
-    navigate("/");
+    navigate("/lists");
   }
-
+  function toEdit() {
+    navigate(`edit/${id}`);
+  }
   // This method fetches the records from the database.
   useEffect(() => {
     async function fetchItem() {
@@ -201,13 +203,11 @@ export default function ViewListing() {
     fetchLister();
     return;
   });
-  if (curruser_parsed.email === lister.email) {
+  if (curruser_parsed && curruser_parsed.email === lister.email) {
     // TODO: allow user to edit/delete listing if it belongs to them
     return (
       <div>
         <Record record={[listing, lister]} key={listing._id} />
-        {/* TODO: FIX EDIT AND LINK HERE */}
-        {/* <Link className="btn btn-link" to={`/edit/${listing._id}`}>Edit</Link> */}
         <button
           class="btn btn-secondary ml-auto"
           onClick={() => {
@@ -215,6 +215,14 @@ export default function ViewListing() {
           }}
         >
           Delete
+        </button>
+        <button
+          class="btn btn-secondary ml-auto"
+          onClick={() => {
+            toEdit(listing._id);
+          }}
+        >
+          Edit
         </button>
       </div>
     );

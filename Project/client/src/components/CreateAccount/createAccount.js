@@ -40,6 +40,7 @@ export default function Register() {
     number: "",
     department: "",
     activationDate: "",
+    images64: "",
   });
 
   const options = [
@@ -68,6 +69,31 @@ export default function Register() {
     });
   }
 
+  function validateImageSize(eventTarget) {
+    //let clickSubmit = document.getElementById('submit');
+    let fileInput = document.getElementById("images").files;
+    console.log("fileInput", fileInput);
+    if (fileInput.length > 0) {
+      const imageSize = fileInput[0].size / 1024 / 1024; // in MB
+      console.log("ImageSize", imageSize);
+      if (imageSize > 16) {
+        alert("File size exceeds 16 MB"); // 16MB for storage with MongoDB
+        // $(file).val(''); //for clearing with Jquery
+      } else {
+        const [imageFile] = fileInput;
+        const fileReader = new FileReader();
+
+        fileReader.onloadend = function () {
+          console.log("RESULT", fileReader.result);
+          var res = fileReader.result;
+          console.log("res0", res);
+          updateForm({ images64: fileReader.result });
+        };
+        fileReader.readAsDataURL(imageFile);
+      }
+    }
+  }
+
   // This function will handle the submission.
   async function handleSubmit(e) {
     e.preventDefault();
@@ -92,6 +118,7 @@ export default function Register() {
         number: "",
         department: "",
         activationDate: "",
+        images64: "",
       });
       window.alert("Registration Successful! Please Log In now.");
 
@@ -222,6 +249,18 @@ export default function Register() {
                     updateForm({ department: value ? value.label : "" })
                   }
                 />
+
+                <div className="form-group">
+                  <label htmlFor="Image">Image(s)</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="form-control"
+                    id="images"
+                    //value={form.images}
+                    onChange={(e) => validateImageSize(e.target.files)}
+                  />
+                </div>
 
                 <Button
                   type="submit"

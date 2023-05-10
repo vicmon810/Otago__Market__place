@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 export default function Create() {
   const [form, setForm] = useState({
@@ -19,11 +18,11 @@ export default function Create() {
   });
 
   const options = [
-    { label: 'Clothing', id: 1 },
-    { label: 'Electronics', id: 2 },
-    { label: 'Furniture', id: 3 },
-    { label: 'Stationary', id: 4 },
-    { label: 'Other', id: 5 },
+    { label: "Clothing", id: 1 },
+    { label: "Electronics", id: 2 },
+    { label: "Furniture", id: 3 },
+    { label: "Stationary", id: 4 },
+    { label: "Other", id: 5 },
   ];
 
   const navigate = useNavigate();
@@ -33,7 +32,6 @@ export default function Create() {
     return setForm((prev) => {
       //return { ...prev, ...value, category: value.label };
       return { ...prev, ...value };
-
     });
   }
 
@@ -89,39 +87,38 @@ export default function Create() {
         const [imageFile] = fileInput;
         const fileReader = new FileReader();
 
-        fileReader.onloadend = function(){
-          console.log('RESULT', fileReader.result);
+        fileReader.onloadend = function () {
+          console.log("RESULT", fileReader.result);
           var res = fileReader.result;
-          console.log('res0', res);
+          console.log("res0", res);
           updateForm({ images64: fileReader.result });
-      }
-        fileReader.readAsDataURL(imageFile); 
+        };
+        fileReader.readAsDataURL(imageFile);
       }
     }
   }
 
   // This following section will display the form that takes the input from the item.
   return (
-    <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }}>
-
-    <Box
-      component="form"
-      alignItems="center"
-      sx={{
-        width: 400,
-        height: 500,
-        backgroundColor: 'white',
-        
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
-      noValidate
-      autoComplete="off"
-      onSubmit={onSubmit}
     >
-  
+      <Box
+        component="form"
+        alignItems="center"
+        sx={{
+          width: 400,
+          height: 500,
+          backgroundColor: "white",
+        }}
+        noValidate
+        autoComplete="off"
+        onSubmit={onSubmit}
+      >
         <h3>Add listing</h3>
 
         <TextField
@@ -129,8 +126,9 @@ export default function Create() {
           id="title"
           value={form.title}
           onChange={(e) => updateForm({ title: e.target.value })}
-          variant="standard" />
-        
+          variant="standard"
+        />
+
         <Autocomplete
           disablePortal
           id="category"
@@ -138,64 +136,77 @@ export default function Create() {
           getOptionLabel={(option) => option.label} // Specify how to extract the label from the option
           sx={{ width: 400 }}
           renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Category"
-              id="category"
-            />
+            <TextField {...params} label="Category" id="category" />
           )}
-          isOptionEqualToValue={(option, value) =>
-            option.id === value.id
+          isOptionEqualToValue={(option, value) => option.id === value.id}
+          onChange={(event, value) =>
+            updateForm({ category: value ? value.label : "" })
           }
-          onChange={(event, value) => updateForm({ category: value ? value.label : "" })}
-          />
+        />
 
-          
-          <TextField
+        <TextField
           label="Quantity"
           id="quantity"
-              value={form.quantity}
-              placeholder="1"
-              onChange={(e) => updateForm({ quantity: e.target.value })}
-          variant="standard" />
-          
-          <div>
-          <TextField
-          label="Location"
-          id="location"
-              value={form.location}
-              onChange={(e) => updateForm({ location: e.target.value })}
-          variant="standard" />
-          </div>
+          value={form.quantity}
+          placeholder="1"
+          onChange={(e) => updateForm({ quantity: e.target.value })}
+          variant="standard"
+        />
 
         <div>
           <TextField
-          label="Description"
-          id="description"
-              value={form.description}
-              onChange={(e) => updateForm({ description: e.target.value })}
-          variant="standard" />       
+            label="Location"
+            id="location"
+            value={form.location}
+            onChange={(e) => updateForm({ location: e.target.value })}
+            variant="standard"
+          />
         </div>
-      
 
+        <div>
+          <TextField
+            label="Description"
+            id="description"
+            value={form.description}
+            onChange={(e) => updateForm({ description: e.target.value })}
+            variant="standard"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="Image">Image(s)</label>
+          <input
+            type="file"
+            accept="image/*"
+            className="form-control"
+            id="images"
+            //value={form.images}
+            onChange={(e) => validateImageSize(e.target.files)}
+          />
+        </div>
+
+        {
           <div className="form-group">
-            <label htmlFor="Image">Image(s)</label>
-            <input
-              type="file"
-              accept="image/*"
-              className="form-control"
-              id="images"
-              //value={form.images}
-              onChange={(e) => validateImageSize(e.target.files)} />
-          </div> 
-
-          {<div className="form-group">
             <input
               type="submit"
               value="Add listing"
-              className="btn btn-primary" />
-          </div>}
-          </Box>
+              className="btn btn-primary"
+            />
           </div>
+        }
+
+        <div className="form-group">
+          <label htmlFor="Image">Image(s)</label>
+          <input
+            type="file"
+            accept="image/*"
+            className="form-control"
+            id="images"
+            //value={form.images}
+            onChange={(e) => validateImageSize(e.target.files)}
+          />
+        </div>
+      </Box>
+    </div>
   );
 }

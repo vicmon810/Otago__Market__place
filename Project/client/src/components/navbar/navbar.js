@@ -23,9 +23,11 @@ const Navbar = (props) => {
   };
   const getUser = () => {
     const user = localStorage.getItem("currUser");
-    console.log(user);
-    const name = JSON.parse(user).name; //current login user
-    return name;
+    console.log(localStorage);
+    if (user) {
+      const name = JSON.parse(user).name; //current login user
+      return name;
+    }
   };
   async function search() {
     console.log("hey");
@@ -39,7 +41,15 @@ const Navbar = (props) => {
     }
     const data = await response.json();
     //Update search result
-    setSearchResults(data);
+    // console.log(data.length);
+    // if (data.length > 0) {
+    //   localStorage.setItem("searchResult", JSON.stringify(data));
+    //   localStorage.setItem("searchStatus", true);
+    //   console.log(localStorage);
+    // } else {
+    //   localStorage.removeItem("searchResult");
+    //   localStorage.removeItem("searchStatus");
+    // }
   }
 
   console.log("navbar authenticated:", authenticated);

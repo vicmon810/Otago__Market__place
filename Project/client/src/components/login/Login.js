@@ -87,10 +87,12 @@ export default function LoginForm() {
         const user = await response.json();
         localStorage.setItem("currUser", JSON.stringify(user));
       }
-      GetUserByEmail();
+
+      await GetUserByEmail();
+
       const curruser = localStorage.getItem("currUser");
       const curruser_parsed = JSON.parse(curruser);
-
+      console.log(localStorage);
       navigate("/lists");
       window.location.reload();
       return;

@@ -143,6 +143,7 @@ const createAccount = async (req, res) => {
       department: req.body.department,
       number: req.body.number,
       activationDate: Math.floor(new Date().getTime() / 1000),
+      images64: req.body.images64,
       //pfp: req.body.pfp,
     };
     console.log(account);
@@ -169,24 +170,23 @@ const verifyLogin = async (req, res) => {
     });
 
     // check if the password matches
-    console.log('result',result);
+    console.log("result", result);
     if (result) {
-      console.log('valid email');
+      console.log("valid email");
       let hasher = crypto.createHash("sha256");
       hasher = hasher.update(req.body.password + "salt12345)(*&^");
       password = hasher.digest("hex");
       if (result.password == password) {
-        console.log('correct password, going back to client login');
+        console.log("correct password, going back to client login");
         res.json(result);
-        
       } else {
-        console.log('wrong password for existing email');
+        console.log("wrong password for existing email");
         res.status(401).json({
           message: "Invalid username or password",
         });
       }
     } else {
-      console.log('invalid email');
+      console.log("invalid email");
       res.status(401).json({
         message: "Invalid username or password",
       });

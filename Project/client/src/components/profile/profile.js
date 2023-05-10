@@ -25,83 +25,84 @@ function UseLogout() {
 
 const Profile = (props) => (
   <div className="column">
-    <div  style={{ backgroundColor: "white" }}>
-    <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "white" }}>
+    <div style={{ backgroundColor: "white" }}>
+      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "white" }}>
+        <img
+          id="base64image"
+          style={{ maxHeight: "500px", maxWidth: "500px" }}
+          src={props.images64}
+          alt="No image(s)"
+        />
 
-    <List>
-        <ListItem disablePadding>
-          <ListItemIcon>
-            <PersonIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary="Name:" 
-            secondary={props.record.name + ' ' + props.record.surname} />
-        </ListItem>
-      </List>
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <PersonIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Name:"
+              secondary={props.record.name + " " + props.record.surname}
+            />
+          </ListItem>
+        </List>
 
-      <List>
-        <ListItem disablePadding>
-          <ListItemIcon>
-            <CategoryIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary="Department:"
-            secondary={props.record.department}
-          />
-        </ListItem>
-      </List>
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <CategoryIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Department:"
+              secondary={props.record.department}
+            />
+          </ListItem>
+        </List>
 
-      <List>
-        <ListItem disablePadding>
-          <ListItemIcon>
-            <EmailIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary="Email:" 
-            secondary={props.record.email} />
-        </ListItem>
-      </List>
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <EmailIcon />
+            </ListItemIcon>
+            <ListItemText primary="Email:" secondary={props.record.email} />
+          </ListItem>
+        </List>
 
-      <List>
-        <ListItem disablePadding>
-          <ListItemIcon>
-            <PhoneIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary="Phone Number:" 
-            secondary={props.record.number} />
-        </ListItem>
-      </List>
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <PhoneIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Phone Number:"
+              secondary={props.record.number}
+            />
+          </ListItem>
+        </List>
 
-      <List>
-        <ListItem disablePadding>
-          <ListItemIcon>
-            <CalendarMonthIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary="Account activated on:"
-            secondary={props.record.activationDate}
-          />
-        </ListItem>
-      </List>
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <CalendarMonthIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Account activated on:"
+              secondary={props.record.activationDate}
+            />
+          </ListItem>
+        </List>
 
-      <List>
-        <ListItem disablePadding>
-          <ListItemIcon>
-            <NumbersIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary="User ID:"
-            secondary={props.record._id}
-          />
-        </ListItem>
-      </List>
-
-    </Box>
+        <List>
+          <ListItem disablePadding>
+            <ListItemIcon>
+              <NumbersIcon />
+            </ListItemIcon>
+            <ListItemText primary="User ID:" secondary={props.record._id} />
+          </ListItem>
+        </List>
+      </Box>
     </div>
   </div>
 );
-
 
 export default function GetProfile() {
   const [profile, setProfile] = useState([]);

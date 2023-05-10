@@ -19,7 +19,7 @@ import NumbersIcon from "@mui/icons-material/Numbers";
 import navbar from "../../components/navbar/navbar";
 
 import { TypeAnimation } from "react-type-animation";
-console.log(navbar.searchResult);
+
 const Record = (props) => (
   <div className="column">
     <div className="card" style={{ backgroundColor: "white" }}>
@@ -147,11 +147,31 @@ export default function RecordList() {
       });
     }
   }
+  function searchResult() {
+    const searchResult = JSON.parse(localStorage.searchResult);
 
-  return (
-    <div>
-      <br></br>
-      {recordList()}
-    </div>
-  );
+    if (searchResult.length > 0) {
+      return searchResult
+        .filter((searchResult) => searchResult.includes(searchResult._id))
+        .map((searchResult) => (
+          <Record record={searchResult} key={searchResult._id} />
+        ));
+    }
+  }
+
+  if (localStorage.searchStatus === true) {
+    return (
+      <div>
+        <br></br>
+        {searchResult()}
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <br></br>
+        {recordList()}
+      </div>
+    );
+  }
 }
