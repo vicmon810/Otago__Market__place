@@ -30,7 +30,6 @@ const Navbar = (props) => {
     }
   };
   const handleSearch = async (event) => {
-    console.log("HD");
     event.preventDefault();
     const response = await fetch(
       `http://localhost:8000/api/item_routes/search?query=${searchInput}`
@@ -42,7 +41,7 @@ const Navbar = (props) => {
     }
     const data = await response.json();
     console.log(data);
-    props.setSearchResults(data + "HEI");
+    props.setSearchResults(data);
   };
 
   console.log("navbar authenticated:", authenticated);

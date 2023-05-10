@@ -14,15 +14,20 @@ export default function Create() {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   let itemId = query.get("item");
-  console.log(itemId)
-  
+  console.log(itemId);
+
   // The email works however for prefilling values I can't figure out how to get the following to fill out the
   // form, trying to print them prints nothing. I also am not sure how to get this to only run once, it seems to
   // be continuously running whenever the user modifies any value.
-  async function getItemInfo(itemId){
-    const itemData = await fetch("http://localhost:8000/api/item_routes/item/" + itemId);
+  async function getItemInfo(itemId) {
+    const itemData = await fetch(
+      "http://localhost:8000/api/item_routes/item/" + itemId
+    );
     itemTitle = itemData.body.title;
-    const userData = await fetch("http://localhost:8000/api/account_routes/account/" + itemData.body.userAccount);
+    const userData = await fetch(
+      "http://localhost:8000/api/account_routes/account/" +
+        itemData.body.userAccount
+    );
     userTitle = userData.body.name;
   }
 
@@ -61,15 +66,15 @@ export default function Create() {
       message: "",
     });
     window.alert("Message sent!");
-    navigate("/");
+    navigate("/lists");
   }
-  
+
   // This following section will display the form that takes the input from the item.
   return (
     <div>
       <h3>Send Message</h3>
       <form onSubmit={onSubmit}>
-      <div className="form-group">
+        <div className="form-group">
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -99,7 +104,7 @@ export default function Create() {
             onChange={(e) => updateForm({ message: e.target.value })}
           />
         </div>
-         
+
         {
           <div className="form-group">
             <input
