@@ -21,11 +21,12 @@ import LocationIcon from "@mui/icons-material/LocationOn";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DescIcon from "@mui/icons-material/Description";
 import NumbersIcon from "@mui/icons-material/Numbers";
-import {Container,} from "@mui/material";
+import { CardContent, Container, Card } from "@mui/material";
 import generalBackground from "../../assets/GeneralBg.jpg";
 
 const Record = (props) => (
-  <div style={{ backgroundImage: `url(${generalBackground})` }}>
+  // <div style={{ backgroundImage: `url(${generalBackground})` }}>
+  <div >
     <Button size="large" href={`/item/${props.record[0]._id}`}>
       {props.record[0].title}
     </Button>
@@ -208,27 +209,55 @@ export default function ViewListing() {
   if (curruser_parsed && curruser_parsed.email === lister.email) {
     // TODO: allow user to edit/delete listing if it belongs to them
     return (
-      <div>
-        <Record record={[listing, lister]} key={listing._id} />
-        <button
-          class="btn btn-secondary ml-auto"
-          onClick={() => {
-            deleteListing(listing._id);
-          }}
-        >
-          Delete
-        </button>
-        <button
-          class="btn btn-secondary ml-auto"
-          onClick={() => {
-            toEdit(listing._id);
-          }}
-        >
-          Edit
-        </button>
-      </div>
-    );
+      <Container>
+        <div
+          id="radius-shape-1"
+          sx={{ position: "absolute", borderRadius: "50%", boxShadow: 5 }}
+        ></div>
+
+        <Card sx={{ my: 5, bgcolor: "background.glass" }}>
+          <CardContent sx={{ p: 1 }}></CardContent>
+          <Record record={[listing, lister]} key={listing._id} />
+          <Button
+            variant="contained"
+            //color="secondary"
+            sze="large"
+            fullWidth
+            sx={{ mt: 4 }}
+            onClick={() => {
+              deleteListing(listing._id);
+            }}
+          >
+            Delete
+          </Button>
+
+          <Button
+            variant="contained"
+            //color="secondary"
+            sze="large"
+            fullWidth
+            sx={{ mt: 4 }}
+            onClick={() => {
+              toEdit(listing._id);
+            }}
+          >
+            Edit
+          </Button>
+        </Card>
+      </Container>);
   } else {
-    return <Record record={[listing, lister]} key={listing._id} />;
+    return (
+      <Container>
+        <div
+          id="radius-shape-1"
+          sx={{ position: "absolute", borderRadius: "50%", boxShadow: 5 }}
+        ></div>
+
+        <Card sx={{ my: 5, bgcolor: "background.glass" }}>
+          <CardContent sx={{ p: 1 }}></CardContent>
+          <Record record={[listing, lister]} key={listing._id} />
+
+        </Card>
+      </Container>);
   }
 }
