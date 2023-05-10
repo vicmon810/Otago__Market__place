@@ -61,7 +61,7 @@ export default function Create() {
       message: "",
     });
     window.alert("Message sent!");
-    navigate("/");
+    navigate("/lists");
   }
   
   // This following section will display the form that takes the input from the item.
