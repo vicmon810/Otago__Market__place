@@ -24,6 +24,16 @@ export default function Edit() {
     contactInfo: { email: "", number: "" },
   });
 
+  async function deleteListing() {
+    await fetch(`http://localhost:8000/api/item_routes/item/${id}`, {
+      method: "DELETE",
+    }).catch((error) => {
+      window.alert(error);
+      return;
+    });
+    navigate("/lists");
+  }
+
   // This method fetches the records from the database.
   useEffect(() => {
     async function fetchItem() {
@@ -156,9 +166,9 @@ export default function Edit() {
         </div>
       </form>
       <button
-        className="btn btn-link"
+        class="btn btn-secondary ml-auto"
         onClick={() => {
-          form.deleteRecord(form._id);
+          deleteListing(id);
         }}
       >
         Delete
