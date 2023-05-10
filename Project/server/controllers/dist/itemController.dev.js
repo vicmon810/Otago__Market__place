@@ -138,33 +138,35 @@ var createItem = function createItem(req, res) {
 
 
 var updateItem = function updateItem(req, res) {
-  var db_connect, myquery, newItem;
+  var db_connect, myquery, _updateItem;
+
   return regeneratorRuntime.async(function updateItem$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
+          console.log("test");
+
           try {
             db_connect = dbo.getDb();
             myquery = {
               _id: ObjectId(req.params.id)
             };
-            newItem = {
-              // product_id: req.body.product_id,
-              title: req.body.title,
-              category: req.body.category,
-              quantity: req.body.quantity,
-              location: req.body.location,
-              description: req.body.description,
-              images64: req.body.images64,
-              listingDate: req.body.listingDate,
-              userAccount: req.body.userAccount,
-              contactInfo: {
-                email: req.body.email,
-                number: req.body.number
+            _updateItem = {
+              $set: {
+                title: req.body.title,
+                category: req.body.category,
+                quantity: req.body.quantity,
+                location: req.body.location,
+                description: req.body.description,
+                images64: req.body.images64,
+                listingDate: req.body.listingDate,
+                userAccount: req.body.userAccount,
+                "contactInfo.email": req.body.email,
+                "contactInfo.number": req.body.number
               }
             };
-            console.log(newItem);
-            db_connect.collection("items").updateOne(myquery, newItem, function (err, result) {
+            console.log(_updateItem);
+            db_connect.collection("items").updateOne(myquery, _updateItem, function (err, result) {
               if (err) throw err;
               res.status(200).json(result);
             });
@@ -175,7 +177,7 @@ var updateItem = function updateItem(req, res) {
             });
           }
 
-        case 1:
+        case 2:
         case "end":
           return _context4.stop();
       }

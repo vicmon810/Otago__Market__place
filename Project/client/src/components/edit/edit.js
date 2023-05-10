@@ -6,11 +6,23 @@ import deleteRecord from "../itemsList/itemsList.js";
 import ".//../../CSS/itemsList.css";
 
 //TODO: backend- authorize edit (by user)
-
 export default function Edit() {
+  const navigate = useNavigate();
   const params = useParams();
   const id = params.id.toString();
-  const [form, setForm] = useState([]);
+  const [form, setForm] = useState({
+    title: "",
+    product_id: "",
+    category: "",
+    quantity: "",
+    location: "",
+    description: "",
+    images: [],
+    images64: [],
+    listingDate: "",
+    userAccount: "",
+    contactInfo: { email: "", number: "" },
+  });
 
   // This method fetches the records from the database.
   useEffect(() => {
@@ -28,28 +40,42 @@ export default function Edit() {
     }
     fetchItem();
     return;
-  });
+  }, [id]);
 
   // These methods will update the state properties.
-  function updateForm(value) {
-    return setForm((prev) => {return { ...prev, ...value };});
+  function updateForm(key, value) {
+    setForm((prevForm) => {
+      return {
+        ...prevForm,
+        [key]: value,
+      };
+    });
   }
 
   async function onSubmit(e) {
     e.preventDefault();
-    const editedListing = {
-      title: form.title,
-      product_id: form.product_id, 
-      category: form.category,
-      quantity: form.quantity,
-      location: form.location,
-      description: form.description,
-      images: form.images,
-      images64: form.images64,
-      listingDate: form.listingDate,
-      userAccount: form.userAccount,
-      contactInfo: { email: form.email, number: form.number },
+    const updatedForm = {
+      title: e.target.title.value,
+      // product_id: e.target.product_id.value,
+      category: e.target.category.value,
+      quantity: e.target.quantity.value,
+      location: e.target.location.value,
+      description: e.target.description.value,
+      // images: e.target.images.value,
+      // images64: e.target.images64.value,
+      // listingDate: e.target.listingDate.value,
+      // userAccount: e.target.userAccount.value,
+      // contactInfo: {
+      //   email: e.target.email.value,
+      //   number: e.target.number.value,
+      // },
     };
+    const editedListing = {
+      ...form,
+      ...updatedForm,
+    };
+    // update the form state
+    updateForm(editedListing);
 
     // This will send a post request to update the data in the database.
     await fetch(`http://localhost:8000/api/item_routes/item/${id}`, {
@@ -59,9 +85,10 @@ export default function Edit() {
         "Content-Type": "application/json",
       },
     });
-
-    //navigate("/");
+    console.log(editedListing);
+    navigate("/lists");
   }
+
   // This following section will display the form that takes input from the user to update the data.
   return (
     <div>
@@ -69,40 +96,55 @@ export default function Edit() {
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="name">Title: </label>
-          <input type="text" className="form-control"
-            id="title"
+          <input
+            type="text"
+            className="form-control"
+            name="title"
             //value={form.title}
             defaultValue={form.title}
-            onChange={(e) => updateForm({ title: e.target.value })} />
+            onChange={(e) => updateForm({ title: e.target.value })}
+          />
         </div>
         <div className="form-group">
           <label htmlFor="name">Category: </label>
-          <input type="text" className="form-control"
-            id="category"
-            value={form.category}
-            onChange={(e) => updateForm({ category: e.target.value })} />
+          <input
+            type="text"
+            className="form-control"
+            name="category"
+            defaultValue={form.category}
+            onChange={(e) => updateForm({ category: e.target.value })}
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="name">Quantity: </label>
-          <input type="text" className="form-control"
-            id="quantity"
-            value={form.quantity}
-            onChange={(e) => updateForm({ quantity: e.target.value })} />
+          <input
+            type="text"
+            className="form-control"
+            name="quantity"
+            defaultValue={form.quantity}
+            onChange={(e) => updateForm({ quantity: e.target.value })}
+          />
         </div>
         <div className="form-group">
           <label htmlFor="name">Location: </label>
-          <input type="text" className="form-control"
-            id="location"
-            value={form.location}
-            onChange={(e) => updateForm({ location: e.target.value })} />
+          <input
+            type="text"
+            className="form-control"
+            name="location"
+            defaultValue={form.location}
+            onChange={(e) => updateForm({ location: e.target.value })}
+          />
         </div>
         <div className="form-group">
           <label htmlFor="name">Description: </label>
-          <input type="text" className="form-control"
-            id="description"
-            value={form.description}
-            onChange={(e) => updateForm({ description: e.target.value })} />
+          <input
+            type="text"
+            className="form-control"
+            name="description"
+            defaultValue={form.description}
+            onChange={(e) => updateForm({ description: e.target.value })}
+          />
         </div>
         {/* edit images */}
         <div className="form-group">
@@ -113,11 +155,14 @@ export default function Edit() {
           />
         </div>
       </form>
-      <button className="btn btn-link"
+      <button
+        className="btn btn-link"
         onClick={() => {
           form.deleteRecord(form._id);
         }}
-      >Delete</button>
+      >
+        Delete
+      </button>
     </div>
   );
 }
