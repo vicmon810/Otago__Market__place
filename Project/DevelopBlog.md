@@ -1,7 +1,7 @@
 # 9/May/2023
 current issues:
-- edit and delete item specific to the account that listed the item
-- email notifications
+- ~~edit and delete item specific to the account that listed the item~~
+- ~~email notifications~~
 - profile display picture
 - search feature
 - filter by category feature
