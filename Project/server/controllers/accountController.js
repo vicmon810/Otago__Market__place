@@ -203,19 +203,21 @@ const messageUser = async (req, res) => {
     const db_connect = dbo.getDb();
     const collection = db_connect.collection("user");
     const result = await collection.findOne({
-      email: req.body.email,
+      name: req.body.username,
     });
+    console.log(result);
     if (result) {
       const ses = new AWS.SES();
       const params = {
         Destination: {
+
           ToAddresses: [result.email]
         },
         Message: {
           Body: {
             Html: {
               Charset: 'UTF-8',
-              Data: 'Your new message from Otago Marketplace regarding item ' + req.body.subject
+              Data: 'Your new message from Otago Marketplace regarding item ' + req.body.item + ":<br/><br/>" + req.body.message
             },
             Text: {
               Charset: 'UTF-8',
@@ -224,7 +226,7 @@ const messageUser = async (req, res) => {
           },
           Subject: {
             Charset: 'UTF-8',
-            Data: "New message on Otago Marketplace"
+            Data: "New message on Otago Marketplace for " + req.body.item
           }
         },
         Source: 'otagomarketplace@gmail.com'
