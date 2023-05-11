@@ -197,6 +197,7 @@ export default function Register() {
             <CardContent sx={{ p: 5 }}>
               <form onSubmit={handleSubmit}>
                 <TextField
+                  required
                   label="First Name"
                   variant="standard"
                   id="name"
@@ -207,6 +208,7 @@ export default function Register() {
                 />
 
                 <TextField
+                  required
                   label="Last Name"
                   variant="standard"
                   id="surname"
@@ -217,6 +219,7 @@ export default function Register() {
                 />
 
                 <TextField
+                  required
                   label="Faculty Email (.ac.nz)"
                   variant="standard"
                   id="email"
@@ -228,6 +231,7 @@ export default function Register() {
                 />
 
                 <TextField
+                  required
                   label="Password"
                   variant="standard"
                   id="password"
@@ -239,6 +243,7 @@ export default function Register() {
                 />
 
                 <TextField
+                  required
                   label="Phone Number"
                   variant="standard"
                   id="number"
@@ -251,13 +256,14 @@ export default function Register() {
               
                 <Box sx={{ mt: 2 }} />  {/* //linebreak */}
                 <Autocomplete
+                  
                   disablePortal
                   id="department"
                   options={options}
                   getOptionLabel={(option) => option.label} // Specify how to extract the label from the option
                   sx={{ width: 620 }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Department" id="department" />
+                    <TextField required {...params} label="Department" id="department" />
                   )}
                   isOptionEqualToValue={(option, value) =>
                     option.id === value.id
