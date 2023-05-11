@@ -99,7 +99,27 @@ export default function Register() {
   // This function will handle the submission.
   async function handleSubmit(e) {
     e.preventDefault();
-    // TODO: add authentication
+
+    // check that email doesn't already have an account associated
+    async function checkEmail() {
+      const response = await fetch(
+        `http://localhost:8000/api/account_routes/account/email/${form.email}`,
+        { method: "GET" }
+      );
+      const existing = await response.json();
+      if (existing) {
+        window.alert(`An error occured: ${form.email} already in use`);
+        updateForm({ email: '' });
+        return 0;
+      }
+      else {
+        updateForm({ email: form.email });
+      } 
+
+    }
+    const validEmail = await checkEmail();
+    if (validEmail === 0) {return;}
+    
     // When a post request is sent to the create URL, we'll add a new record to the database.
     const newItem = { ...form };
     const newItem_json = JSON.stringify(newItem);
