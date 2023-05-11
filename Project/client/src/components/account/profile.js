@@ -17,6 +17,8 @@ import NumbersIcon from "@mui/icons-material/Numbers";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 
+import MyNavbar from "./myNavbar";
+
 function UseLogout() {
   console.log("UseLogout()");
   localStorage.setItem("authenticated", false);
@@ -24,9 +26,11 @@ function UseLogout() {
 }
 
 const Profile = (props) => (
+  <div>
+          <MyNavbar />
   <div className="column">
     <div style={{ backgroundColor: "white" }}>
-      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "white" }}>
+      <Box sx={{ width: "100%", bgcolor: "white" }}>
       {/* {console.log("Image URL or base64 data:", props.images64)} */}
 
         <img
@@ -104,6 +108,8 @@ const Profile = (props) => (
       </Box>
     </div>
   </div>
+  </div>
+
 );
 
 export default function GetProfile() {

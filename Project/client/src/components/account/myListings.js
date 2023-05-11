@@ -19,6 +19,7 @@ import NumbersIcon from "@mui/icons-material/Numbers";
 import navbar from "../../components/navbar/navbar";
 import generalBackground from "../../assets/GeneralBg.jpg";
 import {Container,} from "@mui/material";
+import MyNavbar from "./myNavbar";
 
 const Record = (props) => (
   <div className="column">
@@ -172,6 +173,8 @@ export default function MyRecordList() {
     );
   } else {
     return (
+        <div>
+        <MyNavbar />
       <Container
       maxWidth="xl"
       sx={{
@@ -190,6 +193,7 @@ export default function MyRecordList() {
         {RecordList()}
       </div>
       </Container>
+      </div>
     );
   }
 }
