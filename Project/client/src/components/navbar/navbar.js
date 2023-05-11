@@ -95,9 +95,9 @@ const Navbar = (props) => {
             {" "}
             Add Listing{" "}
           </a>
-          <a className="nav-link text-info" href="/profile">
+          <a className="nav-link text-info" href="/account">
             {" "}
-            Profile{" "}
+            Account{" "}
           </a>
         </div>
         <span className="nav-link text-info">Welcome {getUser()}!</span>
