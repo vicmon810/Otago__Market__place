@@ -99,7 +99,27 @@ export default function Register() {
   // This function will handle the submission.
   async function handleSubmit(e) {
     e.preventDefault();
-    // TODO: add authentication
+
+    // check that email doesn't already have an account associated
+    async function checkEmail() {
+      const response = await fetch(
+        `http://localhost:8000/api/account_routes/account/email/${form.email}`,
+        { method: "GET" }
+      );
+      const existing = await response.json();
+      if (existing) {
+        window.alert(`An error occured: ${form.email} already in use`);
+        updateForm({ email: '' });
+        return 0;
+      }
+      else {
+        updateForm({ email: form.email });
+      } 
+
+    }
+    const validEmail = await checkEmail();
+    if (validEmail === 0) {return;}
+    
     // When a post request is sent to the create URL, we'll add a new record to the database.
     const newItem = { ...form };
     const newItem_json = JSON.stringify(newItem);
@@ -197,6 +217,7 @@ export default function Register() {
             <CardContent sx={{ p: 5 }}>
               <form onSubmit={handleSubmit}>
                 <TextField
+                  required
                   label="First Name"
                   variant="standard"
                   id="name"
@@ -207,6 +228,7 @@ export default function Register() {
                 />
 
                 <TextField
+                  required
                   label="Last Name"
                   variant="standard"
                   id="surname"
@@ -217,6 +239,7 @@ export default function Register() {
                 />
 
                 <TextField
+                  required
                   label="Faculty Email (.ac.nz)"
                   variant="standard"
                   id="email"
@@ -228,6 +251,7 @@ export default function Register() {
                 />
 
                 <TextField
+                  required
                   label="Password"
                   variant="standard"
                   id="password"
@@ -239,6 +263,7 @@ export default function Register() {
                 />
 
                 <TextField
+                  required
                   label="Phone Number"
                   variant="standard"
                   id="number"
@@ -251,13 +276,14 @@ export default function Register() {
               
                 <Box sx={{ mt: 2 }} />  {/* //linebreak */}
                 <Autocomplete
+                  
                   disablePortal
                   id="department"
                   options={options}
                   getOptionLabel={(option) => option.label} // Specify how to extract the label from the option
                   sx={{ width: 620 }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Department" id="department" />
+                    <TextField required {...params} label="Department" id="department" />
                   )}
                   isOptionEqualToValue={(option, value) =>
                     option.id === value.id

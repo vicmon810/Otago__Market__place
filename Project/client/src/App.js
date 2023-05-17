@@ -8,7 +8,8 @@ import Create from "./components/CreateItems/createItem";
 import LoginForm from "./components/login/Login";
 import MessageForm from "./components/sendMessage/sendMessage";
 import Register from "./components/CreateAccount/createAccount";
-import GetProfile from "./components/profile/profile";
+import GetProfile from "./components/account/profile";
+import MyRecordList from "./components/account/myListings"
 import ViewListing from "./components/viewListing/viewListing";
 
 const App = () => {
@@ -26,7 +27,8 @@ const App = () => {
           element={<RecordList searchResults={searchResults} />}
         />
         <Route path="register" element={<Register />} />
-        <Route path="/profile" element={<GetProfile />} />
+        <Route path="/account" element={<GetProfile />} />
+        <Route path="/account/mine" element={<MyRecordList />} />
         <Route path="/message" element={<MessageForm />} />
         <Route path="/login" element={<LoginForm />} />
       </Routes>
