@@ -164,6 +164,7 @@ const deleteItem = async (req, res) => {
 
 //Search items
 const searchItem = async (req, res) => {
+  console.log("Here");
   try {
     const db_connection = dbo.getDb();
     const query = { title: { $regex: req.params.searchInput, $options: "i" } };

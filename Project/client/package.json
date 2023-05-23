@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^14.4.3",
     "bootstrap": "^5.2.3",
     "cypress": "^12.9.0",
+    "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",

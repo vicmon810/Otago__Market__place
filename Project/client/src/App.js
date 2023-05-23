@@ -9,14 +9,15 @@ import LoginForm from "./components/login/Login";
 import MessageForm from "./components/sendMessage/sendMessage";
 import Register from "./components/CreateAccount/createAccount";
 import GetProfile from "./components/account/profile";
-import MyRecordList from "./components/account/myListings"
+import MyRecordList from "./components/account/myListings";
 import ViewListing from "./components/viewListing/viewListing";
 
 const App = () => {
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResult, setSearchResult] = useState("");
   return (
     <div>
-      <Navbar />
+      <Navbar setSearchResult={setSearchResult} />{" "}
+      {/* Pass setSearchResult callback */}
       <Routes>
         <Route exact path="/" element={<LoginForm />} />
         <Route path="/item/:id" element={<ViewListing />} />
@@ -24,9 +25,9 @@ const App = () => {
         <Route path="/create" element={<Create />} />
         <Route
           path="/lists"
-          element={<RecordList searchResults={searchResults} />}
+          element={<RecordList searchResults={searchResult} />}
         />
-        <Route path="register" element={<Register />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/account" element={<GetProfile />} />
         <Route path="/account/mine" element={<MyRecordList />} />
         <Route path="/message" element={<MessageForm />} />

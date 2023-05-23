@@ -26,7 +26,7 @@ import generalBackground from "../../assets/GeneralBg.jpg";
 
 const Record = (props) => (
   // <div style={{ backgroundImage: `url(${generalBackground})` }}>
-  <div >
+  <div>
     <Button size="large" href={`/item/${props.record[0]._id}`}>
       {props.record[0].title}
     </Button>
@@ -165,6 +165,7 @@ export default function ViewListing() {
   const curruser = localStorage.getItem("currUser");
   const curruser_parsed = JSON.parse(curruser);
 
+  console.log(navigate.searchResults);
   async function deleteListing() {
     await fetch(`http://localhost:8000/api/item_routes/item/${id}`, {
       method: "DELETE",
@@ -207,6 +208,7 @@ export default function ViewListing() {
     return;
   });
   if (curruser_parsed && curruser_parsed.email === lister.email) {
+    console.log("Here");
     // TODO: allow user to edit/delete listing if it belongs to them
     return (
       <Container>
@@ -244,7 +246,8 @@ export default function ViewListing() {
             Edit
           </Button>
         </Card>
-      </Container>);
+      </Container>
+    );
   } else {
     return (
       <Container>
@@ -256,8 +259,8 @@ export default function ViewListing() {
         <Card sx={{ my: 5, bgcolor: "background.glass" }}>
           <CardContent sx={{ p: 1 }}></CardContent>
           <Record record={[listing, lister]} key={listing._id} />
-
         </Card>
-      </Container>);
+      </Container>
+    );
   }
 }

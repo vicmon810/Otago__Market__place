@@ -3,10 +3,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import ".//../../CSS/navbar.css";
 import { getListItemSecondaryActionClassesUtilityClass } from "@mui/material";
 
-const Navbar = (props) => {
+const Navbar = ({ setSearchResult }) => {
   const [isNavCollapsed, setIsNavCollapsed] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  const [searchResults, setSearchResults] = useState([]); // state variable to store search results
+  // const [searchResult, setSearchResult] = useState([]);
 
   const handleSearchInputChange = (event) => {
     setSearchInput(event.target.value);
@@ -23,7 +23,7 @@ const Navbar = (props) => {
   };
   const getUser = () => {
     const user = localStorage.getItem("currUser");
-    console.log(localStorage);
+    // console.log(localStorage);
     if (user) {
       const name = JSON.parse(user).name; //current login user
       return name;
@@ -32,22 +32,21 @@ const Navbar = (props) => {
   const handleSearch = async (event) => {
     event.preventDefault();
     const response = await fetch(
-      `http://localhost:8000/api/item_routes/search?query=${searchInput}`
+      `http://localhost:8000/api/item_routes/items/${searchInput}`
     );
+
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;
       window.alert(message);
       return;
     }
-    const data = await response.json();
-    console.log(data);
-    props.setSearchResults(data);
+
+    const itemDetail = await response.json();
+    setSearchResult(itemDetail); // Update the search result using setSearchResult callback
   };
 
-  console.log("navbar authenticated:", authenticated);
-
   if (authenticated === "true") {
-    console.log("LOGGED-IN NAVBAR");
+    // console.log("LOGGED-IN NAVBAR");
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
         <a className="navbar-brand text-info font-weight-bolder" href="/lists">
@@ -83,8 +82,8 @@ const Navbar = (props) => {
               type="submit"
               disabled={!searchInput}
               size={searchInput.toString()}
-              onClick={() => {
-                handleSearch();
+              onClick={(event) => {
+                handleSearch(event);
               }}
             >
               Search
@@ -111,7 +110,6 @@ const Navbar = (props) => {
       </nav>
     );
   } else {
-    console.log("FULL NAVBAR");
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
         <a className="navbar-brand text-info font-weight-bolder" href="/">
@@ -148,7 +146,7 @@ const Navbar = (props) => {
               disabled={!searchInput}
               size={searchInput.toString()}
               onClick={() => {
-                handleSearch();
+                // handleSearch();
               }}
             >
               Search

@@ -18,97 +18,110 @@ import DescIcon from "@mui/icons-material/Description";
 import NumbersIcon from "@mui/icons-material/Numbers";
 import navbar from "../../components/navbar/navbar";
 import generalBackground from "../../assets/GeneralBg.jpg";
-import {Container,} from "@mui/material";
+import { Container } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: ["Open Sans", "sans-serif"].join(","),
+  },
+});
 
 const Record = (props) => (
-  <div className="column">
-    <div className="card" style={{ backgroundColor: "white" }}>
-      <Button size="large" href={`/item/${props.record._id}`}>
-        {props.record.title}
-      </Button>
-      <br></br>
-      <img id="base64image" src={props.record.images64} alt="No image(s)" />
-      <br></br>
+  <ThemeProvider theme={theme}>
+    <div className="column">
+      <div className="card" style={{ backgroundColor: "white" }}>
+        <Button size="large" href={`/item/${props.record._id}`}>
+          {props.record.title}
+        </Button>
+        <br></br>
+        <img id="base64image" src={props.record.images64} alt="No image(s)" />
+        <br></br>
 
-      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "white" }}>
-        <nav aria-label="main mailbox folders">
+        <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "white" }}>
+          <nav aria-label="main mailbox folders">
+            <List>
+              <ListItem disablePadding>
+                <ListItemIcon>
+                  <CategoryIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Category:"
+                  secondary={props.record.category}
+                />
+              </ListItem>
+            </List>
+          </nav>
+
           <List>
             <ListItem disablePadding>
               <ListItemIcon>
-                <CategoryIcon />
+                <InventoryIcon />
               </ListItemIcon>
               <ListItemText
-                primary="Category:"
-                secondary={props.record.category}
+                primary="Quantity:"
+                secondary={props.record.quantity}
               />
             </ListItem>
           </List>
-        </nav>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <InventoryIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Quantity:"
-              secondary={props.record.quantity}
-            />
-          </ListItem>
-        </List>
+          <List>
+            <ListItem disablePadding>
+              <ListItemIcon>
+                <LocationIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Location:"
+                secondary={props.record.location}
+              />
+            </ListItem>
+          </List>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <LocationIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Location:"
-              secondary={props.record.location}
-            />
-          </ListItem>
-        </List>
+          <List>
+            <ListItem disablePadding>
+              <ListItemIcon>
+                <DescIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Description:"
+                secondary={props.record.description}
+              />
+            </ListItem>
+          </List>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <DescIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Description:"
-              secondary={props.record.description}
-            />
-          </ListItem>
-        </List>
-
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <CalendarMonthIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Listing Date:"
-              secondary={props.record.listingDate}
-            />
-          </ListItem>
-        </List>
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <NumbersIcon />
-            </ListItemIcon>
-            <ListItemText primary="Product ID:" secondary={props.record._id} />
-          </ListItem>
-        </List>
-      </Box>
-      <a href={"message?item=" + props.record._id}><button>Contact Owner</button></a>
+          <List>
+            <ListItem disablePadding>
+              <ListItemIcon>
+                <CalendarMonthIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Listing Date:"
+                secondary={props.record.listingDate}
+              />
+            </ListItem>
+          </List>
+          <List>
+            <ListItem disablePadding>
+              <ListItemIcon>
+                <NumbersIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Product ID:"
+                secondary={props.record._id}
+              />
+            </ListItem>
+          </List>
+        </Box>
+        <a href={"message?item=" + props.record._id}>
+          <button>Contact Owner</button>
+        </a>
+      </div>
     </div>
-  </div>
+  </ThemeProvider>
 );
 
-export default function RecordList() {
+const RecordList = ({ searchResults }) => {
   const [records, setRecords] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
   const curruser = localStorage.getItem("currUser");
   const curruser_parsed = JSON.parse(curruser);
   // This method fetches the records from the database.
@@ -140,21 +153,22 @@ export default function RecordList() {
   }
 
   // This method will map out the records on the table
-  function recordList() {
-    if (records.length > 0) {
-      return records.map((record) => {
-        return <Record record={record} key={record._id} />;
-      });
+  function renderRecords() {
+    if (searchResults.length > 0) {
+      return searchResults.map((result) => (
+        <Record record={result} key={result._id} />
+      ));
+    } else if (records.length > 0) {
+      return records.map((record) => (
+        <Record record={record} key={record._id} />
+      ));
     }
   }
-  function searchResult() {
-    console.log(searchResults);
-    console.log("HAHA");
-  }
 
-  if (searchResult.length > 0) {
-    return (
-      <Container
+  console.log(searchResults);
+
+  return (
+    <Container
       maxWidth="xl"
       sx={{
         p: 4,
@@ -170,30 +184,9 @@ export default function RecordList() {
     >
       <div>
         <br></br>
-        {searchResult()}
+        {renderRecords()}
       </div>
-      </Container>
-    );
-  } else {
-    return (
-      <Container
-      maxWidth="xl"
-      sx={{
-        p: 4,
-        bgcolor: "background.radialGradient",
-        overflow: "hidden",
-        backgroundImage: `url(${generalBackground})`,
-        backgroundSize: "cover",
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}>
-      <div>
-        <br></br>
-        {recordList()}
-      </div>
-      </Container>
-    );
-  }
-}
+    </Container>
+  );
+};
+export default RecordList;
