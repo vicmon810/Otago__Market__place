@@ -119,7 +119,6 @@ const Record = (props) => (
     </div>
   </ThemeProvider>
 );
-
 const RecordList = ({ searchResults }) => {
   const [records, setRecords] = useState([]);
   const curruser = localStorage.getItem("currUser");
@@ -164,8 +163,6 @@ const RecordList = ({ searchResults }) => {
       ));
     }
   }
-
-  console.log(searchResults);
 
   return (
     <Container

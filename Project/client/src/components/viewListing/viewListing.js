@@ -23,137 +23,148 @@ import DescIcon from "@mui/icons-material/Description";
 import NumbersIcon from "@mui/icons-material/Numbers";
 import { CardContent, Container, Card } from "@mui/material";
 import generalBackground from "../../assets/GeneralBg.jpg";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: ["Open Sans", "sans-serif"].join(","),
+  },
+});
 
 const Record = (props) => (
-  // <div style={{ backgroundImage: `url(${generalBackground})` }}>
-  <div>
-    <Button size="large" href={`/item/${props.record[0]._id}`}>
-      {props.record[0].title}
-    </Button>
-    <br></br>
+  <ThemeProvider theme={theme}>
+    <div>
+      <Button size="large" href={`/item/${props.record[0]._id}`}>
+        {props.record[0].title}
+      </Button>
+      <br></br>
 
-    <Grid container spacing={2}>
-      <Grid item xs={8}>
-        <Box>
-          <img
-            id="base64image"
-            width="500"
-            src={props.record[0].images64}
-            alt="No image(s)"
-          />
-        </Box>
-      </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={8}>
+          <Box>
+            <img
+              id="base64image"
+              width="500"
+              src={props.record[0].images64}
+              alt="No image(s)"
+            />
+          </Box>
+        </Grid>
 
-      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "white" }}>
-        <nav aria-label="main mailbox folders">
+        <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "white" }}>
+          <nav aria-label="main mailbox folders">
+            <List>
+              <ListItem disablePadding>
+                <ListItemIcon>
+                  <CategoryIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Category:"
+                  secondary={props.record[0].category}
+                />
+              </ListItem>
+            </List>
+          </nav>
+
           <List>
             <ListItem disablePadding>
               <ListItemIcon>
-                <CategoryIcon />
+                <InventoryIcon />
               </ListItemIcon>
               <ListItemText
-                primary="Category:"
-                secondary={props.record[0].category}
+                primary="Quantity:"
+                secondary={props.record[0].quantity}
               />
             </ListItem>
           </List>
-        </nav>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <InventoryIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Quantity:"
-              secondary={props.record[0].quantity}
-            />
-          </ListItem>
-        </List>
+          <List>
+            <ListItem disablePadding>
+              <ListItemIcon>
+                <LocationIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Location:"
+                secondary={props.record[0].location}
+              />
+            </ListItem>
+          </List>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <LocationIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Location:"
-              secondary={props.record[0].location}
-            />
-          </ListItem>
-        </List>
+          <List>
+            <ListItem disablePadding>
+              <ListItemIcon>
+                <DescIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Description:"
+                secondary={props.record[0].description}
+              />
+            </ListItem>
+          </List>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <DescIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Description:"
-              secondary={props.record[0].description}
-            />
-          </ListItem>
-        </List>
+          <List>
+            <ListItem disablePadding>
+              <ListItemIcon>
+                <CalendarMonthIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Listing Date:"
+                secondary={props.record[0].listingDate}
+              />
+            </ListItem>
+          </List>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <CalendarMonthIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Listing Date:"
-              secondary={props.record[0].listingDate}
-            />
-          </ListItem>
-        </List>
+          <List>
+            <ListItem disablePadding>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Posted by:"
+                secondary={props.record[1].name + " " + props.record[1].surname}
+              />
+            </ListItem>
+          </List>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Posted by:"
-              secondary={props.record[1].name + " " + props.record[1].surname}
-            />
-          </ListItem>
-        </List>
+          <List>
+            <ListItem disablePadding>
+              <ListItemIcon>
+                <EmailIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Email:"
+                secondary={props.record[1].email}
+              />
+            </ListItem>
+          </List>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <EmailIcon />
-            </ListItemIcon>
-            <ListItemText primary="Email:" secondary={props.record[1].email} />
-          </ListItem>
-        </List>
+          <List>
+            <ListItem disablePadding>
+              <ListItemIcon>
+                <PhoneIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Phone Number:"
+                secondary={props.record[1].number}
+              />
+            </ListItem>
+          </List>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <PhoneIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Phone Number:"
-              secondary={props.record[1].number}
-            />
-          </ListItem>
-        </List>
-
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <NumbersIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Product ID:"
-              secondary={props.record[0]._id}
-            />
-          </ListItem>
-        </List>
-      </Box>
-    </Grid>
-  </div>
+          <List>
+            <ListItem disablePadding>
+              <ListItemIcon>
+                <NumbersIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Product ID:"
+                secondary={props.record[0]._id}
+              />
+            </ListItem>
+          </List>
+        </Box>
+      </Grid>
+    </div>
+  </ThemeProvider>
 );
 
 export default function ViewListing() {

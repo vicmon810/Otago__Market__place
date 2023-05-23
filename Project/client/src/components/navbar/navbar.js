@@ -48,8 +48,11 @@ const Navbar = ({ setSearchResult }) => {
   if (authenticated === "true") {
     // console.log("LOGGED-IN NAVBAR");
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <a className="navbar-brand text-info font-weight-bolder" href="/lists">
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <head>
+          <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'/>
+        </head>
+        <a className="navbar-brand font-weight-bolder" href="/lists">
           <span className="">otagoMarketplace</span>
         </a>
         <button
@@ -78,7 +81,7 @@ const Navbar = ({ setSearchResult }) => {
               onChange={handleSearchInputChange}
             />
             <button
-              className="btn btn-outline-success"
+              className="btn btn-outline-light"
               type="submit"
               disabled={!searchInput}
               size={searchInput.toString()}
@@ -89,18 +92,18 @@ const Navbar = ({ setSearchResult }) => {
               Search
             </button>
           </form>
-          <a className="nav-link text-info" href="/create">
+          <a className="nav-link " href="/create">
             {" "}
             Add Listing{" "}
           </a>
-          <a className="nav-link text-info" href="/account">
+          <a className="nav-link" href="/account">
             {" "}
             Account{" "}
           </a>
         </div>
-        <span className="nav-link text-info">Welcome {getUser()}!</span>
+        <span className="nav-link ">Welcome {getUser()}!</span>
         <button
-          className="btn btn-outline-success"
+          className="btn btn-outline-light"
           type="submit"
           onClick={handleLogout}
         >
@@ -111,8 +114,11 @@ const Navbar = ({ setSearchResult }) => {
     );
   } else {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <a className="navbar-brand text-info font-weight-bolder" href="/">
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <head>
+          <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'/>
+        </head>
+        <a className="navbar-brand font-weight-bolder" href="/">
           <span className="">otagoMarketplace</span>
         </a>
         <button
@@ -141,7 +147,7 @@ const Navbar = ({ setSearchResult }) => {
               onChange={handleSearchInputChange}
             />
             <button
-              className="btn btn-outline-success"
+              className="btn btn-outline-light"
               type="submit"
               disabled={!searchInput}
               size={searchInput.toString()}
@@ -152,16 +158,16 @@ const Navbar = ({ setSearchResult }) => {
               Search
             </button>
           </form>
-          {/* <a className="nav-link text-info" href="/create"> Add Listing </a> */}
-          <a className="nav-link text-info" href="/">
+          {/* <a className="nav-link " href="/create"> Add Listing </a> */}
+          <a className="nav-link " href="/">
             {" "}
             Login{" "}
           </a>
-          <a className="nav-link text-info" href="/register">
+          <a className="nav-link" href="/register">
             {" "}
             Register{" "}
           </a>
-          {/* <a className="nav-link text-info" href="/profile"> Profile </a> */}
+          {/* <a className="nav-link " href="/profile"> Profile </a> */}
         </div>
       </nav>
     );

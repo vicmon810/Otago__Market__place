@@ -5,18 +5,18 @@ import { getListItemSecondaryActionClassesUtilityClass } from "@mui/material";
 
 const MyNavbar = (props) => {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <a className="navbar-brand text-info" href="/account">
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <a className="navbar-brand" href="/account">
           <span className="">My Account</span>
         </a>
         <div
           id="navbarToggleExternalContent"
         >
-          <a className="nav-link text-info" href="/account">
+          <a className="nav-link " href="/account">
             {" "}
             Profile{" "}
           </a>
-          <a className="nav-link text-info" href="/account/mine">
+          <a className="nav-link" href="/account/mine">
             {" "}
             My Listings{" "}
           </a>

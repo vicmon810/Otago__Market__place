@@ -17,7 +17,15 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import loginBackground from "../../assets/loginbg.jpg";
-import American from "../../assets/American Captain.ttf";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Open Sans',
+      'sans-serif'
+    ].join(','),
+  }
+});
 
 export default function LoginForm() {
   const [login, setLogin] = useState({ email: "", password: "" });
@@ -33,8 +41,8 @@ export default function LoginForm() {
   const styles = {
     "@font-face": [
       {
-        fontFamily: "American Captain",
-        src: `url(${American}) format('truetype')`,
+        fontFamily: "Open Sans",
+        src: `url(https://fonts.googleapis.com/css?family=Open Sans) format('truetype')`,
         fontWeight: "normal",
         fontStyle: "normal",
       },
@@ -130,7 +138,7 @@ export default function LoginForm() {
           >
             <Typography
               variant={isMobile ? "h5" : "h2"}
-              sx={{ fontFamily: "American Captain", textAlign: "center" }}
+              sx={{ textAlign: "center" }}
             >
               Welcome to <br /> 
               otagoMarketplace
@@ -168,6 +176,7 @@ export default function LoginForm() {
                   label="Email"
                   variant="standard"
                   id="email"
+                  type="email"
                   value={login.email}
                   onChange={(e) => updateForm({ email: e.target.value })}
                   fullWidth
