@@ -130,6 +130,7 @@ const updateUser = async (req, res) => {
 //create a new account
 const createAccount = async (req, res) => {
   try {
+    const ses = new AWS.SES();
     let db_connect = dbo.getDb();
     let hasher = crypto.createHash("sha256");
     hasher = hasher.update(req.body.password + "salt12345)(*&^");
@@ -146,6 +147,18 @@ const createAccount = async (req, res) => {
       //pfp: req.body.pfp,
     };
     console.log(account);
+    const params = {
+      EmailAddress: req.body.email // Replace with the email address you want to verify
+    };
+    
+    // Call SES to verify the email identity
+    ses.verifyEmailIdentity(params, function(err, data) {
+      if (err) {
+        console.log(err, err.stack); // An error occurred
+      } else {
+        console.log(data); // Successful response
+      }
+    });
     db_connect.collection("user").insertOne(account, function (err, result) {
       if (err) throw err;
       res.json(result);
