@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #0d4e9d;
+  background-color: #00508F;
   border-bottom: 1px solid #850c0c;
   padding: 1rem;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -8,17 +8,17 @@
 .navbar-brand {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+  color: #f9c013;
 }
 
 .nav-link {
   font-size: 1.2rem;
-  color: #333;
+  color: #f9c013;
   margin-right: 1rem;
 }
 
 .nav-link:hover {
-  color: #007bff;
+  color: #f9c013;
 }
 
 .navbar-toggler {
@@ -27,12 +27,21 @@
 }
 
 .navbar-toggler-icon {
-  background-color: #333;
+  background-color: #f9c013;
+}
+
+.navbar-button{
+  display: none;
+  position: absolute;
+  background-color: #f9c013;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
   .navbar-nav {
-    background-color: #8ae0eb;
+    background-color: #f9c013;
     padding: 1rem;
   }
   .nav-link {

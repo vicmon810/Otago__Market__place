@@ -18,6 +18,16 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 
 import MyNavbar from "./myNavbar";
+import { createTheme,ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Open Sans',
+      'sans-serif'
+    ].join(','),
+  }
+});
 
 function UseLogout() {
   console.log("UseLogout()");
@@ -28,6 +38,8 @@ function UseLogout() {
 const Profile = (props) => (
   <div>
           <MyNavbar />
+          <ThemeProvider theme={theme}>
+
   <div className="column">
     <div style={{ backgroundColor: "white" }}>
       <Box sx={{ width: "100%", bgcolor: "white" }}>
@@ -108,6 +120,8 @@ const Profile = (props) => (
       </Box>
     </div>
   </div>
+  </ThemeProvider>
+
   </div>
 
 );

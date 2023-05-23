@@ -20,7 +20,16 @@ import navbar from "../../components/navbar/navbar";
 import generalBackground from "../../assets/GeneralBg.jpg";
 import {Container,} from "@mui/material";
 import MyNavbar from "./myNavbar";
+import { createTheme,ThemeProvider } from '@mui/material/styles';
 
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Open Sans',
+      'sans-serif'
+    ].join(','),
+  }
+});
 const Record = (props) => (
   <div className="column">
     <div className="card" style={{ backgroundColor: "white" }}>
@@ -151,6 +160,7 @@ export default function MyRecordList() {
 
   if (searchResult.length > 0) {
     return (
+    <ThemeProvider theme={theme}>
       <Container
       maxWidth="xl"
       sx={{
@@ -170,11 +180,13 @@ export default function MyRecordList() {
         {searchResult()}
       </div>
       </Container>
+      </ThemeProvider>
     );
   } else {
     return (
         <div>
         <MyNavbar />
+        <ThemeProvider theme={theme}>
       <Container
       maxWidth="xl"
       sx={{
@@ -193,6 +205,7 @@ export default function MyRecordList() {
         {RecordList()}
       </div>
       </Container>
+        </ThemeProvider>
       </div>
     );
   }

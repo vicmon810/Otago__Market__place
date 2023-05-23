@@ -19,8 +19,19 @@ import NumbersIcon from "@mui/icons-material/Numbers";
 import navbar from "../../components/navbar/navbar";
 import generalBackground from "../../assets/GeneralBg.jpg";
 import {Container,} from "@mui/material";
+import { createTheme,ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Open Sans',
+      'sans-serif'
+    ].join(','),
+  }
+});
 
 const Record = (props) => (
+  <ThemeProvider theme={theme}>
   <div className="column">
     <div className="card" style={{ backgroundColor: "white" }}>
       <Button size="large" href={`/item/${props.record._id}`}>
@@ -104,6 +115,7 @@ const Record = (props) => (
       <a href={"message?item=" + props.record._id}><button>Contact Owner</button></a>
     </div>
   </div>
+  </ThemeProvider>
 );
 
 export default function RecordList() {

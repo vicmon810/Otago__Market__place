@@ -23,9 +23,19 @@ import DescIcon from "@mui/icons-material/Description";
 import NumbersIcon from "@mui/icons-material/Numbers";
 import { CardContent, Container, Card } from "@mui/material";
 import generalBackground from "../../assets/GeneralBg.jpg";
+import { createTheme,ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Open Sans',
+      'sans-serif'
+    ].join(','),
+  }
+});
 
 const Record = (props) => (
-  // <div style={{ backgroundImage: `url(${generalBackground})` }}>
+  <ThemeProvider theme={theme}>
   <div >
     <Button size="large" href={`/item/${props.record[0]._id}`}>
       {props.record[0].title}
@@ -154,6 +164,7 @@ const Record = (props) => (
       </Box>
     </Grid>
   </div>
+    </ThemeProvider>
 );
 
 export default function ViewListing() {
