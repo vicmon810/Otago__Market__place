@@ -148,7 +148,7 @@ export default function Register() {
         activationDate: "",
         images64: "",
       });
-      window.alert("Registration Successful! Please Log In now.");
+      window.alert("Registration Successful! Check your email for verification (from Amazon) so you can receive messages. You are now able to log in.");
 
       navigate("/login");
     } catch (error) {
