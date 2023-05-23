@@ -170,7 +170,6 @@ export default function MyRecordList() {
         backgroundImage: `url(${generalBackground})`,
         backgroundSize: "cover",
         minHeight: "100vh",
-        display: "flex",
         alignItems: "center",
         justifyContent: "center",
       }}
@@ -196,7 +195,6 @@ export default function MyRecordList() {
         backgroundImage: `url(${generalBackground})`,
         backgroundSize: "cover",
         minHeight: "100vh",
-        display: "flex",
         alignItems: "center",
         justifyContent: "center",
       }}>

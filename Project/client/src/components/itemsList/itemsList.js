@@ -174,7 +174,6 @@ const RecordList = ({ searchResults }) => {
         backgroundImage: `url(${generalBackground})`,
         backgroundSize: "cover",
         minHeight: "100vh",
-        display: "flex",
         alignItems: "center",
         justifyContent: "center",
       }}
