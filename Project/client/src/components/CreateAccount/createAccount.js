@@ -243,6 +243,7 @@ export default function Register() {
                   label="Faculty Email (.ac.nz)"
                   variant="standard"
                   id="email"
+                  type="email"
                   value={form.email}
                   // TODO: add restrictions (faculty email)
                   onChange={(e) => updateForm({ email: e.target.value })}
@@ -255,6 +256,7 @@ export default function Register() {
                   label="Password"
                   variant="standard"
                   id="password"
+                  type="password"
                   value={form.password}
                   // TODO: add restrictions
                   onChange={(e) => updateForm({ password: e.target.value })}

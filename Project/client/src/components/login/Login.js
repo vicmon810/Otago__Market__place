@@ -168,6 +168,7 @@ export default function LoginForm() {
                   label="Email"
                   variant="standard"
                   id="email"
+                  type="email"
                   value={login.email}
                   onChange={(e) => updateForm({ email: e.target.value })}
                   fullWidth
