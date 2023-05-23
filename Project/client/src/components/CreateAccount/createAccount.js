@@ -39,6 +39,7 @@ export default function Register() {
     surname: "",
     email: "",
     password: "",
+    confirm_password: "",
     number: "",
     department: "",
     activationDate: "",
@@ -99,7 +100,11 @@ export default function Register() {
   // This function will handle the submission.
   async function handleSubmit(e) {
     e.preventDefault();
-
+    if (form.password != form.confirm_password) {
+      window.alert('Passwords do not match.');
+      updateForm({ password: '', confirm_password: '' });
+      return;
+    }
     // check that email doesn't already have an account associated
     async function checkEmail() {
       const response = await fetch(
@@ -137,6 +142,7 @@ export default function Register() {
         surname: "",
         email: "",
         password: "",
+        confirm_password: "",
         number: "",
         department: "",
         activationDate: "",
@@ -260,6 +266,19 @@ export default function Register() {
                   value={form.password}
                   // TODO: add restrictions
                   onChange={(e) => updateForm({ password: e.target.value })}
+                  fullWidth
+                  sx={{ mt: 4 }}
+                />
+
+                <TextField
+                  required
+                  label="Confirm Password"
+                  variant="standard"
+                  id="confirm_password"
+                  type="password"
+                  value={form.confirm_password}
+                  // TODO: add restrictions
+                  onChange={(e) => updateForm({ confirm_password: e.target.value })}
                   fullWidth
                   sx={{ mt: 4 }}
                 />
