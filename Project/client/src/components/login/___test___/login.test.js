@@ -1,6 +1,11 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import LoginForm from "./Login.js";
+import LoginForm from "../Login.js";
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: jest.fn(),
+}));
 
 describe("LoginForm Component", () => {
   beforeEach(() => {
@@ -28,7 +33,12 @@ describe("LoginForm Component", () => {
   });
 
   test("handles form submission", async () => {
-    render(<LoginForm />);
+    useNavigate.mockImplementationOnce(() => jest.fn());
+    render(
+      <MemoryRouter>
+        <LoginForm />
+      </MemoryRouter>
+    );
 
     const emailInput = screen.getByLabelText("Email");
     const passwordInput = screen.getByLabelText("Password");
@@ -51,7 +61,12 @@ describe("LoginForm Component", () => {
   });
 
   test("redirects to register page", () => {
-    render(<LoginForm />);
+    useNavigate.mockImplementationOnce(() => jest.fn());
+    render(
+      <MemoryRouter>
+        <LoginForm />
+      </MemoryRouter>
+    );
 
     const registerButton = screen.getByRole("button", { name: "Register" });
     fireEvent.click(registerButton);
@@ -60,3 +75,21 @@ describe("LoginForm Component", () => {
     expect(window.location.href).toContain("/register");
   });
 });
+function App() {
+  return (
+    <Router>
+      <Switch>
+        {/* Other routes */}
+        <Route path="/login" component={LoginForm} />
+      </Switch>
+    </Router>
+  );
+}
+
+function LoginForm() {
+  let navigate = useNavigate();
+
+  // Rest of the component code
+}
+
+export default App;

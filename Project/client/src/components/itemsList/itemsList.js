@@ -178,7 +178,7 @@ const RecordList = ({ searchResults }) => {
         justifyContent: "center",
       }}
     >
-      <div>
+      <div className="row">
         <br></br>
         {renderRecords()}
       </div>
