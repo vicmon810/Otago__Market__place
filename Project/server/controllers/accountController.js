@@ -14,6 +14,34 @@ AWS.config.update({
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
  
+function getTime() {
+  UNIX_timestamp = Math.floor(new Date().getTime() / 1000);
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var time = date + " " + month + " " + year;
+  // var hour = a.getHours();
+  // var min = a.getMinutes();
+  // var sec = a.getSeconds();
+  // var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  return time;
+}
+
 //get a single account info
 const getUser = async (req, res) => {
   try {
@@ -109,7 +137,7 @@ const updateUser = async (req, res) => {
       password: hashed_password,
       department: req.body.department,
       number: req.body.number,
-      activationDate: req.body.activationDate,
+      activationDate: getTime(),
       //pfp: req.body.pfp,
     };
     db_connection
@@ -142,7 +170,7 @@ const createAccount = async (req, res) => {
       password: hashed_password,
       department: req.body.department,
       number: req.body.number,
-      activationDate: Math.floor(new Date().getTime() / 1000),
+      activationDate: getTime(),
       images64: req.body.images64,
       //pfp: req.body.pfp,
     };
