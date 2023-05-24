@@ -18,15 +18,12 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 
 import MyNavbar from "./myNavbar";
-import { createTheme,ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme({
   typography: {
-    fontFamily: [
-      'Open Sans',
-      'sans-serif'
-    ].join(','),
-  }
+    fontFamily: ["Open Sans", "sans-serif"].join(","),
+  },
 });
 
 function UseLogout() {
@@ -37,93 +34,85 @@ function UseLogout() {
 
 const Profile = (props) => (
   <div>
-          <MyNavbar />
-          <ThemeProvider theme={theme}>
+    <MyNavbar />
+    <ThemeProvider theme={theme}>
+      <div className="column">
+        <div style={{ backgroundColor: "white" }}>
+          <Box sx={{ width: "100%", bgcolor: "white" }}>
+            {/* {console.log("Image URL or base64 data:", props.images64)} */}
 
-  <div className="column">
-    <div style={{ backgroundColor: "white" }}>
-      <Box sx={{ width: "100%", bgcolor: "white" }}>
-      {/* {console.log("Image URL or base64 data:", props.images64)} */}
+            {/* <img id="base64image" src={props.images64} alt="No image(s)" /> */}
 
-        <img
-          id="base64image"
-          style={{ maxHeight: "500px", maxWidth: "500px" }}
-          src={props.images64}
-          alt="No image(s)"
-        />
+            <List>
+              <ListItem disablePadding>
+                <ListItemIcon>
+                  <PersonIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Name:"
+                  secondary={props.record.name + " " + props.record.surname}
+                />
+              </ListItem>
+            </List>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Name:"
-              secondary={props.record.name + " " + props.record.surname}
-            />
-          </ListItem>
-        </List>
+            <List>
+              <ListItem disablePadding>
+                <ListItemIcon>
+                  <CategoryIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Department:"
+                  secondary={props.record.department}
+                />
+              </ListItem>
+            </List>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <CategoryIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Department:"
-              secondary={props.record.department}
-            />
-          </ListItem>
-        </List>
+            <List>
+              <ListItem disablePadding>
+                <ListItemIcon>
+                  <EmailIcon />
+                </ListItemIcon>
+                <ListItemText primary="Email:" secondary={props.record.email} />
+              </ListItem>
+            </List>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <EmailIcon />
-            </ListItemIcon>
-            <ListItemText primary="Email:" secondary={props.record.email} />
-          </ListItem>
-        </List>
+            <List>
+              <ListItem disablePadding>
+                <ListItemIcon>
+                  <PhoneIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Phone Number:"
+                  secondary={props.record.number}
+                />
+              </ListItem>
+            </List>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <PhoneIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Phone Number:"
-              secondary={props.record.number}
-            />
-          </ListItem>
-        </List>
+            <List>
+              <ListItem disablePadding>
+                <ListItemIcon>
+                  <CalendarMonthIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Account activated on:"
+                  secondary={props.record.activationDate}
+                />
+              </ListItem>
+            </List>
 
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <CalendarMonthIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Account activated on:"
-              secondary={props.record.activationDate}
-            />
-          </ListItem>
-        </List>
-
-        <List>
-          <ListItem disablePadding>
-            <ListItemIcon>
-              <NumbersIcon />
-            </ListItemIcon>
-            <ListItemText primary="User ID:" secondary={props.record._id} />
-          </ListItem>
-        </List>
-      </Box>
-    </div>
+            <List>
+              <ListItem disablePadding>
+                <ListItemIcon>
+                  <NumbersIcon />
+                </ListItemIcon>
+                <ListItemText primary="User ID:" secondary={props.record._id} />
+              </ListItem>
+            </List>
+          </Box>
+        </div>
+      </div>
+    </ThemeProvider>
   </div>
-  </ThemeProvider>
-
-  </div>
-
 );
 
 export default function GetProfile() {

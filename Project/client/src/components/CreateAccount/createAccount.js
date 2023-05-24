@@ -101,8 +101,8 @@ export default function Register() {
   async function handleSubmit(e) {
     e.preventDefault();
     if (form.password != form.confirm_password) {
-      window.alert('Passwords do not match.');
-      updateForm({ password: '', confirm_password: '' });
+      window.alert("Passwords do not match.");
+      updateForm({ password: "", confirm_password: "" });
       return;
     }
     // check that email doesn't already have an account associated
@@ -114,17 +114,17 @@ export default function Register() {
       const existing = await response.json();
       if (existing) {
         window.alert(`An error occured: ${form.email} already in use`);
-        updateForm({ email: '' });
+        updateForm({ email: "" });
         return 0;
-      }
-      else {
+      } else {
         updateForm({ email: form.email });
-      } 
-
+      }
     }
     const validEmail = await checkEmail();
-    if (validEmail === 0) {return;}
-    
+    if (validEmail === 0) {
+      return;
+    }
+
     // When a post request is sent to the create URL, we'll add a new record to the database.
     const newItem = { ...form };
     const newItem_json = JSON.stringify(newItem);
@@ -148,7 +148,9 @@ export default function Register() {
         activationDate: "",
         images64: "",
       });
-      window.alert("Registration Successful! Check your email for verification (from Amazon) so you can receive messages. You are now able to log in.");
+      window.alert(
+        "Registration Successful! Check your email for verification (from Amazon) so you can receive messages. You are now able to log in."
+      );
 
       navigate("/login");
     } catch (error) {
@@ -174,7 +176,6 @@ export default function Register() {
         justifyContent: "center",
       }}
     >
-      
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Box sx={styles}>
@@ -191,7 +192,7 @@ export default function Register() {
               variant={isMobile ? "h5" : "h2"}
               sx={{ fontFamily: "American Captain", textAlign: "center" }}
             >
-              Register <br /> 
+              Register <br />
               for an Account
             </Typography>
           </Grid>
@@ -210,112 +211,109 @@ export default function Register() {
           justifyContent: "center",
           p: 5,
         }}
-        >            
-          <div
-            id="radius-shape-1"
-            sx={{ position: "absolute", borderRadius: "50%", boxShadow: 5 }}
-          ></div>
-          <div
-            id="radius-shape-2"
-            sx={{ position: "absolute", boxShadow: 5 }}
-          ></div>
-          <Card sx={{ my: 5, bgcolor: "background.glass" }}>
-            <CardContent sx={{ p: 5 }}>
-              <form onSubmit={handleSubmit}>
-                <TextField
-                  required
-                  label="First Name"
-                  variant="standard"
-                  id="name"
-                  value={form.name}
-                  onChange={(e) => updateForm({ name: e.target.value })}
-                  fullWidth
-                  sx={{ mt: 4 }}
-                />
-
-                <TextField
-                  required
-                  label="Last Name"
-                  variant="standard"
-                  id="surname"
-                  value={form.surname}
-                  onChange={(e) => updateForm({ surname: e.target.value })}
-                  fullWidth
-                  sx={{ mt: 4 }}
-                />
-
-                <TextField
-                  required
-                  label="Faculty Email (.ac.nz)"
-                  variant="standard"
-                  id="email"
-                  type="email"
-                  value={form.email}
-                  // TODO: add restrictions (faculty email)
-                  onChange={(e) => updateForm({ email: e.target.value })}
-                  fullWidth
-                  sx={{ mt: 4 }}
-                />
-
-                <TextField
-                  required
-                  label="Password"
-                  variant="standard"
-                  id="password"
-                  type="password"
-                  value={form.password}
-                  // TODO: add restrictions
-                  onChange={(e) => updateForm({ password: e.target.value })}
-                  fullWidth
-                  sx={{ mt: 4 }}
-                />
-
-                <TextField
-                  required
-                  label="Confirm Password"
-                  variant="standard"
-                  id="confirm_password"
-                  type="password"
-                  value={form.confirm_password}
-                  // TODO: add restrictions
-                  onChange={(e) => updateForm({ confirm_password: e.target.value })}
-                  fullWidth
-                  sx={{ mt: 4 }}
-                />
-
-                <TextField
-                  required
-                  label="Phone Number"
-                  variant="standard"
-                  id="number"
-                  value={form.number}
-                  // TODO: add restrictions (valid/NZ phone number)
-                  onChange={(e) => updateForm({ number: e.target.value })}
-                  fullWidth
-                  sx={{ mt: 4 }}
-                />
-              
-                <Box sx={{ mt: 2 }} />  {/* //linebreak */}
-                <Autocomplete
-                  
-                  disablePortal
-                  id="department"
-                  options={options}
-                  getOptionLabel={(option) => option.label} // Specify how to extract the label from the option
-                  sx={{ width: 620 }}
-                  renderInput={(params) => (
-                    <TextField required {...params} label="Department" id="department" />
-                  )}
-                  isOptionEqualToValue={(option, value) =>
-                    option.id === value.id
-                  }
-                  onChange={(event, value) =>
-                    updateForm({ department: value ? value.label : "" })
-                  }
-                />
-                <Box sx={{ mt: 2 }} />  {/* //linebreak */}
-
-                <div className="form-group">
+      >
+        <div
+          id="radius-shape-1"
+          sx={{ position: "absolute", borderRadius: "50%", boxShadow: 5 }}
+        ></div>
+        <div
+          id="radius-shape-2"
+          sx={{ position: "absolute", boxShadow: 5 }}
+        ></div>
+        <Card sx={{ my: 5, bgcolor: "background.glass" }}>
+          <CardContent sx={{ p: 5 }}>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                required
+                label="First Name"
+                variant="standard"
+                id="name"
+                value={form.name}
+                onChange={(e) => updateForm({ name: e.target.value })}
+                fullWidth
+                sx={{ mt: 4 }}
+              />
+              <TextField
+                required
+                label="Last Name"
+                variant="standard"
+                id="surname"
+                value={form.surname}
+                onChange={(e) => updateForm({ surname: e.target.value })}
+                fullWidth
+                sx={{ mt: 4 }}
+              />
+              <TextField
+                required
+                label="Faculty Email (.ac.nz)"
+                variant="standard"
+                id="email"
+                type="email"
+                value={form.email}
+                // TODO: add restrictions (faculty email)
+                onChange={(e) => updateForm({ email: e.target.value })}
+                fullWidth
+                sx={{ mt: 4 }}
+              />
+              <TextField
+                required
+                label="Password"
+                variant="standard"
+                id="password"
+                type="password"
+                value={form.password}
+                // TODO: add restrictions
+                onChange={(e) => updateForm({ password: e.target.value })}
+                fullWidth
+                sx={{ mt: 4 }}
+              />
+              <TextField
+                required
+                label="Confirm Password"
+                variant="standard"
+                id="confirm_password"
+                type="password"
+                value={form.confirm_password}
+                // TODO: add restrictions
+                onChange={(e) =>
+                  updateForm({ confirm_password: e.target.value })
+                }
+                fullWidth
+                sx={{ mt: 4 }}
+              />
+              <TextField
+                required
+                label="Phone Number"
+                variant="standard"
+                id="number"
+                value={form.number}
+                // TODO: add restrictions (valid/NZ phone number)
+                onChange={(e) => updateForm({ number: e.target.value })}
+                fullWidth
+                sx={{ mt: 4 }}
+              />
+              <Box sx={{ mt: 2 }} /> {/* //linebreak */}
+              <Autocomplete
+                disablePortal
+                id="department"
+                options={options}
+                getOptionLabel={(option) => option.label} // Specify how to extract the label from the option
+                sx={{ width: 620 }}
+                renderInput={(params) => (
+                  <TextField
+                    required
+                    {...params}
+                    label="Department"
+                    id="department"
+                  />
+                )}
+                isOptionEqualToValue={(option, value) => option.id === value.id}
+                onChange={(event, value) =>
+                  updateForm({ department: value ? value.label : "" })
+                }
+              />
+              <Box sx={{ mt: 2 }} /> {/* //linebreak */}
+              {/* <div className="form-group">
                   <label htmlFor="Image">Image(s)</label>
                   <input
                     type="file"
@@ -325,26 +323,25 @@ export default function Register() {
                     //value={form.images}
                     onChange={(e) => validateImageSize(e.target.files)}
                   />
-                </div>
+                </div> */}
+              <Button
+                type="submit"
+                variant="contained"
+                size="large"
+                fullWidth
+                sx={{ mt: 4 }}
+              >
+                Register!
+              </Button>
+            </form>
 
-                <Button
-                  type="submit"
-                  variant="contained"
-                  size="large"
-                  fullWidth
-                  sx={{ mt: 4 }}
-                >
-                  Register!
-                </Button>
-              </form>
-
-              <Typography variant="body2" sx={{ mb: 2, textAlign: "center" }}>
-                Disclaimer: OtagoMarketplace is a platform for members (faculty
-                and staff) of the University of Otago.
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+            <Typography variant="body2" sx={{ mb: 2, textAlign: "center" }}>
+              Disclaimer: OtagoMarketplace is a platform for members (faculty
+              and staff) of the University of Otago.
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
     </Container>
   );
 }
