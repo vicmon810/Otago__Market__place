@@ -10,14 +10,21 @@ more easily connect with each other and ensure that available resources are bein
 effectively. Could you develop such a app for our department?
 
 ### Team members
-- Adelle Lim
-- Will Frame
-- Kris Mao
-- Olivia Deng
+- [Adelle Lim](https://github.com/adellelimrj)
+- [Will Frame](https://github.com/wpframe)
+- [Kris Mao](https://github.com/vicmon810)
+- [Olivia Deng](https://github.com/oliviaseed)
+
+### Set up Database :
+MongoDB compass Download Link : [Download](https://www.mongodb.com/try/download/shell)<br>
+Compass access Link : `mongodb+srv://admin2:1EiG7CUoKjvMn6p9@cluster0.hayoush.mongodb.net/test`
 
 ### Running the project
 You can run the project by downloading the Project directory as a zip file (https://isgb.otago.ac.nz/info310/denol976/OtagoMarketplace/archive/Project/main.zip), extracting the files, and then running the run.sh file in the first level of the Project directory.
 
 You may need to change the permissions on the script to make it executable using `chmod u+x run.sh`.
+
+
+
 
 ### [Requirements](./requirements.md)
