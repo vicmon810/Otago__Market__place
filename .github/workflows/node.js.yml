@@ -24,8 +24,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          ls -a
+          cd Project/
           npm ci
 
       - name: Run tests
-        run: npm test
+        run: |
+          cd Project/
+          npm test
