@@ -24,7 +24,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd Project/
+          cd Project/server
+          ls
+          npm init
+          npm install
+          npm ci
+      
+      - name: Install dependencies
+        run: |
+          cd Project/client
           ls
           npm init
           npm install
