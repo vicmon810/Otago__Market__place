@@ -22,27 +22,30 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies
+      - name: Install and build server dependencies
+        working-directory: Project/server
         run: |
-          cd Project/server
-          ls
-          npm init
-          npm install
           npm ci
+          # Optionally, you can run server build commands here if needed
+          # For example: npm run build
 
-      - name: Install dependencies
+      - name: Install and build client dependencies
+        working-directory: Project/client
         run: |
-          cd Project/client
-          ls
-          npm install
           npm ci
+          # Optionally, you can run client build commands here if needed
+          # For example: npm run build
 
       - name: Run tests
+        working-directory: Project
         run: |
-          cd Project/
-          npm init
-          npm install
+          # If your tests are located in the server or client directories,
+          # specify the appropriate test commands here.
+          # Example:
+          # npm test --prefix server
+          # npm test --prefix client
+
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
