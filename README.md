@@ -1,5 +1,7 @@
 ## Otago Marketplace
 
+![CI](https://github.com/vicmon810/Otago__Market__place/actions)
+
 ### Project Description
 As staff members, we often find ourselves in need of new items for our offices or shared areas
 within our department, such as furniture, a spare microwave, or a coffee machine. Unfortunately,
