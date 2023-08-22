@@ -26,6 +26,8 @@ jobs:
         run: |
           cd Project/
           ls
+          npm init
+          npm install
           npm ci
 
       - name: Run tests
@@ -33,7 +35,6 @@ jobs:
           cd Project/
           npm init
           npm install
-
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
