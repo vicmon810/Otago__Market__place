@@ -1,6 +1,6 @@
 ## Otago Marketplace
 
-![CI](https://github.com/vicmon810/Otago__Market__place/actions)
+[![CI](https://github.com/vicmon810/Otago__Market__place/actions/workflows/node.js.yml/badge.svg)](https://github.com/vicmon810/Otago__Market__place/actions/workflows/node.js.yml)
 
 ### Project Description
 As staff members, we often find ourselves in need of new items for our offices or shared areas
