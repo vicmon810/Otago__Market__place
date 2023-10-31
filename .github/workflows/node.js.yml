@@ -25,6 +25,8 @@ jobs:
       - name: Install and build server dependencies
         working-directory: Project/server
         run: |
+          npm  install 
+          node server.js
           npm ci
           # Optionally, you can run server build commands here if needed
           # For example: npm run build
