@@ -25,8 +25,6 @@ jobs:
       - name: Install and build server dependencies
         working-directory: Project/server
         run: |
-          npm  install 
-          node server.js
           npm ci
           # Optionally, you can run server build commands here if needed
           # For example: npm run build
@@ -49,6 +47,5 @@ jobs:
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
