@@ -1,4 +1,4 @@
-## Otago Marketplace
+# Otago Marketplace
 
 [![CI](https://github.com/vicmon810/Otago__Market__place/actions/workflows/node.js.yml/badge.svg)](https://github.com/vicmon810/Otago__Market__place/actions/workflows/node.js.yml)
 
